@@ -1,2 +1,1 @@
-first commit
-second
+1、git のデフォルトブランチを develop に変更
