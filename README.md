@@ -2,3 +2,4 @@
 ２、修正完了  
 ３、feature branch によるテスト
 4、narutest brabch によるテスト
+fuji-test
