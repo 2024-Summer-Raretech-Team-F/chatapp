@@ -3,3 +3,4 @@
 ３、feature branch によるテスト
 4、narutest brabch によるテスト
 fuji-test
+test_Fugashiです。
