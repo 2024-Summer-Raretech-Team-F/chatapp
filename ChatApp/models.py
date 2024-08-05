@@ -2,12 +2,12 @@ from flask import Flask, abort , pymysql
 from util.DB import DB
 
 class dbConnect:
-    def getSchoolCode(school_code, school_name):
+    def getSchoolCode(school_code, school_name, parent_auth_key, teacher_auth_key):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO schools (school_id, school_name) VALUES (%s, %s);"
-            cur.execute(sql, (school_code, school_name))
+            sql = "INSERT INTO schools (school_code, school_name, parent_auth_key, teacher_auth_key) VALUES (%s, %s, %s, %s);"
+            cur.execute(sql, (school_code, school_name, parent_auth_key, teacher_auth_key))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています')  
