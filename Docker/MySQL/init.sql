@@ -9,6 +9,7 @@ GRANT ALL PRIVILEGES ON chimyapp.* TO 'testuser';
 
 CREATE TABLE schools (
     school_id INT AUTO_INCREMENT PRIMARY KEY,
+    school_code VARCHAR(50) NOT NULL,
     school_name VARCHAR(100) NOT NULL,
     parent_auth_key VARCHAR(100) NOT NULL,
     teacher_auth_key VARCHAR(100) NOT NULL
@@ -73,7 +74,7 @@ CREATE TABLE notices (
 );
 
 
-INSERT INTO schools (school_name, parent_auth_key, teacher_auth_key)VALUES ('サンプル小学校', 'parent_key_example', 'teacher_key_example');
+INSERT INTO schools (school_code, school_name, parent_auth_key, teacher_auth_key)VALUES ('demo0101','サンプル小学校', 'parent_key_example', 'teacher_key_example');
 
 INSERT INTO academic_levels (grade, section, school_id) VALUES ('1年', 'A組', 1);
 
