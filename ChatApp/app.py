@@ -16,5 +16,14 @@ app.permanent_session_lifetime = timedelta(days=30)
 def login():
     return render_template('registration/login.html')
 
+@app.route('/auth')
+def auth():
+    return render_template('registration/auth.html')
+
+# @app.route('home')
+# def home():
+#     return
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=False)

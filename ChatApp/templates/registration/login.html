@@ -1,1 +1,24 @@
-こんにちわ
+<title>ログインページ</title>
+
+<form method="post">
+  <div>
+    <label for="login-email">e-mail</label>
+    <input
+      type="text"
+      placeholder="Email"
+      name="email"
+      id="login-email-input"
+    />
+  </div>
+  <div>
+    <label for="login-password">password</label>
+    <input
+      type="text"
+      name="password"
+      id="login-password-id"
+      placeholder="password"
+    />
+  </div>
+</form>
+
+<a href="{{url_for('auth')}}">次へ</a>
