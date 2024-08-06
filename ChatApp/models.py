@@ -28,6 +28,33 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()  
-        
-    
-    
+
+
+    def getUser(email):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM users WHERE email=%s;"
+            cur.execute(sql, (email))
+            user = cur.fetchone()
+            return user
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def getGroups():
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM groups;"
+            cur.execute(sql)
+            groups = cur.fetchall()
+            return groups
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
