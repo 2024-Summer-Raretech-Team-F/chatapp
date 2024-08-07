@@ -28,6 +28,122 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()  
-        
-    
-    
+
+
+    def getUser(email):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM users WHERE email=%s;"
+            cur.execute(sql, (email))
+            user = cur.fetchone()
+            return user
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def getGroups():
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM groups;"
+            cur.execute(sql)
+            groups = cur.fetchall()
+            return groups
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def getMessageAll(group_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT message_id, u.user_id, user_name, message FROM messages AS m INNER JOIN users AS u ON m.user_id = u.user_id WHERE group_id = %s"
+            cur.execute(sql,(group_id))
+            messages = cur.fetchall()
+            return messages
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()    
+
+
+##お知らせ一覧の処理
+
+    def getAllNotices():
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT notice_id, title, description, post_data, created_at, teacher_id FROM notices;"   
+            cur.execute(sql)
+            notices = cur.fetchall()
+            return notices
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def getNoticeById(notice_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT notice_id, title, description, post_data, created_at,teacher_id FROM notices WHERE noitced_id = %s;"
+            cur.execute(sql, (notice_id))
+            notice = cur.fetchone()
+            return notice
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def creatNotice(title, description, post_data, teacher_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "INSERT INTO notices (title, description, post_data, teacher_id) VALUES (%s, %s, %s, %s)"
+            cur.execute(sql, (title, description, post_data, teacher_id))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def updateNotice(notice_id, title, description, post_date):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE notices SET title = %s, description = %s, post_date = %s WHERE notice_id = %s;"
+            cur.execute(sql, (title, description, post_date, notice_id))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def deleteNotice(notice_id):
+            try:
+                conn = DB.getConnection()
+                cur = conn.cursor()
+                sql = "DELETE FROM notices WHERE notice_id = %s;"
+                cur.execute(sql, (notice_id))
+                conn.commit()
+            except Exception as e:
+                print(f'{e} が発生しています')
+                abort(500)
+            finally:
+                cur.close()
