@@ -147,3 +147,34 @@ class dbConnect:
                 abort(500)
             finally:
                 cur.close()
+
+
+    def getNoticeByGrade(category):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT notice_id, title, description, post_date, created_at, teacher_id, category FROM notices WHERE category = %s;"
+            cur.execute(sql, (category))
+            notices = cur.fetchall()
+            return notices
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def getNoticeByTitle(title):
+        try:
+            conn = DB.getConnection() 
+            cur = conn.cursor()
+            sql = "SELECT notice_id, title, description, post_date, created_at, teacher_id, category FROM noitces WHERE title LIKE %s;"  
+            search_title = f'%{title}%'
+            cur.execute(sql, (search_title))
+            notices = cur.fetchone()
+            return notices
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
