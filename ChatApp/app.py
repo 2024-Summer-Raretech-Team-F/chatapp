@@ -2,11 +2,13 @@ from flask import Flask, request, redirect, render_template, session, flash, abo
 from datetime import timedelta
 import calendar
 from datetime import datetime
+# import models
+
 import hashlib
 import uuid
 import re
 
-# from models import dbConnect
+from models import dbConnect
 
 app = Flask(__name__)
 app.secret_key = uuid.uuid4().hex
@@ -23,7 +25,7 @@ def auth():
     return render_template('registration/auth.html')
 
 
-@app.route('/home')
+@app.route('/home',methods=['GET','POST'])
 def home():
     # 現在の年月日を取得
     now = datetime.now()
@@ -47,9 +49,13 @@ def home():
     group_message = "グループメッセージだよ〜"
     group_message_time ="7:50 "
 
+    # SQLからユーザー取得
+    users_data = dbConnect.getUser('satoru@example.com')
+
+    print(users_data)
 
 
-    return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time)
+    return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time,users_data=users_data)
 
 
 
