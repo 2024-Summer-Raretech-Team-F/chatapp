@@ -1,4 +1,5 @@
-from flask import Flask, abort , pymysql
+from flask import Flask, abort
+import pymysql
 from util.DB import DB
 
 class dbConnect:
@@ -10,10 +11,10 @@ class dbConnect:
             cur.execute(sql, (school_code, school_name, parent_auth_key, teacher_auth_key))
             conn.commit()
         except Exception as e:
-            print(f'{e} が発生しています')  
+            print(f'{e} が発生しています')
             abort(500)
         finally:
-            cur.close()      
+            cur.close()
 
 
     def createUser(user_kanji_full, user_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id):
@@ -24,10 +25,10 @@ class dbConnect:
             cur.execute(sql, (user_kanji_full, user_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id))
             conn.commit()
         except Exception as e:
-            print(f'{e} が発生してます') 
+            print(f'{e} が発生してます')
             abort(500)
         finally:
-            cur.close()  
+            cur.close()
 
 
     def getUser(email):
@@ -37,6 +38,7 @@ class dbConnect:
             sql = "SELECT * FROM users WHERE email=%s;"
             cur.execute(sql, (email))
             user = cur.fetchone()
+
             return user
         except Exception as e:
             print(f'{e} が発生しています')
@@ -72,7 +74,7 @@ class dbConnect:
             print(f'{e} が発生しています')
             abort(500)
         finally:
-            cur.close()    
+            cur.close()
 
 
 ##お知らせ一覧の処理
@@ -81,7 +83,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_data, created_at, teacher_id FROM notices;"   
+            sql = "SELECT notice_id, title, description, post_data, created_at, teacher_id FROM notices;"
             cur.execute(sql)
             notices = cur.fetchall()
             return notices
