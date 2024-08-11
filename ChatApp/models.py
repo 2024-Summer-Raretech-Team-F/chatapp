@@ -45,6 +45,20 @@ class dbConnect:
             cur.close()
 
 
+    def updateUser(user_id, name_knaji_full, name_kana_full, parent_name, phone_number,email, password):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE users SET name_kanji_full = %s, name_kana_full = %s, parent_name = %s, phone_number = %s, email = %s, password = %s WHERE user_id = %s;"
+            cur.execute(sql, (user_id, name_knaji_full, name_kana_full, parent_name, phone_number,email, password))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています') 
+            abort(500)
+        finally:
+            cur.close()       
+
+
     def getGroups():
         try:
             conn = DB.getConnection()
