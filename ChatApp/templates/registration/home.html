@@ -1,1 +1,101 @@
 <!-- ホーム画面 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        width: 14.28%;
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>新着のお知らせ</h2>
+    <p>年間スケジュール調整のお知らせ</p>
+    <div class="text-white">
+      <p class="rounded-pill bg-primary text-center" style="width: 100px">
+        お知らせ
+      </p>
+    </div>
+
+    <!--カレンダ -->
+    <h2>{{year}}年{{month}} 月のカレンダー</h2>
+    <h2>本日は{{year}}年{{month}}月{{today}}日です</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>日</th>
+          <th>月</th>
+          <th>火</th>
+          <th>水</th>
+          <th>木</th>
+          <th>金</th>
+          <th>土</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for week in month_days%}
+        <tr>
+          {% for day in week%} {% if day == 0%}
+          <td></td>
+          {% else%} {% if today == day%}
+          <td class="text-danger">{{day}} 本日</td>
+          {%else%}
+          <td>{{day}}</td>
+          {%endif%} {%endif%} {%endfor%}
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+
+    <!-- チャット -->
+    <h2>チャットルーム一覧</h2>
+
+    <h3>{{child_class}}</h3>
+    <h3>{{student_name}}</h3>
+
+    <div class="border border-primary row">
+      <div class="col-1"></div>
+      <div class="col">
+        <h3>{{child_class}} {{teacher}}先生</h3>
+        <p>{{teacher_message}}</p>
+      </div>
+      <div class="col">
+        <p>{{teacher_message_time}}</p>
+      </div>
+    </div>
+
+    <div>
+      <h3>{{child_class}} {{group_name}}</h3>
+      <p>{{group_message}}</p>
+      <p>{{group_message_time}}</p>
+    </div>
+
+    {{users_data}}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

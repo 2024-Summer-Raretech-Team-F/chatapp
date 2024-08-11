@@ -1,4 +1,5 @@
-from flask import Flask, abort , pymysql
+from flask import Flask, abort
+import pymysql
 from util.DB import DB
 
 class dbConnect:
@@ -10,10 +11,10 @@ class dbConnect:
             cur.execute(sql, (school_code, school_name, parent_auth_key, teacher_auth_key))
             conn.commit()
         except Exception as e:
-            print(f'{e} が発生しています')  
+            print(f'{e} が発生しています')
             abort(500)
         finally:
-            cur.close()      
+            cur.close()
 
 
     def createUser(name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id):
@@ -24,10 +25,10 @@ class dbConnect:
             cur.execute(sql, (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id))
             conn.commit()
         except Exception as e:
-            print(f'{e} が発生してます') 
+            print(f'{e} が発生してます')
             abort(500)
         finally:
-            cur.close()  
+            cur.close()
 
 
     def getUser(email):
@@ -37,6 +38,7 @@ class dbConnect:
             sql = "SELECT * FROM users WHERE email=%s;"
             cur.execute(sql, (email))
             user = cur.fetchone()
+
             return user
         except Exception as e:
             print(f'{e} が発生しています')
@@ -86,7 +88,7 @@ class dbConnect:
             print(f'{e} が発生しています')
             abort(500)
         finally:
-            cur.close()    
+            cur.close()
 
 
 ##お知らせ一覧の処理
@@ -95,7 +97,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_data, created_at, teacher_id FROM notices;"   
+            sql = "SELECT notice_id, title, description, post_data, created_at, teacher_id FROM notices;"
             cur.execute(sql)
             notices = cur.fetchall()
             return notices
@@ -163,6 +165,7 @@ class dbConnect:
                 cur.close()
 
 
+
     def getNoticeByGrade(category):
         try:
             conn = DB.getConnection()
@@ -182,7 +185,7 @@ class dbConnect:
         try:
             conn = DB.getConnection() 
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_date, created_at, teacher_id, category FROM noitces WHERE title LIKE %s;"  
+            sql = "SELECT notice_id, title, description, post_date, created_at, teacher_id, category FROM notices WHERE title LIKE %s;"  
             search_title = f'%{title}%'
             cur.execute(sql, (search_title))
             notices = cur.fetchone()
@@ -192,3 +195,4 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+

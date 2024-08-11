@@ -1,6 +1,6 @@
 <title>ログインページ</title>
 
-<form method="post">
+<form method="post" action="{{url_for('auth')}}">
   <div>
     <label for="login-email">e-mail</label>
     <input
@@ -19,6 +19,7 @@
       placeholder="password"
     />
   </div>
+  <button>次へ</button>
 </form>
 
-<a href="{{url_for('auth')}}">次へ</a>
+<!-- <a href="{{url_for('auth')}}">次へ</a> -->
