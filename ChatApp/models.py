@@ -1,5 +1,4 @@
-from flask import Flask, abort
-import pymysql
+from flask import Flask, abort, pymysql
 from util.DB import DB
 
 class dbConnect:
