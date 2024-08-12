@@ -69,8 +69,8 @@ CREATE TABLE notices (
     description TEXT,
     post_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    teacher_id INT,
-    FOREIGN KEY (teacher_id) REFERENCES users(user_id)
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 
