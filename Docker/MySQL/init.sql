@@ -1,6 +1,6 @@
 
-DROP DATABASE chimyapp;
-DROP USER 'testuser';
+DROP DATABASE IF EXISTS chimyapp;
+DROP USER IF EXISTS 'testuser';
 
 CREATE USER 'testuser' IDENTIFIED BY 'testuser';
 CREATE DATABASE chimyapp;
