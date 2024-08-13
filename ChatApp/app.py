@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, render_template, session, flash, abo
 from datetime import timedelta
 import calendar
 from datetime import datetime
-
+# import models
 
 import hashlib
 import uuid
@@ -57,12 +57,6 @@ def home():
 
     return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time,users_data=users_data)
 
-
-#お知らせ一覧(全て)を表示させる
-@app.route('/notices', methods=['GET'])
-def get_all_notices():
-    notices = dbConnect.getAllNotices()
-    return notices
 
 
 
