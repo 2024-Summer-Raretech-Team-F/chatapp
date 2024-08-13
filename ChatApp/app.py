@@ -59,6 +59,13 @@ def home():
 
 
 
+#お知らせ一覧(全て)を表示させる
+@app.route('/notices', methods=['GET'])
+def get_all_notices():
+    notices = dbConnect.getAllNotices()
+    return notices
+
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
