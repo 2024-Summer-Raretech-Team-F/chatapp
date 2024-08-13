@@ -1,0 +1,190 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.header-main {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #DBF2FF;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-main nav {
+    display: flex;
+    margin-top: 0;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 30px;
+}
+
+#backButton {
+    display: flex;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
+}
+
+#backButton i:hover {
+    color: #56B7ED; /* ホバー時のリンクの色 */
+}
+
+.header-main h6 {
+    display: flex;
+    margin: 0; /* 文字の大きさリセット */
+    font-size: 1em; 
+    color: #333;
+  }
+
+.header-main nav ul  {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+}
+
+.header-main nav ul li {
+    margin-left: 20px; 
+}
+
+.header-main nav ul li a {
+    text-decoration: none;
+    color: #333; /* テキスト色を設定（必要に応じて変更） */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s;
+   
+}
+
+.header-main nav ul li a:hover {
+    color: #56B7ED; /* ホバー時のリンクの色 */
+}
+
+#home-icon, #info-icon, #config-icon {
+    font-size: 30px;
+    margin-top: 8px;
+    margin-bottom: -3px;
+}
+
+.header-main nav ul li p {
+    font-size: 10px;
+}
+
+
+#user-icon {
+    font-size: 60px;
+    }
+
+.main_message{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.sub_message{
+    width: 70%;
+}
+.message{
+    display: flex;
+    margin: 20px 0;
+}
+.message_left{
+    flex-direction: row; /* 左から右に並べる */
+    align-items: end;
+    margin-right: auto;
+}
+.message_right{
+    flex-direction: row-reverse; /* 右から左に並べる */
+    align-items: end;
+    margin-left: auto;
+}
+/* 吹き出しの入力部分の作成 */
+.messaging{
+    display: inline-block; /* 吹き出しが文字幅に合わせます */ 
+    padding: 10px 20px;
+    border:solid 1px #000000;
+    font-size: small;
+    border-radius: 12px; /*吹き出しの丸み具合を変更*/
+    max-width: 200px;
+}
+.messaging_left{
+    margin:0 5px 0 10px;
+    border-radius: 30px 30px 30px 0;
+}
+.messaging_right{
+    margin:0 10px 0 5px;
+    border-radius: 30px 30px 0 30px;
+    text-align: left;
+}
+.message_text{
+    overflow-wrap: break-word;
+}
+.name_text{
+    text-align: right;
+}
+.message_text_right{
+    display: flex;
+    padding-left:20px
+}
+.icon_img{
+    margin: 0;
+}
+.message_name_left p{
+    margin: 0 0 0 10px;
+    font-size: small;
+}
+.message_name_right p{
+    margin:0 10px 0 0;
+    font-size: small;
+}
+
+.chat_footer{
+    padding: 6px;
+    height:60px;
+    background: #DBF2FF;
+    border:1px solid #DBF2FF;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+}
+.send_message{
+    background-color: #ffffff;
+    border-right:1px solid
+}
+
+.send_box button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+input[type="text"]{
+    border-radius: 999px;
+    height: 30px;
+}   
+.send_box{
+    text-align: center;
+    padding: 20px;
+    border-color: #000000;
+}
+
+.message_time{
+    color: #000000;
+    font-size:  10px;
+    align-self: flex-end;
+    margin:0 5px;
+}
+.clear{
+    clear:both;
+}
+
+
+
