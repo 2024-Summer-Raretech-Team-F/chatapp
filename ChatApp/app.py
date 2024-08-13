@@ -111,6 +111,23 @@ def edit_notice(notice_id):
     return redirect(url_for('get_all_notices'))
 
 
+#お知らせの削除
+@app.route('/notices/<int:notice_id>', methods=['DELETE'])
+def delete_notice(notice_id):
+    user_id = request.form.get('user_id')
+    
+    user = dbConnect.getUserById(user_id)
+    
+    if user is None or user['role'] != 'teacher':
+        abort(403)
+        
+    dbConnect.deleteNotice(notice_id)
+    
+    flash("お知らせが削除されました。")
+    return redirect(url_for('get_all_notice'))
+
+
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
