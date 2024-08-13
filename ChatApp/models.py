@@ -80,7 +80,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT message_id, u.user_id, user_name, message FROM messages AS m INNER JOIN users AS u ON m.user_id = u.user_id WHERE group_id = %s"
+            sql = "SELECT message_id, u.user_id, name_kanji_full, message FROM messages AS m INNER JOIN users AS u ON m.user_id = u.user_id WHERE group_id = %s"
             cur.execute(sql,(group_id))
             messages = cur.fetchall()
             return messages
