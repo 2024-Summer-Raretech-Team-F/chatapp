@@ -66,6 +66,11 @@ def get_all_notices():
     return notices
 
 
+#学年でお知らせを絞る
+@app.route('/notices/grade/<category>', methods=['GET'])
+def get_notice_by_grade(category):
+    notices = dbConnect.getNoticeByGrade(category)
+    return notices
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
