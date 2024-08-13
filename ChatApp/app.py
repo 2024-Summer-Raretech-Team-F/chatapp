@@ -92,5 +92,25 @@ def add_notice():
     return redirect(url_for('get_all_notices')) 
 
 
+# お知らせの更新(編集)
+@app.route('/notices/<int:notice_id>', methods=['PUT'])
+def edit_notice(notice_id):
+    title = request.form.get('title')
+    description = request.form.get('description')
+    post_data = request.form.get('post_data')
+    user_id = request.form.get('user_id')
+    
+    user = dbConnect.getUserById(user_id)
+    
+    if user is None or user['role'] != 'teacher':
+        abort(403)
+    
+    dbConnect.updateNotice(notice_id, title, description, post_data)
+    
+    flash("お知らせが更新されました")
+    return redirect(url_for('get_all_notices'))
+
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
