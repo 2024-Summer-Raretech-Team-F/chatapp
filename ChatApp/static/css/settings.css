@@ -1,0 +1,54 @@
+.user-info i {
+    display: flex;
+    padding-top: 50px;
+    justify-content: center;
+    border-bottom: solid  2px #DBF2FF;
+    padding-bottom: 10px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #DBF2FF;
+}
+
+.personal-info {
+    margin: 0 15px 0 30px;
+    text-align: right;
+}
+.personal-info p {
+    height: 20px;
+}
+
+.parsonal-data {
+    margin-left: 30px;
+}
+
+.parsonal-data p {
+    height: 20px;
+}
+
+.user-info hr {
+    margin-top: 10px;
+    margin-left: -150px;
+    /*margin-bottom: -2px;
+    margin-right: -100px;*/
+    width: 274%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DBF2FF;
+}
+
+
+
+
+
+.settings-button {
+    background-color: #56B7ED;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 3px 25px;
+    margin-top: 20px;
+    margin-left: 50vh;
+}

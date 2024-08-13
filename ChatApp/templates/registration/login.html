@@ -1,25 +1,84 @@
-<title>ログインページ</title>
 
-<form method="post" action="{{url_for('auth')}}">
-  <div>
-    <label for="login-email">e-mail</label>
-    <input
-      type="text"
-      placeholder="Email"
-      name="email"
-      id="login-email-input"
-    />
-  </div>
-  <div>
-    <label for="login-password">password</label>
-    <input
-      type="text"
-      name="password"
-      id="login-password-id"
-      placeholder="password"
-    />
-  </div>
-  <button>次へ</button>
-</form>
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
+            <link rel="icon" href="../static/img/favicon.ico" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+            <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+    </head>
+<body>
+        <header class="header-regi">
+            <nav>
+                <h5>今いるページ</h5>
+                <!--{% block header_links %}
+                    <h5>Chimy</h5>-->
+                <!--ホームなら「ホーム画面」記載-->
+                <!--<span class="members-school">保護者or教職員</span>-->
+                <!--{% endblock %}-->
+            </nav>
+        </header>
 
-<!-- <a href="{{url_for('auth')}}">次へ</a> -->
+
+
+    <main class="main-login">
+        <div class="container">
+            <div class="svg-container">
+                <svg viewBox="0 0 594 420">
+                    <!--画像Aのurl-->
+                    <image class="left" xlink:href="hon_hyoushi.png" width="297" height="420"/>
+                    <!--画像Bのurl-->
+                    <image class="right" xlink:href="hon_hiraki01.png" width="297" height="420"/>
+
+                    <rect id="kageL" width="297" height="420" class="left" fill="gray" fill-opacity="0.4"/>
+                    <rect id="kageR" width="297" height="420" class="right" fill="gray" fill-opacity="0.4"/>
+
+                    <!--画像Bのurl-->
+                    <image id="honhiL" class="left" xlink:href="hon_hiraki01.png" width="297" height="420"/>
+                    <!--画像Aのurl-->
+                    <image id="honhyoR" class="right" xlink:href="hon_hyoushi.png" width="297" height="420"/>
+
+                    <clipPath id="leftclip">
+                        <rect x="0" y="0" width="297" height="420"/>
+                    </clipPath>
+
+                    <clipPath id="rightclip">
+                        <rect x="297" y="0" width="297" height="420"/>
+                    </clipPath>
+                </svg>
+
+                <!-- フォームをSVGの右側に配置 -->
+                <div class="form-overlay hidden">
+                    <form class="input-form">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" placeholder="sample@email.com" required autocomplete="email">
+                        
+                        <!--
+                        <label for="token">認証キー</label>
+                        <input type="text" id="token" name="token" placeholder="hogahoga0101" required autocomplete="one-time-code">
+                        -->
+
+                        <label for="password">パスワード</label>
+                        <p class="tyuu_1">※英数字6文字以上</p>
+                        <input type="password" id="password" name="password" placeholder="" required autocomplete="current-password">
+                        
+                        <p class="pass_text">パスワード・認証キーを忘れた場合は</p>
+                        <a href="#">こちら</a>
+                        <button type="submit">ログイン</button>
+                    </form>
+                    <a href="#" class="register-link">新規登録</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-regi">
+        <p>&copy; 2024 summer-f</p>
+    </footer>
+
+
+<script src="login.js"></script>
+</body>
+</html>

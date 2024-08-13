@@ -1,3 +1,50 @@
-<!-- 認証画面のHTML -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>学校ID入力<!--{% block title %}タグに出てくるページタイトル{% endblock}--></title>
+        <link rel="icon" href="../static/img/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+</head>
+<body>
+    <header class="header-regi">
+        <nav>
+            <h5>Chimy</h5>
+                <!--{% block header_links %}
+                    <h5>Chimy</h5>-->
+                <!--ホームなら「ホーム画面」記載-->
+                <!--<span class="members-school">保護者or教職員</span>-->
+                <!--{% endblock %}-->
+        </nav>
+    </header>
 
-<title>認証画面</title>
+    <main class="main-auth">
+        <!--{% block content %}
+        各ページごとのメインはここ
+        {% endblock %}-->
+               <div class="auth-container">
+            <form class="auth-form">
+                <h1 id="form-title">新規登録</h1>
+                    <p>受け取った学校IDを入力してください</p>
+                <label for="token">学校ID</label>
+                <input type="text" id="auth-key" placeholder="">
+                <button id="auth-submit">登録画面へ</button>
+            </form>
+        </div>
+    </main>
+    
+    <footer class="footer-regi">
+        <p>&copy; 2024 summer-f</p>
+    </footer>
+
+    
+    <!--<script src="{{ url_for('static', filename='js/●●.js') }}"></script>-->
+
+    <!--{% block scripts %}
+    各ページのJS
+    {% endblock %}-->
+
+</body>
+</html>

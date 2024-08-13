@@ -6,7 +6,7 @@
         <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
         <link rel="icon" href="../static/img/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="base.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
 </head>
 <body>
     <header class="header-main">
@@ -29,13 +29,51 @@
         </nav>
     </header>
 
-    <main>
+    <main id="settings-main">
         <!--{% block content %}<main></main>
         各ページごとのメインはここ
         {% endblock %}-->
+        <div class="user-info">
+            <i class="fa-regular fa-circle-user" id="user-icon"></i>
+            <div class="info-container">
+                <div class="personal-info">
+                    <p id="main-name">お子様のお名前</p>
+                    <p class="kana-name">ふりがな</p>
+                <hr>
+                    <p id="parents-name">保護者のお名前</p>
+                <hr>
+                    <p>学年</p>
+                    <p>クラス</p>
+                    <p>出席番号</p>
+                    <p id="phone-number">第一緊急連絡先</p>
+                <hr>
+                    <p>メールアドレス</p>
+                    <p class="pass-hr">パスワード</p>
+                    <p>学校ID</p>
+                </div>
+                <div class="parsonal-data">
+                    <p>田中  智樹</p>
+                    <p>たなか  ともき</p>
+                <hr>
+                    <p>田中  由紀子</p>
+                <hr>
+                    <p>5年生</p>
+                    <p>2組</p>
+                    <p>33</p>
+                    <p>0312345678</p>
+                <hr>
+                    <p>sample@email.com</p>
+                    <p>mokomoko12345</p>
+                    <p>hsfdug1255</p>
+                </div>
+            </div>
+                    <button onclick="location.href='edit.html'" class="settings-button">編集</button>
+                </div>            
+        </div>
     </main>
 
-    <script src="base.js"></script>
+    
+    
     <!--<script src="{{ url_for('static', filename='js/base.js') }}"></script>-->
 
     <!--{% block scripts %}

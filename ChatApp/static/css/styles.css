@@ -1,9 +1,10 @@
 @import "color.css";
 @import "base.css";
+@import "base-regi.css";
+@import "login.css";
 @import "main.css";
+@import "home.css";
 @import "detail.css";
 @import "registration.css";
-@import "modal.css";
-@import "popup.css";
-@import "error.css";
-@import "notice.css";
+@import "auth.css";
+@import "settings.css";

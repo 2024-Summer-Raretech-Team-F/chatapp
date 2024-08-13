@@ -1,0 +1,72 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #fff;
+}
+
+
+main {
+    padding-top: 63px;
+    padding-bottom: 70px;
+    background-color: #fff; 
+    overflow-y: auto;
+}
+
+
+.header-regi {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #DBF2FF;
+    padding: 15px 0;
+    z-index: 10;
+    }
+
+.header-regi h5 {
+    margin: 0; /* 文字の大きさリセット */
+    font-size: 1em; 
+    color: #333;
+    margin-left: 6vw;
+    
+  }
+
+.footer-regi {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #DBF2FF;
+    padding: 10px 0;
+    z-index: 10;
+
+    justify-content: center;
+}
+
+.footer-regi p {
+    margin: 0; /* マージンリセット */
+    font-size: x-small; 
+    color: #333;
+    text-align: right;
+    margin-right: 6vw;
+ 
+}
+
+
+/*
+.content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    background-color: #DBF2FF;
+    text-align: right;
+    padding: 0 30px;
+}
+*/
+
