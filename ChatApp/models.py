@@ -123,7 +123,7 @@ class dbConnect:
             cur.close()
 
 
-    def creatNotice(title, description, post_data, user_id):
+    def createNotice(title, description, post_data, user_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()

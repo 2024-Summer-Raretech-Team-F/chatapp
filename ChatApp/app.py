@@ -1,8 +1,8 @@
-from flask import Flask, request, redirect, render_template, session, flash, abort
+from flask import Flask, request, redirect, render_template, session, flash, abort, url_for
 from datetime import timedelta
 import calendar
 from datetime import datetime
-# import models
+
 
 import hashlib
 import uuid
@@ -71,6 +71,26 @@ def get_all_notices():
 def get_notice_by_grade(category):
     notices = dbConnect.getNoticeByGrade(category)
     return notices
+
+
+#お知らせの作成
+@app.route('/notices/add_notice', methods=['POST'])
+def add_notice():
+    title = request.form.get('title')
+    description = request.form.get('description')
+    post_data = request.form.get('post_data')
+    user_id = request.form.get('user_id')
+    
+    user = dbConnect.getUserById(user_id)
+    
+    if user is None or user['role'] != 'teacher':
+        abort(403)
+        
+    dbConnect.createNotice(title, description, post_data, user_id)
+    
+    flash("お知らせが作成されました！")  
+    return redirect(url_for('get_all_notices')) 
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
