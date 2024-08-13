@@ -1,8 +1,8 @@
-from flask import Flask, request, redirect, render_template, session, flash, abort
+from flask import Flask, request, redirect, render_template, session, flash, abort, url_for
 from datetime import timedelta
 import calendar
 from datetime import datetime
-# import models
+
 
 import hashlib
 import uuid
@@ -56,6 +56,75 @@ def home():
 
 
     return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time,users_data=users_data)
+
+
+
+#お知らせ一覧(全て)を表示させる
+@app.route('/notices', methods=['GET'])
+def get_all_notices():
+    notices = dbConnect.getAllNotices()
+    return notices
+
+
+#学年でお知らせを絞る
+@app.route('/notices/grade/<category>', methods=['GET'])
+def get_notice_by_grade(category):
+    notices = dbConnect.getNoticeByGrade(category)
+    return notices
+
+
+#お知らせの作成
+@app.route('/notices/add_notice', methods=['POST'])
+def add_notice():
+    title = request.form.get('title')
+    description = request.form.get('description')
+    post_data = request.form.get('post_data')
+    user_id = request.form.get('user_id')
+    
+    user = dbConnect.getUserById(user_id)
+    
+    if user is None or user['role'] != 'teacher':
+        abort(403)
+        
+    dbConnect.createNotice(title, description, post_data, user_id)
+    
+    flash("お知らせが作成されました！")  
+    return redirect(url_for('get_all_notices')) 
+
+
+# お知らせの更新(編集)
+@app.route('/notices/<int:notice_id>', methods=['PUT'])
+def edit_notice(notice_id):
+    title = request.form.get('title')
+    description = request.form.get('description')
+    post_data = request.form.get('post_data')
+    user_id = request.form.get('user_id')
+    
+    user = dbConnect.getUserById(user_id)
+    
+    if user is None or user['role'] != 'teacher':
+        abort(403)
+    
+    dbConnect.updateNotice(notice_id, title, description, post_data)
+    
+    flash("お知らせが更新されました")
+    return redirect(url_for('get_all_notices'))
+
+
+#お知らせの削除
+@app.route('/notices/<int:notice_id>', methods=['DELETE'])
+def delete_notice(notice_id):
+    user_id = request.form.get('user_id')
+    
+    user = dbConnect.getUserById(user_id)
+    
+    if user is None or user['role'] != 'teacher':
+        abort(403)
+        
+    dbConnect.deleteNotice(notice_id)
+    
+    flash("お知らせが削除されました。")
+    return redirect(url_for('get_all_notice'))
 
 
 

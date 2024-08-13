@@ -31,6 +31,22 @@ class dbConnect:
             cur.close()
 
 
+    def getUserById(user_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM users WHERE user_id = %s"
+            cur.execute(sql, (user_id,))
+            user = cur.fetchone()
+            
+            return user
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
     def getUser(email):
         try:
             conn = DB.getConnection()
@@ -123,7 +139,7 @@ class dbConnect:
             cur.close()
 
 
-    def creatNotice(title, description, post_data, user_id):
+    def createNotice(title, description, post_data, user_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
