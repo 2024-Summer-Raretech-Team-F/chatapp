@@ -41,10 +41,29 @@ def userLogin():
                 return redirect('/home')    
     return redirect('/login')                
 
-
-@app.route('/auth',methods=['GET','POST'])
+# 新規登録 / 学校IDの入力画面の表示
+@app.route('/auth')
 def auth():
     return render_template('registration/auth.html')
+
+
+@app.route('/auth', methods=['POST'])
+def getSchoolId(school_code):
+    school_code = request.form.get('school_code')
+    
+    if not school_code:
+        flash('学校IDを入力してください')
+        return redirect('auth')
+    
+    school_id = dbConnect.getSchoolCode(school_code)
+    
+    if school_id is None:
+        flash('無効な学校IDです。正しい学校IDを入力してください。')
+        return redirect(url_for('auth'))
+    
+    return redirect(url_for('home'), school_id=school_id)
+
+
 
 
 @app.route('/home',methods=['GET','POST'])
