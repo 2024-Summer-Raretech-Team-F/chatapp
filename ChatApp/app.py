@@ -20,6 +20,28 @@ app.permanent_session_lifetime = timedelta(days=30)
 def login():
     return render_template('registration/login.html')
 
+# ログイン処理
+@app.route('/login', methods=['POST'] )
+def userLogin():
+    email = request.form.get('email')
+    password = request.form.get('password')
+        
+    if email == '' or password == '':
+        flash('入力されていないフォームがあります')
+    else:
+        user = dbConnect.getUser(email)
+        if user is None:
+            flash('このユーザーは存在しません')
+        else:
+            hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if hashPassword != user['password']:
+                flash('パスワードが間違っています')
+            else:
+                session['user_id'] = user['user_id']
+                return redirect('/home')    
+    return redirect('/login')                
+
+
 @app.route('/auth',methods=['GET','POST'])
 def auth():
     return render_template('registration/auth.html')
