@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><!--{% block title %}{% endblock}-->教職員登録画面</title>
+        <link rel="icon" href="../static/img/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="signup.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+</head>
+<body class="signup_body">
+    <header class="header-regi">
+        <nav class="signup_nav">
+            <h5>アカウント登録</h5>
+                <!--{% block header_links %}
+                    <h5>Chimy</h5>-->
+                <!--ホームなら「ホーム画面」記載-->
+                <!--{% endblock %}-->
+            <span class="signup_role">教職員用</span>
+        </nav>
+    </header>
+
+    <main class="signup_main">
+        <!--{% block content %}
+        {% endblock %}-->
+        <h5>｜教職員の情報</h5>
+        <form method="POST" action="#">
+            <p><span class="required">氏名</span></p>
+            <input type="text" maxlength="50" placeholder="山田　太郎" required size="60" name="name_kanji_full">
+            <p><span class="required">氏名 （ふりがな）</span></p>
+            <input type="text" maxlength="50" placeholder="やまだ　たろう" required size="60" name="name_kana_full">
+            <p><span class="required"><select name="grade" id="grade" required>
+                <option disabled selected>学年</option>
+                <option label="１年"></option>"
+                <option label="２年"></option>
+                <option label="３年"></option>
+                <option label="４年"></option>
+                <option label="５年"></option>
+                <option label="６年"></option>
+            </span></select></p>
+            <p><span class="required"><select name="section" id="section" required>
+                <span class="required"><option disabled selected>担当</option></span>
+                <option label="１組"></option>"
+                <option label="２組"></option>
+                <option label="３組"></option>
+                <option label="４組"></option>
+                <option label="５組"></option>
+                <option label="６組"></option>
+            </span></select></p>
+            <p><span class="required">電話番号</p></span>
+            <input type="text" maxlength="20" placeholder="08012345678"required size="60" name="phone_number">
+            <p><span class="required">メールアドレス</p></span>
+            <input type="email" maxlength="100" placeholder="sample@email.com" required size="60" name="email">
+            <p><span class="required">パスワード</p></span>
+            <p class="sentence">※半角英数字６文字以上</p>
+            <input type="password" maxlength="255" required size="60" name="password">
+            <p><span class="required">パスワード再入力</p></span>
+            <input type="password" maxlength="255" required size="60" name="password">
+            <br>
+            <br>
+            <br>
+            <p><input type="submit" value="登録" class="button"></p>
+        </form>
+    </main>
+    
+    <footer class="footer-regi">
+        <p>&copy; 2024 summer-f</p>
+    </footer>
+
+    
+</body>
+</html>
