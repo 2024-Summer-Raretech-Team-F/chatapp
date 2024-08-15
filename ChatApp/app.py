@@ -20,6 +20,23 @@ app.permanent_session_lifetime = timedelta(days=30)
 def login():
     return render_template('registration/login.html')
 
+
+# ログイン時の処理
+@app.route('/login',methods=['POST'])
+def checkLogin():
+    email = request.form.get('name')
+    password = request.form.get('password')
+    DBuser = dbConnect.getUser(email)
+    DBpassword = DBuser["user"]
+    if DBuser != None:
+        print("すでにユーザーが登録されています")
+
+    elif password != DBpassword:
+        print("PWが間違っています")
+    else:
+        # ここを認証キーのページにリダイレクト変更する
+        return redirect('/home')
+
 @app.route('/auth',methods=['GET','POST'])
 def auth():
     return render_template('registration/auth.html')
@@ -59,6 +76,7 @@ def home():
 
 
 
+
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
@@ -80,16 +98,16 @@ def add_notice():
     description = request.form.get('description')
     post_data = request.form.get('post_data')
     user_id = request.form.get('user_id')
-    
+
     user = dbConnect.getUserById(user_id)
-    
+
     if user is None or user['role'] != 'teacher':
         abort(403)
-        
+
     dbConnect.createNotice(title, description, post_data, user_id)
-    
-    flash("お知らせが作成されました！")  
-    return redirect(url_for('get_all_notices')) 
+
+    flash("お知らせが作成されました！")
+    return redirect(url_for('get_all_notices'))
 
 
 # お知らせの更新(編集)
@@ -99,14 +117,14 @@ def edit_notice(notice_id):
     description = request.form.get('description')
     post_data = request.form.get('post_data')
     user_id = request.form.get('user_id')
-    
+
     user = dbConnect.getUserById(user_id)
-    
+
     if user is None or user['role'] != 'teacher':
         abort(403)
-    
+
     dbConnect.updateNotice(notice_id, title, description, post_data)
-    
+
     flash("お知らせが更新されました")
     return redirect(url_for('get_all_notices'))
 
@@ -115,14 +133,14 @@ def edit_notice(notice_id):
 @app.route('/notices/<int:notice_id>', methods=['DELETE'])
 def delete_notice(notice_id):
     user_id = request.form.get('user_id')
-    
+
     user = dbConnect.getUserById(user_id)
-    
+
     if user is None or user['role'] != 'teacher':
         abort(403)
-        
+
     dbConnect.deleteNotice(notice_id)
-    
+
     flash("お知らせが削除されました。")
     return redirect(url_for('get_all_notice'))
 

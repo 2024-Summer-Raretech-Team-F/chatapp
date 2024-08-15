@@ -1,1 +1,11 @@
-初期データに編集済み
+残すファイル
+login
+
+ <img src="{{url_for('static',filename='img/hon_hiraki01.png')}}"alt=""/>
+に変更
+
+
+
+
+廃棄ファイル
+login-2
