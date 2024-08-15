@@ -3,12 +3,12 @@ import pymysql
 from util.DB import DB
 
 class dbConnect:
-    def getSchoolCode(school_code, school_name, parent_auth_key, teacher_auth_key):
+    def getSchoolCode(school_code):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO schools (school_code, school_name, parent_auth_key, teacher_auth_key) VALUES (%s, %s, %s, %s);"
-            cur.execute(sql, (school_code, school_name, parent_auth_key, teacher_auth_key))
+            sql = "INSERT INTO schools (school_code) VALUES (%s);"
+            cur.execute(sql, (school_code))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています')
