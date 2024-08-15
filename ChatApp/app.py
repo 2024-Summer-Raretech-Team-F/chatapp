@@ -48,12 +48,12 @@ def auth():
 
 
 @app.route('/auth', methods=['POST'])
-def getSchoolId(school_code):
-    school_code = request.form.get('school_code')
+def getSchoolId():
+    school_code = request.form.get('school_code')  
     
     if not school_code:
         flash('学校IDを入力してください')
-        return redirect('auth')
+        return redirect(url_for('auth'))  
     
     school_id = dbConnect.getSchoolCode(school_code)
     
@@ -61,7 +61,7 @@ def getSchoolId(school_code):
         flash('無効な学校IDです。正しい学校IDを入力してください。')
         return redirect(url_for('auth'))
     
-    return redirect(url_for('home'), school_id=school_id)
+    return redirect(url_for('home', school_id=school_id))
 
 
 
