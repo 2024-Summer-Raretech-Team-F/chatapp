@@ -169,6 +169,7 @@ body, html {
 input[type="text"]{
     border-radius: 999px;
     height: 30px;
+    border-style: solid;
 }   
 .send_box{
     text-align: center;
