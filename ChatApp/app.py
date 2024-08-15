@@ -20,9 +20,50 @@ app.permanent_session_lifetime = timedelta(days=30)
 def login():
     return render_template('registration/login.html')
 
-@app.route('/auth',methods=['GET','POST'])
+# ログイン処理
+@app.route('/login', methods=['POST'] )
+def userLogin():
+    email = request.form.get('email')
+    password = request.form.get('password')
+        
+    if email == '' or password == '':
+        flash('入力されていないフォームがあります')
+    else:
+        user = dbConnect.getUser(email)
+        if user is None:
+            flash('このユーザーは存在しません')
+        else:
+            hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            if hashPassword != user['password']:
+                flash('パスワードが間違っています')
+            else:
+                session['user_id'] = user['user_id']
+                return redirect('/home')    
+    return redirect('/login')                
+
+# 新規登録 / 学校IDの入力画面の表示
+@app.route('/auth')
 def auth():
     return render_template('registration/auth.html')
+
+
+@app.route('/auth', methods=['POST'])
+def getSchoolId():
+    school_code = request.form.get('school_code')  
+    
+    if not school_code:
+        flash('学校IDを入力してください')
+        return redirect(url_for('auth'))  
+    
+    school_id = dbConnect.getSchoolCode(school_code)
+    
+    if school_id is None:
+        flash('無効な学校IDです。正しい学校IDを入力してください。')
+        return redirect(url_for('auth'))
+    
+    return redirect(url_for('home', school_id=school_id))
+
+
 
 
 @app.route('/home',methods=['GET','POST'])
@@ -127,7 +168,12 @@ def delete_notice(notice_id):
     return redirect(url_for('get_all_notice'))
 
 
-
+#チャットグループの表示
+@app.route('/home')
+def show_group():
+    groups = dbConnect.getGroups()
+    render_template('chat_main.html', groups=groups)
+    
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
