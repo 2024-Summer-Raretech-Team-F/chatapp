@@ -1,6 +1,6 @@
 
-DROP DATABASE IF EXISTS chimyapp;
-DROP USER IF EXISTS 'testuser';
+DROP DATABASE  chimyapp;
+DROP USER  'testuser';
 
 CREATE USER 'testuser' IDENTIFIED BY 'testuser';
 CREATE DATABASE chimyapp;
@@ -74,7 +74,7 @@ CREATE TABLE notices (
 );
 
 
-INSERT INTO schools (school_code, school_name, parent_auth_key, teacher_auth_key)VALUES ('demo0101','サンプル小学校', 'parent_key_example', 'teacher_key_example');
+INSERT INTO schools (id, school_code)VALUES (1, 'demo0101');
 
 INSERT INTO academic_levels (grade, section, school_id) VALUES ('1年', 'A組', 1);
 
