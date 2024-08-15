@@ -168,7 +168,12 @@ def delete_notice(notice_id):
     return redirect(url_for('get_all_notice'))
 
 
-
+#チャットグループの表示
+@app.route('/home')
+def show_group():
+    groups = dbConnect.getGroups()
+    render_template('chat_main.html', groups=groups)
+    
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
