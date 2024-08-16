@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -86,7 +86,7 @@ body {
     background-color: #56B7ED;
     border: none;
     padding: 2px 50px;
-    color: white;
+    color: #fff;
     cursor: pointer;
     font-size: 12px;
     border-radius: 500px;
@@ -94,7 +94,8 @@ body {
 }
 
 #notice-btn:hover {
-    background-color: #00bfff;
+    background-color: #56B7ED;
+    opacity: 0.7;
 }
 
 #calendar-nav {

@@ -1,172 +1,207 @@
+.login-nav {
+    justify-content: center;
+    align-items: center;
+    margin-right: 6vw;
+}
+
+.login-main main {
+    margin: 0;
+    padding: 0;
+}
+
+
 .main-login {
     height: auto;
-
+    
 }
 
 /* コンテナを中央に配置 */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60vw; 
-  max-width: 1200px; /*  */
-  margin-top: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60vw; 
+    max-height: 550px;
+    max-width: 1050px; 
+    min-width: 500px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 
-/* SVGのサイズはお好みで。 */
+/* SVGのサイズ。 */
 .svg-container {
-  position: relative;
-  width: 100%; /* SVGコンテナの幅をコンテナに合わせて設定 */
-  height: auto;
+    position: relative;
+    width: 100%; 
+    height: auto;
 }
 
 svg {
-  display: block;
-  width: 100%; /* コンテナの幅に合わせてサイズ変更 */
-  height: auto;
-  overflow: visible;
+    display: block;
+    width: 100%; 
+    height: auto;
+    overflow: visible;
 }
 
 /* フォームをSVGの右側に配置 PCのみ */
 .form-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%; /* フォームの幅をSVGの右側半分に設定 */
-  height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%; /* フォームの幅をSVGの右側半分に設定 */
+    height: 100%;
     display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  padding: 30px;
-  -webkit-box-sizing: border-box;  /*webkit系*/
-  -moz-box-sizing: border-box;  /*Firefox*/
-  box-sizing: border-box; /* ボックスのサイズを含む */
-  opacity: 0;
-  transform: translateY(20px); /* 初期位置を下に設定 */
-  transition: opacity 500ms ease-in-out, transform 5ms ease-in-out; /* フェードインと浮かび上がるアニメーション */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    padding: 30px;
+    -webkit-box-sizing: border-box;  /*webkit系*/
+    -moz-box-sizing: border-box;  /*Firefox*/
+    box-sizing: border-box; 
+    opacity: 0;
+    transform: translateY(20px); /* 初期位置下 */
+    transition: opacity 500ms ease-in-out, transform 5ms ease-in-out; /* フェードインと浮かび上がるアニメーション */
 }
 
 .form-overlay.hidden {
-  opacity: 0;
-  transform: translateY(20px); /* 初期位置を下に設定 */
+    opacity: 0;
+    transform: translateY(20px); /* 初期位置下 */
 }
 
 .form-overlay h2 {
-  margin-bottom: 20px;
-  font-size: 2vw; /* フォントサイズを相対的に設定 */
+    margin-bottom: 20px;
+    font-size: 1vw; /* フォントサイズを相対的に設定 */
 }
 
 .input-form {
-  width: 100%;
-  max-width: 600px; 
-  margin: 0 auto; 
+    width: 100%;
+    margin: 0 auto; 
 }
 
 
 .input-form label {
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-size: 1.2vw; /* フォントサイズを相対的に設定 */
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1vw; /* フォントサイズを相対的に設定 */
 }
 
 .input-form input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
-  border: transparent;
-  border-bottom: 3px solid #DBF2FF;
-  border-radius: 0px;
-  box-sizing: border-box; /* ボックスのサイズを含む */
-  font-size: 1.2vw; /* フォントサイズを相対的に設定 */
-  margin-top: 8px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: transparent;
+    border-bottom: 3px solid #DBF2FF;
+    border-radius: 0px;
+    box-sizing: border-box; /* ボックスのサイズを含む */
+    font-size: 1.2vw; /* フォントサイズを相対的に設定 */
+    margin-top: 8px;
 }
 
 .input-form button {
-  display: block;
-  width: 50%;
-  padding: 4px;
-  margin: auto;
-  background-color: #56B7ED;
-  color: #fff;
-  border: none;
-  border-radius: 500px;
-  cursor: pointer;
-  margin-top: 16px;
-  font-size: 1.2vw; /* フォントサイズを相対的に設定 */
+    display: block;
+    width: 50%;
+    padding: 4px;
+    margin: auto;
+    background-color: #56B7ED;
+    color: #fff;
+    border: none;
+    border-radius: 500px;
+    cursor: pointer;
+    margin-top: 16px;
+    font-size: 1.2vw; /* フォントサイズを相対的に設定 */
 }
 
 .input-form button:hover {
-  background-color: #368ebd;
+   background-color: #56B7ED;
+    opacity: 0.7;
 }
 
 .tyuu_1 {
-  display: block;
-  text-align: auto;
-  margin-top: 8px;
-  color: #000000;
-  text-decoration: none;
-  font-size: 1.0vw; /* フォントサイズを相対的に設定 */
+    display: block;
+    text-align: auto;
+    margin-top: 8px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.0vw; /* フォントサイズを相対的に設定 */
 } 
 
 .pass_text {
-  display: inline-block;
-  text-align: right;
-  margin-top: 10px;
-  color: #000000;
-  text-decoration: none;
-  font-size: 1.0vw; /* フォントサイズを相対的に設定 */
+    display: inline-block;
+    text-align: right;
+    margin-top: 10px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.0vw; /* フォントサイズを相対的に設定 */
 }
 
 
 
 .input-form a {
-  display: inline-block;
-  text-align: right;
-  color: #368ebd;
-  text-decoration: none;
-  font-size: 1.0vw; /* フォントサイズを相対的に設定 */
+    display: inline-block;
+    text-align: right;
+    color: #56B7ED;
+    text-decoration: none;
+    font-size: 1vw; 
+}
+
+.input-form a:hover {
+    color: #56B7ED;
+    opacity: 0.7;
 }
 
 .register-link {
-  margin-top: 24px;
-  color: #ff0000;
-  font-size: 1.0vw; /* フォントサイズを相対的に設定 */
+    margin-top: 24px;
+    color: #ff0000;
+    font-size: 1vw;
+}
+
+.register-link:hover {
+    color: #ff0000;
+    opacity: 0.7;
+}
+
+.input-form input[type="email"]:focus {
+    outline: none;
+}
+
+.input-form input[type="password"]:focus {
+  outline: none;
 }
 
 
 image {
-  width: 100%;
-  height: auto;
-  /* あるいはheight:100%; */
-  transform-origin: center;
+    width: 100%;
+    height: auto;
+    transform-origin: center;
 }
 
 .left {
-  clip-path: url(#leftclip);
-  animation: openLeft 2s forwards; /* 本を開くアニメーション */
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
+    clip-path: url(#leftclip);
+    animation: openLeft 2s forwards; /* 本を開くアニメーション */
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
 }
 
 .right {
-  clip-path: url(#rightclip);
-  animation: openLeft 2s forwards; /* 本を開くアニメーション */
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
+    clip-path: url(#rightclip);
+    animation: openLeft 2s forwards; /* 本を開くアニメーション */
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
 }
 
 #honhiL {
-  animation: honhiL 2s linear forwards; /* アニメーションを1回のみ実行 */
+    animation: honhiL 2s linear forwards; /* アニメーションを1回のみ実行 */
 }
 
 #honhyoR {
-  animation: honhyoR 2s linear forwards; /* アニメーションを1回のみ実行 */
+    animation: honhyoR 2s linear forwards; /* アニメーションを1回のみ実行 */
 }
+
+
+/*=======================================================*/
+
 
 @keyframes honhiL {
   0% {

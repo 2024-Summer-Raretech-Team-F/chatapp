@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->登録完了</title>
+        <link rel="icon" href="../static/img/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+</head>
+<body>
+    <header class="header-regi">
+        <nav class="finish-nav">
+            <h5 class="center-title">アカウント登録</h5>
+            <!--{% block header_links %}
+                    <h5>Chimy</h5>-->
+                <!--ホームなら「ホーム画面」記載-->
+                <!--<span class="members-school?????">保護者or教職員</span>-->
+                <!--{% endblock %}-->
+        </nav>
+    </header>
+
+    <main class="complete_tontainer">
+        <!--{% block content %}
+        各ページごとのメインはここ <main> </main>
+        {% endblock %}-->
+        <div class="complete_tontainer">
+            <p class="complete_text">ご登録ありがとうございます</p>
+            <p class="complete_text">少しでもあなたの助けになりますように</p>
+            <form class="auth-form" action="" method="post">
+                <button type="submit">ホーム画面へ</button>
+            </form>
+        </div>
+        <img src="penpen01.gif" class="complete_gif">
+        <!--<img src="{{ url_for('static',filename='img/cat2.gif') }}" class="error-gif">-->
+
+
+    </main>
+    
+    <footer class="footer-regi">
+        <p>&copy; 2024 summer-f</p>
+    </footer>
+</body>
+</html>

@@ -9,7 +9,7 @@
     gap: 8px; /* 各要素の間にスペースを設定 */    
 }
 
-#form-title {
+#form-title, #form-title_key {
     margin: 0;
     padding: 0;
     color: red;
@@ -22,11 +22,14 @@
     padding-bottom: 50px;
 }
 
-#auth-key {
+
+#auth-key, #token-key {
     width: 400px;
+    border-radius: 8px;
+    height: 20px;
 }
 
-#auth-submit {
+#auth-submit, #auth-submit_sinki {
     margin: auto;
     border: none;
     width: 150px;
@@ -35,8 +38,11 @@
     background-color: #56B7ED;
     color: #fff;
    margin-top: 40px;
+   font-weight: bold;
 }
 
-#auth-submit:hover {
-    background-color: #368ebd;
+#auth-submit, #auth-submit_sinki:hover {
+    background-color: #56B7ED;
+    opacity: 0.7;
+
 }

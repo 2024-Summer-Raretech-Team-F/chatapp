@@ -1,12 +1,19 @@
 @import "color.css";
-@import "base.css";
+@import "auth.css";
 @import "base-regi.css";
+@import "base.css";
+@import "chat.css";
+@import "error.css";
+@import "finish.css";
+@import "home.css";
 @import "login.css";
 @import "main.css";
-@import "home.css";
+
+@import "notice-list.css";
+@import "notice-main.css";
+@import "settings-edit.css";
+@import "settings.css";
+@import "signup.css";
+
 @import "detail.css";
 @import "registration.css";
-@import "auth.css";
-@import "settings.css";
-@import "settings-edit.css";
-@import "chat.css";

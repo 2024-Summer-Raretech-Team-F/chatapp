@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
+            <link rel="icon" href="../static/img/favicon.ico" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+            <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+    </head>
+    <body>
+        <header class="header-main">
+            <nav>
+                <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+                <h6><!--{% block header_links %}-->
+                今いるページ<!--ホームなら「ホーム画面」記載-->
+                <!--{% endblock %}--></h6>
+                <ul>
+                    <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                        <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
+                    <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                        <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
+                    <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                        <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
+                    <!--<li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}"><img src="" alt="Icon">画像で行くならこっち</li>-->
+                    <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}">-->
+                        <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
+                </ul>
+            </nav>
+        </header>
+
+
+
+       <main class="main-home">
+        <section class="left-section">
+            <div class="notifications">
+                <h3>新着のお知らせ</h3>
+                <div class="latest-notice">
+                    <p id="latest-notice-title">年間スケジュール調整のお知らせ</p>
+                    <button id="notice-btn">お知らせへ</button>
+                </div>
+            </div>
+            <div class="calendar">
+                <div id="calendar-nav">
+                    <button id="prev-month"><i class="fa-solid fa-angle-up fa-rotate-270"></i></button>
+                    <!--前の月-->
+                    <span id="calendar-month">2025年 5月</span>
+                    <!--今の月-->
+                    <button id="next-month"><i class="fa-solid fa-angle-up fa-rotate-90"></i></button>
+                    <!--次の月-->
+                </div>
+                <div id="calendar"></div>
+                <div id="selected-date-notice">ここにその日のタイトル</div>
+            </div>
+        </section>
+        <section class="chat">
+            <h3><a onclick="window.location.reload(true);"><i class="fa-solid fa-rotate-right"></i>
+            </a>チャットルーム一覧</h3>
+            <div id="chat-list" class="chat-list">
+                <!-- チャット一覧表示よてい -->
+            </div>
+        </section>
+    </main>
+
+
+
+    <script src="home.js"></script>
+</body>
+</html>

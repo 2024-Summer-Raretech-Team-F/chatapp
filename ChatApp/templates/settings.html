@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
+        <link rel="icon" href="../static/img/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+</head>
+<body>
+    <header class="header-main">
+        <nav>
+            <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+            <h6><!--{% block header_links %}-->
+            今いるページ<!--ホームなら「ホーム画面」記載-->
+            <!--{% endblock %}--></h6>
+            <ul>
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                    <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                    <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                    <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
+                <!--<li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}"><img src="" alt="Icon">画像で行くならこっち</li>-->
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}">-->
+                    <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="settings-mainpage">
+        <!--{% block content %}<main></main>
+        各ページごとのメインはここ
+        {% endblock %}-->
+        <div class="user-info">
+            <i class="fa-regular fa-circle-user" id="user-icon"></i>
+            <div class="info-container">
+                <div class="personal-info_main">
+                    <div class="settings-main_grop">
+                        <p class="left-settings">お子様のお名前</p>
+                        <p class="right-settings">田中  智樹</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">ふりがな</p>
+                        <p class="right-settings">たなか  ともき</p>
+                    </div>
+                <hr>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">保護者のお名前</p>
+                        <p class="right-settings">田中  由紀子</p>
+                    </div>
+                <hr>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">学年</p>
+                        <p class="right-settings">5年生</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">クラス</p>
+                        <p class="right-settings">2組</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">出席番号</p>
+                        <p class="right-settings">33</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">第一緊急連絡先</p>
+                        <p class="right-settings">0312345678</p>
+                    </div>
+                <hr>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">メールアドレス</p>
+                        <p class="right-settings">sample@email.com</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">パスワード</p>
+                        <p class="right-settings">mokomoko12345</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">学校ID</p>
+                        <p class="right-settings">hsfdug1255</p>
+                    </div>
+                <hr>
+                </div>
+                <div class="parsonal-data">
+                </div>
+            </div>
+                    <button onclick="location.href='edit.html'" class="settings-button">編集</button>
+                </div>            
+        </div>
+    </main>
+</body>
+</html>

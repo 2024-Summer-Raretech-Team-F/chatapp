@@ -1,3 +1,8 @@
+//前提//
+//JSだといちいちJS上で記載しないと反映されない//
+//休日も西暦から入れないと振替休日等が反映されないため//
+//JSでのカレンダー・チャットなどは非推奨//
+
 document.addEventListener('DOMContentLoaded', () => {
     const notices = [
         { date: '2025-05-01', title: '連休開始' },

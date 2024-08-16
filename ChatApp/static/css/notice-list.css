@@ -1,0 +1,180 @@
+.notice-list_main {
+    max-height: 530px;
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    margin-left: 60px;
+    position: relative;
+}
+
+.notice-list_search {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-bottom: 2px solid #56B7ED;
+    padding-bottom: 30px;
+}
+
+.search-container {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-container select {
+    margin-left: 28px;
+    width: 90px; /* プルダウンの横幅 */
+    height: 20px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.search-container form {
+    margin-left: 50px; /* プルダウンと入力バーの間 */
+    flex-grow: 1;
+}
+
+.search-container input[type="search"] {
+    width: 80%; /* バーの長さ */
+}
+
+.search-container .search-button {
+    margin-left: 5px; /* ボタンと検索バーの間に空間 */
+}
+
+.notice-list {
+    display: flex;
+    /*flex-direction: column;*/
+    width: 100%; 
+    max-width: 800px; 
+    padding: 20px;
+    align-items: center;
+    border-bottom: 2px solid #56B7ED;
+    padding-bottom: 20px;
+}
+
+.top-row {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 3em;
+}
+
+.grade-list_a, .grade-list_6, .grade-list_5, .grade-list_4, 
+.grade-list_3, .grade-list_2, .grade-list_1, .month-day-list {
+    margin: 0;
+    white-space: nowrap;
+    margin-right: 2%;
+    flex-direction: row;
+    padding: 3px 40px;
+    border-radius: 500px;
+}
+
+.title-list {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-left: 10px; 
+}
+
+.summary-list {
+    margin: 0;
+    margin-left: 16px;
+    font-size: 0.6em;
+    line-height: 1.5;
+    font-weight: normal;
+    color: #818181;
+    max-width: 100%;
+}
+
+.grade-list_a {
+    background-color: #F5F5DC;
+}
+
+.grade-list_6 {
+    background-color: #F3E6FF;
+}
+
+.grade-list_5 {
+    background-color: #E6F0FF;
+}
+
+.grade-list_4 {
+    background-color: #E6FFE6;
+}
+
+.grade-list_3 {
+    background-color: #FFE6E6;
+}
+
+.grade-list_2 {
+    background-color: #FFFDD0;
+}
+
+.grade-list_1 {
+    background-color: #FFE6CC;
+}
+
+.notice-create {
+   
+    width: 800px;
+    margin: 0 auto;
+}
+
+
+.notice-create_button {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #56B7ED;
+    color: white;
+    font-size: 150px;
+    font-weight: 150;
+    text-align: center;
+    line-height: 79px;
+    text-decoration: none; /* リンクの下線を消す */
+    cursor: pointer;
+    border: none;
+
+    position: fixed; 
+    right: calc((100% - 950px) / 2 + 20px);
+    bottom: 15%;   
+    transform: translateY(80%);
+}
+
+
+.notice-create_button:hover {
+    background-color: #56B7ED;
+    opacity: 0.7;
+}
+
+input[type="search"]:focus {
+    outline: none;
+    border:2px solid #56B7ED;
+}
+
+
+
+
+/*===============================================*/
+
+@media screen and (max-width: 900px) {
+    .notice-create_button {
+        right: 20px; /* 画面の右端に固定 */
+        width: 80px; /* ボタンを少し小さく */
+        height: 80px; 
+        font-size: 100px;
+        line-height: 65px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .notice-create_button {
+        right: 10px; /* さらに画面の右端に寄せる */
+        width: 60px; /* ボタンをさらに小さく */
+        height: 60px;
+        font-size: 80px;
+        line-height: 50px;
+    }
+}

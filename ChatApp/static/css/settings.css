@@ -1,47 +1,51 @@
-.user-info i {
+#settings-mainpage {
+    height: 630px;
+}
+ 
+.user-info  i {
     display: flex;
     padding-top: 50px;
     justify-content: center;
     border-bottom: solid  2px #DBF2FF;
     padding-bottom: 10px;
+
+
 }
 
-.info-container {
+.personal-info_main {
     display: flex;
-    justify-content: center;
-    border-bottom: 2px solid #DBF2FF;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.2;
 }
 
-.personal-info {
-    margin: 0 15px 0 30px;
-    text-align: right;
-}
-.personal-info p {
-    height: 20px;
+
+
+.settings-main_grop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+
 }
 
-.parsonal-data {
-    margin-left: 30px;
+.left-settings {
+    flex: 1;
+    text-align: right
 }
 
-.parsonal-data p {
-    height: 20px;
+.right-settings {
+    flex: 1;
 }
 
-.user-info hr {
-    margin-top: 10px;
-    margin-left: -150px;
-    /*margin-bottom: -2px;
-    margin-right: -100px;*/
-    width: 274%;
+.personal-info_main hr {
     border-style: solid;
     border-width: 1px;
     border-color: #DBF2FF;
+    width: 100%; /* 必要に応じて幅を設定 */
+    margin: 10px 0; /* 上下の余白を調整 */
 }
-
-
-
-
 
 .settings-button {
     background-color: #56B7ED;
