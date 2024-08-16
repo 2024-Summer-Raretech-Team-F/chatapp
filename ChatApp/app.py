@@ -44,7 +44,7 @@ def userLogin():
 # 新規登録 / 学校IDの入力画面の表示
 @app.route('/auth')
 def auth():
-    return render_template('registration/auth.html')
+    return render_template('registration/auth-login.html')
 
 
 @app.route('/auth', methods=['POST'])
@@ -61,6 +61,8 @@ def getSchoolId():
         flash('無効な学校IDです。正しい学校IDを入力してください。')
         return redirect(url_for('auth'))
     
+    
+    session['school_id'] = school_id
     return redirect(url_for('home', school_id=school_id))
 
 
@@ -68,6 +70,14 @@ def getSchoolId():
 
 @app.route('/home',methods=['GET','POST'])
 def home():
+    
+    school_id = session.get('school_id')
+    email = session.get('email')
+    
+    if not school_id:
+        flash("学校IDが見つかりません。再度ログインしてください。")
+        return redirect(url_for('auth'))
+    
     # 現在の年月日を取得
     now = datetime.now()
     year = now.year
@@ -91,7 +101,7 @@ def home():
     group_message_time ="7:50 "
 
     # SQLからユーザー取得
-    users_data = dbConnect.getUser('satoru@example.com')
+    users_data = dbConnect.getUser(email)
 
     print(users_data)
 
@@ -174,6 +184,52 @@ def show_group():
     groups = dbConnect.getGroups()
     render_template('chat_main.html', groups=groups)
     
+
+#チャット欄の表示
+@app.route('/chat/<group_id>')
+def detail(group_id):
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/loign')
+    
+    group_id = group_id
+    group = dbConnect.getGroups(group_id)
+    message = dbConnect.getMessageAll(group_id)
+    
+    return render_template('home.html', group=group, message=message)
+
+
+#チャットの送信
+@app.route('/message', methods=['POST'])
+def add_message():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    
+    message = request.form.get('message')
+    group_id = request.get('group_id')
+    
+    if message:
+        dbConnect.createMessage(user_id, group_id, message)
+        
+    return redirect('/chat/{group_id}'.format(group_id = group_id))    
+
+
+#チャットの削除
+@app.route('/delete_message', methods=['POST'])
+def delete_message():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    
+    message_id = request.form.get('message_id')
+    group_id = request.form.get('group_id')
+    
+    if message_id:
+        dbConnect.deleteMessage(message_id)
+        
+    return redirect('/chat/{group_is}'.format(group_id=group_id))    
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
