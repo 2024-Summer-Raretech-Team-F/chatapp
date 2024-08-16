@@ -61,6 +61,8 @@ def getSchoolId():
         flash('無効な学校IDです。正しい学校IDを入力してください。')
         return redirect(url_for('auth'))
     
+    
+    session['school_id'] = school_id
     return redirect(url_for('home', school_id=school_id))
 
 
@@ -68,6 +70,14 @@ def getSchoolId():
 
 @app.route('/home',methods=['GET','POST'])
 def home():
+    
+    school_id = session.get('school_id')
+    email = session.get('email')
+    
+    if not school_id:
+        flash("学校IDが見つかりません。再度ログインしてください。")
+        return redirect(url_for('auth'))
+    
     # 現在の年月日を取得
     now = datetime.now()
     year = now.year
@@ -91,7 +101,7 @@ def home():
     group_message_time ="7:50 "
 
     # SQLからユーザー取得
-    users_data = dbConnect.getUser('satoru@example.com')
+    users_data = dbConnect.getUser(email)
 
     print(users_data)
 
