@@ -14,6 +14,47 @@ app = Flask(__name__)
 app.secret_key = uuid.uuid4().hex
 app.permanent_session_lifetime = timedelta(days=30)
 
+# サインアップページの表示
+@app.route('/signup')
+def signup():
+    return render_template('registration/signup.parent.html')
+
+
+#サインアップ処理
+@app.route('/signup', methods=['POST'])
+def userSignup():
+    name_kanji_full = request.form.get('name_kanji_full')
+    name_kana_full = request.form.get('name_kana_full')
+    grade = request.form.get('grade')
+    section = request.form.get('section')
+    parent_name = request.form.get('parent_name')
+    phone_number = request.form.get('phone_number')
+    email = request.form.get('email')
+    password1 = request.form.get('password1')
+    password2 = request.form.get('password2')
+
+    pattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+
+    if name_kanji_full == '' or name_kana_full == '' or grade == '' or section == '' or parent_name == ''or phone_number == '' or email =='' or password1 == '' or password2 == '':
+        flash('空のフォームがあるようです')    
+    elif password1 != password2:
+        flash('二つのパスワードの値が違っています')
+    elif re.match(pattern, email) is None:
+        flash('正しいメールアドレスの形式ではありません')
+    else:
+        user_id = uuid.uuid4()
+        password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
+        DBuser = dbConnect.getUser(email)
+
+        if DBuser != None:
+            flash('既に登録されているようです')
+        else:
+            dbConnect.createUser(user_id, name_kanji_full, name_kana_full, email, password)
+            UserId = str(user_id)
+            session['user_id'] = UserId
+            return redirect('/login')
+    return redirect('/home')
+
 
 # ログインページの表示
 @app.route('/login')
