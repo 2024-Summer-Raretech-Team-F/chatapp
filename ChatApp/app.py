@@ -175,5 +175,20 @@ def show_group():
     render_template('chat_main.html', groups=groups)
     
 
+#チャット欄の表示
+@app.route('/chat/<group_id>')
+def detail(group_id):
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/loign')
+    
+    group_id = group_id
+    group = dbConnect.getGroups(group_id)
+    message = dbConnect.getMessageAll(group_id)
+    
+    return render_template('home.html', group=group, message=message)
+
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
