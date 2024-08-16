@@ -189,6 +189,23 @@ def detail(group_id):
     return render_template('home.html', group=group, message=message)
 
 
+#チャットの送信
+@app.route('/message', methods=['POST'])
+def add_message():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    
+    message = request.form.get('message')
+    group_id = request.get('group_id')
+    
+    if message:
+        dbConnect.createMessage(user_id, group_id, message)
+        
+    return redirect('/chat/{group_id}'.format(group_id = group_id))    
+
+
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True)
