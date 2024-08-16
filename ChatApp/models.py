@@ -91,12 +91,12 @@ class dbConnect:
         finally:
             cur.close()
 
-
+##メッセージの処理
     def getMessageAll(group_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT message_id, u.user_id, name_kanji_full, message FROM messages AS m INNER JOIN users AS u ON m.user_id = u.user_id WHERE group_id = %s"
+            sql = "SELECT message_id, u.user_id, name_kanji_full, message FROM messages AS m INNER JOIN users AS u ON m.user_id = u.user_id WHERE group_id = %s;"
             cur.execute(sql,(group_id))
             messages = cur.fetchall()
             return messages
@@ -107,6 +107,33 @@ class dbConnect:
             cur.close()
 
 
+    def createMessage(uid, cid, message):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "INSERT INTO messages(uid, cid, message) VALUES(%s, %s, %s)"
+            cur.execute(sql, (uid, cid, message))
+            conn.commit()
+        except Exception as e:
+            print(e + 'が発生しています')
+            abort(500)
+        finally:
+            cur.close()   
+            
+            
+    def deleteMessage(message_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "DELETE FROM messages WHERE message = %s;"        
+            cur.execute(sql, (message_id))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()        
+        
 ##お知らせ一覧の処理
 
     def getAllNotices():
