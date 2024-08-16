@@ -88,3 +88,7 @@
     display: flex;
     margin: auto;
 }
+
+::placeholder{
+    color: #bbb;
+}
