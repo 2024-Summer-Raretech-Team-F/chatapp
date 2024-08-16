@@ -44,7 +44,7 @@ def userLogin():
 # 新規登録 / 学校IDの入力画面の表示
 @app.route('/auth')
 def auth():
-    return render_template('registration/auth.html')
+    return render_template('registration/auth-login.html')
 
 
 @app.route('/auth', methods=['POST'])
