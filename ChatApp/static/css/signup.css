@@ -9,14 +9,12 @@
     background-color: #fff;
 }
 
-
 .signup_main{
     padding-top: 63px;
     padding-bottom: 70px;
     background-color: #ffffff; /* 任意の背景色 */
     overflow-y: auto;
 }
-
 
 .header-regi {
     position: fixed;
