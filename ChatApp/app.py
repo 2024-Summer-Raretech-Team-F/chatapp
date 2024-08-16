@@ -205,6 +205,20 @@ def add_message():
     return redirect('/chat/{group_id}'.format(group_id = group_id))    
 
 
+#チャットの削除
+@app.route('/delete_message', methods=['POST'])
+def delete_message():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    
+    message_id = request.form.get('message_id')
+    group_id = request.form.get('group_id')
+    
+    if message_id:
+        dbConnect.deleteMessage(message_id)
+        
+    return redirect('/chat/{group_is}'.format(group_id=group_id))    
 
 
 if __name__ == '__main__':
