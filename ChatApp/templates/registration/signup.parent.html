@@ -6,21 +6,21 @@
         <title>{% block title %}{% endblock %}保護者登録画面</title>
         <link rel="icon" href="../static/img/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="signup.css"><link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
 </head>
 <body class="signup_body">
     <header class="header-regi">
         <nav class="signup_nav">
             <h5>アカウント登録</h5>
                 {% block header_links %}
-                    <h5>Chimy</h5>
+
                 <!--ホームなら「ホーム画面」記載-->
                 {% endblock %}
             <span class="signup_role">保護者用</span>
         </nav>
     </header>
 
-    <main class="signup_main">
+    <main class="signup_main custom-design">
         {% block content %}
         {% endblock %}
         <h5>｜お子様の情報</h5>
