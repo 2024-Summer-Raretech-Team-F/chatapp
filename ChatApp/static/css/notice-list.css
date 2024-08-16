@@ -168,7 +168,6 @@ input[type="search"]:focus {
     }
 }
 
-
 @media screen and (max-width: 600px) {
     .notice-create_button {
         right: 10px; /* さらに画面の右端に寄せる */

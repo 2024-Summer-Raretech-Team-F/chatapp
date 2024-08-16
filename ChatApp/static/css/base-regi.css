@@ -14,9 +14,7 @@ main {
     padding-top: 63px;
     padding-bottom: 70px;
     background-color: #fff; 
-
 }
-
 
 .header-regi {
     position: fixed;
@@ -54,13 +52,11 @@ main {
     color: #333;
     text-align: right;
     margin-right: 6vw;
- 
-}
+ }
 
 nav {
     display: flex;
     justify-content: space-between; 
-    
 }
 
 
