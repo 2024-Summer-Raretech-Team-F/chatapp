@@ -26,6 +26,8 @@
     margin-top: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
+    position: relative;
+    z-index: 1;
   }
 
 /* SVGのサイズ。 */
@@ -33,6 +35,7 @@
     position: relative;
     width: 100%; 
     height: auto;
+    z-index: 1;
 }
 
 svg {
@@ -40,6 +43,9 @@ svg {
     width: 100%; 
     height: auto;
     overflow: visible;
+    z-index: 1;
+    pointer-events: none;
+    position: relative;
 }
 
 /* フォームをSVGの右側に配置 PCのみ */
@@ -59,19 +65,18 @@ svg {
     -moz-box-sizing: border-box;  /*Firefox*/
     box-sizing: border-box; 
     opacity: 0;
-    transform: translateY(20px); /* 初期位置下 */
+    /*transform: translateY(20px);  初期位置下 */
+    z-index: 1000;
     transition: opacity 500ms ease-in-out, transform 5ms ease-in-out; /* フェードインと浮かび上がるアニメーション */
 }
 
-.form-overlay.hidden {
-    opacity: 0;
-    transform: translateY(20px); /* 初期位置下 */
-}
+
 
 .form-overlay h2 {
     margin-bottom: 20px;
     font-size: 1vw; /* フォントサイズを相対的に設定 */
 }
+
 
 .input-form {
     width: 100%;
@@ -174,6 +179,8 @@ image {
     width: 100%;
     height: auto;
     transform-origin: center;
+    z-index: 1;
+    position: relative;
 }
 
 .left {
