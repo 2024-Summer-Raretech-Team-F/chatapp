@@ -7,9 +7,11 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO schools (school_code) VALUES (%s);"
+            sql = "SELECT * FROM schools WHERE school_code = %s;"
             cur.execute(sql, (school_code))
-            conn.commit()
+            school_code = cur.fetchone()
+            
+            return school_code
         except Exception as e:
             print(f'{e} が発生しています')
             abort(500)
@@ -21,7 +23,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO users (user_kanji_full, user_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            sql = "INSERT INTO users (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
             cur.execute(sql, (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id))
             conn.commit()
         except Exception as e:
@@ -115,7 +117,7 @@ class dbConnect:
             cur.execute(sql, (uid, cid, message))
             conn.commit()
         except Exception as e:
-            print(e + 'が発生しています')
+            print(f'{e} が発生しています')
             abort(500)
         finally:
             cur.close()   
