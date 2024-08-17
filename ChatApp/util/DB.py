@@ -5,7 +5,7 @@ class DB:
         try:
             conn = pymysql.connect(
             host="db",
-            db="chatapp",
+            db="chimyapp",
             user="testuser",
             password="testuser",
             charset="utf8",
