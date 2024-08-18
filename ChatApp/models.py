@@ -126,7 +126,7 @@ class dbConnect:
             cur.close()       
 
 
-    def getGroups():
+    def getGroupAll():
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
@@ -139,6 +139,22 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+
+
+    def getGroupById(group_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM groups WHERE group_id = %s;"
+            cur.execute(sql, (group_id,))
+            group = cur.fetchone()
+            return group
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
 
 ##メッセージの処理
     def getMessageAll(group_id):
