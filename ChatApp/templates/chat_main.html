@@ -1,33 +1,14 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="chat.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>チャットルーム</title>
-</head>
-<body>
-  <header class="header-main">
-    <nav>
+{%extends "base.html" %}
+
+{% block title %}チャットルーム{% endblock %}
+
+{% block header_content %}
         <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-        <h6>5年2組 佐藤 道哉 先生{% block header_links %}
-        ホームなら「ホーム画面」記載
-        {% endblock %}</h6>
-        <ul>
-            <li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前') }}">
-                <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
-            <li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前') }}">
-                <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
-            <li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前') }}">
-                <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
-            <li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}"><img src="" alt="Icon">画像で行くならこっち</li>
-            <li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}">
-                <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
-        </ul>
-    </nav>
-   </header>
-    
+        <h6>5年2組 佐藤 道哉 先生</h6>
+{% endblock %}        
+
+{% block content %}
+<main>
 <div class="main_message">
 <div class="sub_message">
 <!--メッセージ（左側）-->
@@ -65,10 +46,13 @@
 </div>
 
 <div class="chat_footer">
-  <form method="post" action="/message">
-  <div class="send_box"><input type="text" name="send_message" 
-    size="60" maxlength="10000" placeholder="ここに文章を作成してください。">
-    <button><i class="far fa-paper-plane" style="font-size:20px"></i></button> 
-  </div>
+  <form method="POST" action="{{ url_for('message') }}">
+    <input type="hidden" name="group_id" value="{{ group_id }}">
+    <div class="send_box">
+      <input type="text" name="message" size="60" maxlength="10000" placeholder="ここに文章を作成してください。">
+      <button type="submit"><i class="far fa-paper-plane" style="font-size:20px"></i></button>
+    </div>
   </form>
 </div>
+</main>
+{% endblock %}
