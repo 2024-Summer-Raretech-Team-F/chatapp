@@ -3,37 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->お知らせ一覧</title>
-        <link rel="icon" href="../static/img/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+    <title>{% block title %}お知らせ一覧{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
 </head>
 <body>
     <header class="header-main">
         <nav>
             <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-            <h6><!--{% block header_links %}-->
-            お知らせ一覧<!--ホームなら「ホーム画面」記載-->
-            <!--{% endblock %}--></h6>
+            <h6>{% block header_links %}お知らせ一覧{% endblock %}</h6>
             <ul>
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                <li><a href="{{ url_for('getNoticeById', notice_id=1) }}">
                     <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                <li><a href="{{ url_for('getNoticeById', notice_id=2) }}">
                     <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                <li><a href="{{ url_for('getNoticeById', notice_id=3) }}">
                     <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
-                <!--<li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}"><img src="" alt="Icon">画像で行くならこっち</li>-->
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}">-->
+                <li><a href="{{ url_for('getNoticeById', notice_id=4) }}">
+                    <img src="{{ url_for('static', filename='img/icon.png') }}" alt="Icon"><p>Image</p></a></li>
+                <li><a href="{{ url_for('getNoticeById', notice_id=5) }}">
                     <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
             </ul>
         </nav>
     </header>
 
     <main class="notice-list_main">
-        <!--{% block content %}<main></main>
-        各ページごとのメインはここ
-        {% endblock %}-->
-
+        {% block content %}
         <div class="notice-main">
             <div class="notice-list_search">
                 <label for="grade-notice">学年を選択できます</label>
@@ -48,116 +44,43 @@
                         <option value="5"> 5年生 </option>
                         <option value="6"> 6年生 </option>
                     </select>
-                    <form action="#" method="get"><!--#の代わりに{{ url_for(py定義したやつ)}}-->
+                    <form action="{{ url_for('get_notice_by_grade')}}" method="get">
                         <input type="search" name="notice-search" placeholder="キーワードを入力"> 
                         <button type="submit" class="search-button">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
                 </div>
-                
             </div>
-            <!--ダミー==========================================-->
+
+            <!-- Notice list -->
             <div class="notice-list">
                 <div class="top-row">
-                    <P class="grade-list_a">全学年</P>
+                    <p class="grade-list_a">全学年</p>
                     <p class="month-day-list">8月24日</p>
                 </div>
                 <div class="title-list">      
                     <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
+                    <p class="summary-list">お知らせの詳細内容がここに入ります。</p>
                 </div> 
             </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_6">6年生</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
-                </div> 
-            </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_5">5年生</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing!</p>
-                </div> 
-            </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_4">4年生</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
-                </div> 
-            </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_3">3年生</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
-                </div> 
-            </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_2">2年生</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
-                </div> 
-            </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_1">1年生</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
-                </div> 
-            </div>
-            <div class="notice-list">
-                <div class="top-row">
-                    <P class="grade-list_a">全学年</P>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium officiis corrupti eum in excepturi. Distinctio ut qui earum? Quaerat, minima natus voluptatum mollitia, nostrum fugiat nobis labore nam aliquid deserunt molestias aut. Ipsa nihil est quisquam. Labore dolore illo maiores, tempora veritatis modi! Possimus pariatur eum sequi ipsa error!</p>
-                </div> 
-            </div>
-            <!--===========================================-->
+            <!-- Add more notice-list divs as needed -->
 
             <div id="notice-list_search-results">                            
-                <!--{% if notices %}
+                {% if notices %}
                     {% for notice in notices %}
-                        <p>{{ notice??? }}</p>
+                        <p>{{ notice }}</p>
                     {% endfor %}
                 {% else %}
                     <p>該当するお知らせがありません。</p>
-                {% endif %}-->
+                {% endif %}
             </div> 
         </div>
-        <!--{% endblock %}-->
-
+        {% endblock %}
     </main>
 
     <footer class="notice-create">
-        <a href="#" class="notice-create_button">+</a>
+        <a href="{{ url_for('add_notice') }}" method="post" class="notice-create_button">+</a>
     </footer>
-
-
 </body>
 </html>

@@ -113,7 +113,7 @@ def getSchoolId():
         flash('学校IDを入力してください')
         return redirect(url_for('auth'))
 
-    school_id = dbConnect.signupSchoolCode(school_code)
+    school_id = dbConnect.getSchoolCode(school_code)
 
     if school_id is None:
         flash('無効な学校IDです。正しい学校IDを入力してください。')
@@ -123,8 +123,7 @@ def getSchoolId():
 
 
 
-
-
+#トップページ
 @app.route('/home',methods=['GET','POST'])
 def home():
 
@@ -154,23 +153,25 @@ def home():
     group_message_time ="7:50 "
     
     
-    groups = dbConnect.getGroups()
-    
-    # SQLからユーザー取得
+    # channels = dbConnect.getChannleAll()
     # users_data = dbConnect.getUser(email)
 
-    # print(users_data)
 
-
-    return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time, groups=groups)
+    return render_template('index.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time)
 
 
 
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    notices = dbConnect.getAllNotices()
-    return notices
+    # notices = dbConnect.getAllNotices()
+    return render_template('notice/notice_list.html')
+
+
+@app.route('/notice/<notice_id>', methods=['GET'])
+def getNoticeById(notice_id):
+    main_notice = dbConnect.getNoticeById(notice_id)
+    return render_template('notice_main.html' ,main_notice=main_notice)
 
 
 #学年でお知らせを絞る
@@ -200,7 +201,7 @@ def add_notice():
 
 
 # お知らせの更新(編集)
-@app.route('/notices/<int:notice_id>', methods=['PUT'])
+@app.route('/notices/<notice_id>', methods=['PUT'])
 def edit_notice(notice_id):
     title = request.form.get('title')
     description = request.form.get('description')
@@ -219,7 +220,7 @@ def edit_notice(notice_id):
 
 
 #お知らせの削除
-@app.route('/notices/<int:notice_id>', methods=['DELETE'])
+@app.route('/notices/<notice_id>', methods=['DELETE'])
 def delete_notice(notice_id):
     user_id = request.form.get('user_id')
 
@@ -237,22 +238,21 @@ def delete_notice(notice_id):
 #チャットグループの表示
 @app.route('/home')
 def show_group():
-    groups = dbConnect.getGroups()
-    render_template('chat_main.html', groups=groups)
+    channels = dbConnect.getChannelAll()
+    return render_template('home.html', channels=channels)
 
 
-#チャット欄の表示
+#チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
     user_id = session.get('user_id')
     if user_id is None:
-        return redirect('/loign')
+        return redirect('/login')
 
-    group_id = group_id
-    group = dbConnect.getGroups(group_id)
+    channels = dbConnect.getChannelAll(group_id)
     message = dbConnect.getMessageAll(group_id)
 
-    return render_template('home.html', group=group, message=message)
+    return render_template('chat_main.html', channels=channels, message=message)
 
 
 #チャットの送信
@@ -263,7 +263,7 @@ def add_message():
         return redirect('/login')
 
     message = request.form.get('message')
-    group_id = request.get('group_id')
+    group_id = request.form.get('group_id')
 
     if message:
         dbConnect.createMessage(user_id, group_id, message)
@@ -284,9 +284,12 @@ def delete_message():
     if message_id:
         dbConnect.deleteMessage(message_id)
 
-    return redirect('/chat/{group_is}'.format(group_id=group_id))
+    return redirect('/chat/{group_id}'.format(group_id=group_id))
 
 
+
+# @app.route('/setting')
+# def userSe
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('error/404.html'),404
