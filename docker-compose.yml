@@ -21,7 +21,7 @@ services:
     # コンテナ内の環境変数を設定
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=chatapp
+      - MYSQL_DATABASE=chimyapp
       - MYSQL_USER=testuser
       - MYSQL_PASSWORD=testuser
     # DBのコンテナのヘルスチェックを行う
