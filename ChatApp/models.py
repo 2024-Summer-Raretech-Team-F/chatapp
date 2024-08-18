@@ -81,7 +81,7 @@ class dbConnect:
         finally:
             cur.close()
 
-
+#認証キーの処理
     def getAuthKey(school_id):
         try:
             conn = DB.getConnection()
@@ -96,6 +96,20 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+
+
+    def userRole(role):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE users SET role = %s WHERE user_id = %s;"
+            cur.execute(sql, (role))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()        
 
 
     def updateUser(user_id, name_kanji_full, name_kana_full, parent_name, phone_number,email, password):
