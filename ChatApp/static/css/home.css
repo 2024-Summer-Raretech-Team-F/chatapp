@@ -1,16 +1,13 @@
 body {
-    font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #fff;
-
 }
 
 .main-home {
     display: flex;
     justify-content: center;
-    padding-top: 120px;
+    margin-top: 50px;
 }
 
 .left-section {
@@ -25,7 +22,7 @@ body {
     border: 1px none;
     padding: 10px 10px 0 10px;
     background-color: #fff;
-        margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .calendar {
@@ -38,13 +35,11 @@ body {
  .chat {
     border: 5px solid #56B7ED;
     border-radius: 8px;
-    padding: 16px;
+    padding: 5px 16px;
     margin-left: 2%;
     margin-bottom: auto;
     width: 300px;
     max-width: auto;
-
-   
 }
 
 .notifications h3 {
@@ -64,12 +59,13 @@ body {
 }
 
 
-
+/* 新着のお知らせ関係 */
 .latest-notice {
     text-align: center;
     margin: 20px 0;
 }
 
+/* 新着 */
 #latest-notice-title {
     margin: auto;
     width: 300px;
@@ -80,16 +76,19 @@ body {
     font-size: 12px;
 }
 
-
+/* お知らせへのボタンというかリンク */
 #notice-btn {
     background-color: #56B7ED;
     border: none;
-    padding: 2px 50px;
+    line-height: 60px;
+    padding: 3px 50px;
+    padding-top: 1px;
     color: #fff;
     cursor: pointer;
     font-size: 12px;
     border-radius: 500px;
     margin-top: 18px;
+    text-decoration: none;
 }
 
 #notice-btn:hover {
@@ -97,6 +96,8 @@ body {
     opacity: 0.7;
 }
 
+
+/* カレンダー系 */
 #calendar-nav {
     display: flex;
     justify-content:center; 
@@ -122,18 +123,45 @@ body {
     margin-bottom: -10px;
 }
 
+/*
 #calendar table {
-    /*border-collapse: collapse;*/
     margin: 0 auto;
 }
-.saturday {
-    color: rgb(39, 201, 255);
+*/
+
+.saturday-detail {
+    color: #00BFFF;
 }
 
-.sunday {
-    color: lightcoral;
+.sunday-detail {
+    color: #FF4500;
 }
 
+.date-none {
+    font-size: x-small;
+    text-indent:100%;
+	white-space:nowrap;
+	overflow:hidden;
+
+}
+
+#prev-month, #next-month {
+    color: #56B7ED;
+}
+
+#prev-month:hover {
+    color: #56B7ED;
+    opacity: 0.7;
+}
+
+#next-month:hover {
+    color: #56B7ED;
+    opacity: 0.7;
+}
+
+#calendar-month {
+    padding: 0 20px;
+}
 
 #calendar th, #calendar td {
     /*border: 1px solid #ccc;*//*曜日とかの枠*/
@@ -145,7 +173,19 @@ body {
 }
 
 
+/* カレンダー本日にあたる部分のとこ */
+.today {
+    display: inline-block;
+    padding: 8px 12px; /* ボックスの内側 */
+    border: 2px solid rgb(255, 166, 0); /* ボックスの枠線 */
+    border-radius: 4px; /* 角 */
+    background-color: transparent; /* 背景色 */
+    font-weight: bold; /* 太字に */
+    text-align: center; /* 中央揃え */
+    color: #000; /* テキストの色 */
+}
 
+/*カレンダーの日付押したら出るやつ*/
 #selected-date-notice {
     margin: -25px 0 0 0;
     border-left: 2px solid #ccc;
@@ -157,109 +197,138 @@ body {
     color: red;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
 
-}/*カレンダーの日付押したら出るやつ*/
 
+
+/* ボタン　*/
+#reload-btn {
+    margin-right: 10px;
+ }
+ 
+ #reload-btn:hover {
+     color: #56B7ED;
+     opacity: 0.7;
+ }
+ 
+
+
+/* チャット========================================== */
 .chat-list {
     max-height: 500px;
-    overflow-y: scroll;
-    padding: 10px;
- 
+    overflow-y: scroll;    
 }
 
-/*JSから*/
-
-.account-name {
-    /*border-left: 3px solid #000;
-    padding: 2px 8px;*/
-    position: relative;
-    padding-left: 10px;
+.student-title, .teacher-title {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 3px;
 }
 
-.account-name:before {
-    content: "";
-        display: inline-block;
-        position: absolute;
-      top: 0;
-        left: 0;
-        bottom: -7px;
-        width: 5px;
-        height: 100%;
-        border-radius: 5px;
-      background: #56B7ED;
-    }
-
-.chat-name {
-     font-weight: bold;
-    }
-
-
-.chat-content {
+.class-affi {
+    font-size: 16px;
+    font-weight: bold;
     display: flex;
-    align-items: center;
-    }
-
-.chat-message {
-    padding: 5px 10px;
-    margin-right: 2px;
-    flex-grow: 1;
+    border-left: 5px solid #56B7ED;
+    padding: 0 8px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    gap: 3px;
 }
 
-.chat-time {
-    color: #000000;
-    font-size: 0.9em;
-    white-space: nowrap;
-}
 
-.chat-item {
+
+.chat-container {
     border: 1.75px solid #ccc;
-    border-radius: 16px;
-    padding: 3px 16px;
+    border-radius: 8px;
+    padding: 0 12px 0 8px;
     display: flex;
     align-items: center;
     font-size: 12px;
     margin: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
+.teacher-message-wrapper {
+    display: flex;
+    flex-direction: column; /* タイトルとメッセージを縦に */
+    width: 85%;
+    box-sizing: border-box;
 
-.chat-item i {
+}
+
+.class-teacher {
+    display: flex;
+    font-size: 16px;
+    gap: 3px;
+    white-space: nowrap; 
+    word-wrap: normal;
+    margin-bottom: 8px;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row; /* 横並びにする */
+    gap: 10px; /* 必要に応じてスペースを調整 */
+}
+
+.message-container {
+    display: flex;
+    flex-direction: row; /* 横並びにする */
+    gap: 10px; /* 必要に応じてスペースを調整 */
+    margin-top: 10px; /* メッセージとタイトルの間にスペースを追加 */
+}
+
+.teacher-title, .time-new, .message-new, .teacher-title {
+    margin: 0;
+}
+
+/* チャットのユーザーアイコン */
+.chat-exc {
     font-size: 30px;
-    border-radius: 50%;
-    margin: 10px 10px 8px 0;
     color: #848484
 }
 
-.chat-item div {
+.message-group {
+    display: flex;
+    align-items: center;
+    width: 100%; /* 幅を100%に設定 */
+    box-sizing: border-box; /* パディングとボーダーを含めた幅計算 */
+    justify-content: space-between;
+}
+
+.message-new {
+    margin: 0;
+    overflow-wrap: break-word; /* 長い単語を折り返す */
+    word-wrap: break-word; /* 長い単語を折り返す */
+    white-space: pre-wrap; /* 改行 */
+    width: 100%; /* 幅を100%に設定 */
+    max-width: 100%; /* 最大幅を100%に設定 */
+    box-sizing: border-box;
+    flex-basis: 80%;
     flex-grow: 1;
+    margin-bottom: 3px;
+}
+
+.icon-time {
+    text-align: center;
+    margin: 5px 8px 3px 0;
+    
+}
+
+.time-new {
+    margin: 0;
+    font-size: 12px;
+    color: #888; /* 時間色 */
+    font-weight: bold;
+    white-space: nowrap;
+    width: auto;
 }
 
 
-/*======================================*/
 
-.btn_reload {
-	margin-bottom: 20px;
-}
 
-.btn_reload a {
-	display: block;
-	width: 80%;
-	max-width: 260px;
-	margin: 0 auto;
-	height: 36px;
-	line-height: 36px;
-	text-align: center;
-	color: #fff;
-	text-decoration: none;
-	border-radius: 5px;
-	font-size: 0.875rem;
-	transition: .3s ease;
-}
 
-.btn_reload a:hover {
 
-	transition: .3s ease;
-}
 
-.btn_reload a i {
-	margin-right: 0.5em;
-}

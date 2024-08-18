@@ -3,27 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>学校ID入力{% block title %}タグに出てくるページタイトル{% endblock %}</title>
+        <title>学校ID入力</title>
         <link rel="icon" href="../static/img/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
 </head>
 <body>
     <header class="header-regi">
         <nav class="login-nav">
-            <h5>Chimy</h5>
-                {% block header_links %}
+
+            {% block header_links %}
                     <h5>Chimy</h5>
-                <!--ホームなら「ホーム画面」記載-->
-                <span class="members-school">保護者or教職員</span>
+
+               <span class="members-none">保護者or教職員</span>
                 {% endblock %}
         </nav>
     </header>
-
+    {% block content %}
     <main class="main-auth">
-        {% block content %}
-        各ページごとのメインはここ
-        {% endblock %}
+
         <div class="auth-container">
             <div class="auth-form">
                 <h1 id="form-title_key">認証キー</h1>
@@ -35,8 +33,9 @@
             </form>
             </div>
         </div>
+        
     </main>
-    
+    {% endblock %}
     <footer class="footer-regi">
         <p>&copy; 2024 summer-f</p>
     </footer>
