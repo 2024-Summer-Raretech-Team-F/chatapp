@@ -8,7 +8,7 @@ class dbConnect:
             conn = DB.getConnection()
             cur = conn.cursor()
             sql = "SELECT * FROM schools WHERE school_code = %s;"
-            cur.execute(sql, (school_code))
+            cur.execute(sql, (school_code,))
             school_code = cur.fetchone()
             
             return school_code
