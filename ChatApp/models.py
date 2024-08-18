@@ -1,4 +1,4 @@
-from flask import Flask, abort
+from flask import abort
 import pymysql
 from util.DB import DB
 
@@ -7,16 +7,33 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM schools WHERE school_code = %s;"
+            sql = "SELECT school_id FROM schools WHERE school_code = %s;"
             cur.execute(sql, (school_code,))
-            school_code = cur.fetchone()
+            result = cur.fetchone()
             
-            return school_code
+            if result:
+                return result['school_id']
+            else:
+                return None
         except Exception as e:
             print(f'{e} が発生しています')
             abort(500)
         finally:
-            cur.close()
+                cur.close()
+
+
+    def signupSchoolCode(school_code):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "INSERT INTO schools (school_code) VALUES (%s);" 
+            cur.execute(sql, (school_code,))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()                         
 
 
     def createUser(name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id):
@@ -63,6 +80,36 @@ class dbConnect:
             abort(500)
         finally:
             cur.close()
+
+#認証キーの処理
+    def getAuthKey(school_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT parent_auth_key, teacher_auth_key FROM schools WHERE school_id = %s;"
+            cur.execute(sql, (school_id))
+            auth_key = cur.fetchone()
+            
+            return auth_key
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()
+
+
+    def userRole(role):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE users SET role = %s WHERE user_id = %s;"
+            cur.execute(sql, (role))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()        
 
 
     def updateUser(user_id, name_kanji_full, name_kana_full, parent_name, phone_number,email, password):
