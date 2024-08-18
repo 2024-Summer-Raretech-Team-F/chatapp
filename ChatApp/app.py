@@ -97,6 +97,7 @@ def getSchoolId():
         return redirect(url_for('auth'))  
     
     school_id = dbConnect.getSchoolCode(school_code)
+    print(f"Retrieved school_id: {school_id}")
     
     if school_id is None:
         flash('無効な学校IDです。正しい学校IDを入力してください。')
