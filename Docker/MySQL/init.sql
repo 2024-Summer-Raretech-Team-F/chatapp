@@ -1,12 +1,12 @@
 
-DROP DATABASE  chimyapp;
+DROP DATABASE  chatapp;
 DROP USER  'testuser';
 
 CREATE USER 'testuser'@'%' IDENTIFIED BY 'testuser';
-CREATE DATABASE chimyapp;
-GRANT ALL PRIVILEGES ON chimyapp.* TO 'testuser'@'%';
+CREATE DATABASE chatapp;
+GRANT ALL PRIVILEGES ON chatapp.* TO 'testuser'@'%';
 
-USE chimyapp;
+USE chatapp;
 
 CREATE TABLE schools (
     school_id INT AUTO_INCREMENT PRIMARY KEY,
