@@ -2,15 +2,18 @@
 DROP DATABASE  chimyapp;
 DROP USER  'testuser';
 
-CREATE USER 'testuser' IDENTIFIED BY 'testuser';
+CREATE USER 'testuser'@'%' IDENTIFIED BY 'testuser';
 CREATE DATABASE chimyapp;
+GRANT ALL PRIVILEGES ON chimyapp.* TO 'testuser'@'%';
+
 USE chimyapp;
-GRANT ALL PRIVILEGES ON chimyapp.* TO 'testuser';
 
 CREATE TABLE schools (
     school_id INT AUTO_INCREMENT PRIMARY KEY,
     school_code VARCHAR(50) NOT NULL,
-    school_name VARCHAR(100) NOT NULL
+    school_name VARCHAR(100) NOT NULL,
+    parent_auth_key VARCHAR(100) NOT NULL,
+    teacher_auth_key VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE academic_levels (
@@ -72,7 +75,7 @@ CREATE TABLE notices (
 );
 
 
-INSERT INTO schools (school_code)VALUES ('demo01');
+INSERT INTO schools (school_id, school_code, school_name, parent_auth_key, teacher_auth_key) VALUES (1, 'demo01', 'Demo School', 'parent', 'teacher');
 
 INSERT INTO academic_levels (grade, section, school_id) VALUES ('1年', 'A組', 1);
 
