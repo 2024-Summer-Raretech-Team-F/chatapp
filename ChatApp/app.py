@@ -14,6 +14,11 @@ app = Flask(__name__)
 app.secret_key = uuid.uuid4().hex
 app.permanent_session_lifetime = timedelta(days=30)
 
+@app.route('/')
+def jump():
+    return redirect('login')
+
+
 # サインアップページの表示
 @app.route('/signup')
 def signup():
@@ -62,47 +67,58 @@ def login():
     return render_template('registration/login.html')
 
 # ログイン処理
-@app.route('/login', methods=['GET'] )
+@app.route('/login', methods=['GET', 'POST'] )
 def userLogin():
-    email = request.form.get('email')
-    password = request.form.get('password')
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        auth_key_input = request.form.get('auth_key')
+        
+        user = dbConnect.getUser(email)
+        
+        if user and hashlib.sha256(user[password], password):
+            school_id = user['school_id']
+            auth_key = dbConnect.getAuthKey(school_id)
+                    
+            if auth_key_input == auth_key['teacher_auth_key']:
+                role = 'teacher'
+            elif auth_key_input == auth_key['parent_auth_key']:
+                role = 'student'
+            else:
+                flash('Invalid authentication key')
+                return redirect(url_for('login'))
+            
+            dbConnect.userRole(user['user_id'], role)
+            
+            flash("ログイン完了です！")
+            return redirect(url_for('home'))
+        else:
+            flash("メールアドレスかパスワードが正しくありません")
+            return redirect(url_for('login'))
+    
+    return  render_template('login.html')   
 
-    # if email == '' or password == '':
-    #     flash('入力されていないフォームがあります')
-    # else:
-    #     user = dbConnect.getUser(email)
-    #     if user is None:
-    #         flash('このユーザーは存在しません')
-    #     else:
-
-    #         # hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
-            # if hashPassword != user['password']:
-            #     flash('パスワードが間違っています')
-            # else:
-            #     session['user_id'] = user['user_id']
-    return redirect('/home')
-    # return redirect('/login')
 
 # 新規登録 / 学校IDの入力画面の表示
-@app.route('/auth')
+@app.route('/auth_signup')
 def auth():
     return render_template('registration/auth-login.html')
 
 
-@app.route('/auth', methods=['POST'])
+@app.route('/auth_signup', methods=['POST'])
 def getSchoolId():
-    # if not school_code:
-    #     flash('学校IDを入力してください')
-    #     return redirect(url_for('auth'))
+    school_code = request.form.get('school_code')
+    
+    if not school_code:
+        flash('学校IDを入力してください')
+        return redirect(url_for('auth'))
 
-    # school_id = dbConnect.getSchoolCode(school_code)
+    school_id = dbConnect.signupSchoolCode(school_code)
 
-    # if school_id is None:
-    #     flash('無効な学校IDです。正しい学校IDを入力してください。')
-    #     return redirect(url_for('auth'))
+    if school_id is None:
+        flash('無効な学校IDです。正しい学校IDを入力してください。')
+        return redirect(url_for('auth'))
 
-
-    # session['school_id'] = school_id
     return redirect(url_for('home', school_id=school_code))
 
 
