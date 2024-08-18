@@ -8,26 +8,32 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
 </head>
-<body>
-    {% block header_links %}
+
+<body{% if body_class %} class="{{ body_class }}"{% endif %}>
+
+{% block header_links %}
     <header class="header-regi">  
-           <nav>
-             <h5>Chimy</h5>
-             <span class="members-school">保護者or教職員</span>
+        <nav>
+            <h5>Chimy</h5>
+            <p class="members-school">保護者or教職員</p>
         </nav>
     </header>
-    {% endblock %}  
+{% endblock %}  
 
-    {% block content %}
-    <main>
-       
-      
-       
+{% block content %}
+    <main>            
     </main>
-    {% endblock %}
+{% endblock %}
     
+{% block footer %}
     <footer class="footer-regi">
         <p>&copy; 2024 summer-f</p>
     </footer>
+{% endblock %}
+
+{% block js %}
+<script></script>
+{% endblock %}
+
 </body>
 </html>

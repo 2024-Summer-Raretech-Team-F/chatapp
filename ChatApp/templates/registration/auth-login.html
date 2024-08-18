@@ -1,44 +1,32 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>学校ID入力</title>
-        <link rel="icon" href="../static/img/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
-</head>
-<body>
+{%extends "registration/base.html" %}
+
+{% block title %}学校ID入力{% endblock %}
+
+{% block header_links %}
     <header class="header-regi">
         <nav class="login-nav">
-
-            {% block header_links %}
-                    <h5>Chimy</h5>
-
-               <span class="members-none">保護者or教職員</span>
-                {% endblock %}
+            <h5 class="center-title">Chimy</h5>
+            <p class="members-none">保護者or教職員</p>
         </nav>
     </header>
-    {% block content %}
-    <main class="main-auth">
+{% endblock %}    
 
+{% block content %}
+    <main class="main-auth">
         <div class="auth-container">
             <div class="auth-form">
-                <h1 id="form-title_key">認証キー</h1>
-                    <p>受け取った学校IDを入力してください</p>
+                <h1 id="form-title_key">認証キー入力</h1>
+                <p>受け取った学校IDを入力してください</p>
                 <form class="auth-form" action="{{ url_for('getSchoolId') }}" method="post">
                     <label for="auth-key">学校ID</label>
                     <input type="text" id="auth-key" name="school_code" placeholder="">
                     <button type="submit" id="auth-submit">ログイン</button>
-            </form>
+                </form>
             </div>
-        </div>
-        
+        </div>    
     </main>
-    {% endblock %}
-    <footer class="footer-regi">
-        <p>&copy; 2024 summer-f</p>
-    </footer>
+{% endblock %}
 
-</body>
-</html>
+{% block footer %}{% endblock %}
+
+
