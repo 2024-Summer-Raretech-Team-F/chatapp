@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
+            <title>Document</title>
             <link rel="icon" href="../static/img/favicon.ico" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-            <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+            <link rel="stylesheet" href="/static/css/styles.css">
+<!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
     </head>
     <body>
         <header class="header-main">
@@ -29,8 +30,6 @@
             </nav>
         </header>
 
-
-
        <main class="main-home">
         <section class="left-section">
             <div class="notifications">
@@ -44,12 +43,38 @@
                 <div id="calendar-nav">
                     <button id="prev-month"><i class="fa-solid fa-angle-up fa-rotate-270"></i></button>
                     <!--前の月-->
-                    <span id="calendar-month">2025年 5月</span>
-                    <!--今の月-->
+                    <span id="calendar-month">{{year}}年 {{month}}月</span><!--今の月-->
                     <button id="next-month"><i class="fa-solid fa-angle-up fa-rotate-90"></i></button>
                     <!--次の月-->
                 </div>
-                <div id="calendar"></div>
+                <div id="calendar">
+                    <table class="">
+                        <thead >
+                          <tr class="">
+                            <th class="sunday-detail">日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th class="saturday-detail">土</th>
+                          </tr>
+                        </thead>
+                        <div class="">
+                        {% for week in month_days%}
+                        <tr>
+                        {% for day in week%} {% if day == 0%}
+                        <td></td>
+                        {% else%} {% if today == day%}
+                        <td class="text-danger">{{day}} 本日</td>
+                        {%else%}
+                        <td>{{day}}</td>
+                        {%endif%} {%endif%} {%endfor%}
+                        </tr>
+                        {%endfor%}
+                        </div>
+                    </table>
+                </div>
                 <div id="selected-date-notice">ここにその日のタイトル</div>
             </div>
         </section>
@@ -64,6 +89,6 @@
 
 
 
-    <script src="home.js"></script>
+
 </body>
 </html>
