@@ -1,33 +1,21 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
-    <meta name="format-detection" content="telephone=no">
-        <title><!--{% block title %}{% endblock}-->教職員確認画面</title>
-        <link rel="icon" href="../static/img/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="check.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
-</head>
-<body class="check_body">
+{%extends "registration/base.html" %}
+
+{% block title %}教職員確認画面{% endblock %}
+
+{% block header_links %}
     <header class="header-regi">
         <nav class="check_nav">
             <h5>アカウント登録</h5>
-                <!--{% block header_links %}
-                    <h5>Chimy</h5>-->
-                <!--ホームなら「ホーム画面」記載-->
-                <!--{% endblock %}-->
             <span class="signup_role">教職員用</span>
         </nav>
     </header>
+{% endblock %} 
 
+{% block content %}
     <main class="check_main">
-        <!--{% block content %}
-        {% endblock %}-->
         <h4>以下の内容で登録してよろしいですか？</h4>
             <h5>｜教職員の情報</h5>
-                <form class="confirm_form" action="/finish" method="POST">
+                <form method="POST" action="/finish"><!--action出来次第入力-->
                     <p><span class="required">氏名</span></p>
                         <div class="receive_contents">
                         <p>　{{ name_kanji_full }}</p>
@@ -54,8 +42,8 @@
                         </div>
                     <p><span class="required">パスワード</span></p>
                         <div class="receive_contents">
-                        <p>　{{ '*' * len(password) }}</p>
-                        <input type="hidden" name="password" value="{{ password }}">
+                        <p>　{{ '*' * len(password1) }}</p>
+                        <input type="hidden" name="password1" value="{{ password1 }}">
                         </div>
                     <br>
                     <br>
@@ -70,11 +58,7 @@
                     </div>
                 </form>
     </main>
-    
-    <footer class="footer-regi">
-        <p>&copy; 2024 summer-f</p>
-    </footer>
+{% endblock %} 
 
-    
-</body>
-</html>
+{% block footer %}
+{% endblock %}
