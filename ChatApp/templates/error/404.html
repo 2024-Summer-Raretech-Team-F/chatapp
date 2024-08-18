@@ -1,0 +1,13 @@
+{%extends "error/base.html" %} {% block content%}
+
+<div class="position-absolute top-50 start-50 translate-middle">
+  <p class="fs-1 position-absolute top-20 start-50 translate-middle">
+    404エラー
+  </p>
+  <image src="{{url_for('static',filename='img/penpen01.gif')}}" alt="" />
+  <div class="position-absolute top-100 start-50 translate-middle">
+    <p>ごめんね〜</p>
+    <p>ページが見つからないよ〜</p>
+  </div>
+</div>
+{%endblock%}
