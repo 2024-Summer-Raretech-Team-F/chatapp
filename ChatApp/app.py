@@ -131,10 +131,6 @@ def home():
     school_id = session.get('school_id')
     email = session.get('email')
 
-    # if not school_id:
-    #     flash("学校IDが見つかりません。再度ログインしてください。")
-    #     return redirect(url_for('auth'))
-
     # 現在の年月日を取得
     now = datetime.now()
     year = now.year
@@ -156,14 +152,17 @@ def home():
     group_name = "グループ"
     group_message = "グループメッセージだよ〜"
     group_message_time ="7:50 "
-
+    
+    
+    groups = dbConnect.getGroups()
+    
     # SQLからユーザー取得
-    users_data = dbConnect.getUser(email)
+    # users_data = dbConnect.getUser(email)
 
-    print(users_data)
+    # print(users_data)
 
 
-    return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time,users_data=users_data)
+    return render_template('registration/home.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time, groups=groups)
 
 
 
