@@ -39,19 +39,19 @@ CREATE TABLE users (
     FOREIGN KEY (school_id) REFERENCES schools(school_id)
 );
 
-CREATE TABLE groups (
+CREATE TABLE channels (
     group_id INT AUTO_INCREMENT PRIMARY KEY,
     group_name VARCHAR(100),
     academic_level_id INT,
     FOREIGN KEY (academic_level_id) REFERENCES academic_levels(academic_level_id)
 );
 
-CREATE TABLE user_groups (
+CREATE TABLE user_channels (
     user_group_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     group_id INT,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (group_id) REFERENCES groups(group_id)
+    FOREIGN KEY (group_id) REFERENCES channels(group_id)
 );
 
 CREATE TABLE messages (
@@ -61,8 +61,9 @@ CREATE TABLE messages (
     user_id INT,
     group_id INT,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (group_id) REFERENCES groups(group_id)
+    FOREIGN KEY (group_id) REFERENCES channels(group_id)
 );
+
 
 CREATE TABLE notices (
     notice_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -84,8 +85,16 @@ VALUES  ('五条　悟', 'ゴジョウ　サトル', '五条　由紀子', 'sato
         ('夏油　傑', 'ゲトウ　スグル', NULL, 'suguru@example.com', '54aaa3aced18c8f91fa47b375ea186680236a0359f80dcf483ad7b90b72f8d0d', 'teacher', '08087654321', 1, 1),
         ('家入　硝子', 'イエイリ　ショウコ', NULL, 'syouko@example.com', 'ade7c829d3edab5cdb685fa383149fa867d0880136341ecfe1e1128dc9e2dfdd', 'teacher', '08043218765', 1, 1);
 
-INSERT INTO groups (group_name, academic_level_id) VALUES ('グループA', 1);
+INSERT INTO channels (group_name, academic_level_id) VALUES ('グループA', 1);
 
-INSERT INTO user_groups (user_id, group_id) VALUES (1, 1), (2, 1), (3, 1);
+INSERT INTO user_channels (user_id, group_id) VALUES (1, 1), (2, 1), (3, 1);
 
 INSERT INTO messages (message, user_id, group_id) VALUES ('初めまして。', 1, 1);
+
+INSERT INTO notices (title, description, post_date, user_id)
+VALUES  ('夏休みのお知らせ', '7月20日から8月31日まで夏休みです。', '2024-07-15', 2),
+        ('運動会のお知らせ', '10月10日に運動会が開催されます。参加希望者は申し込みをお願いします。', '2024-09-01', 3),
+        ('保護者会のお知らせ', '11月20日に保護者会を行います。出席をお願いします。', '2024-10-15', 2),
+        ('期末テストのお知らせ', '12月1日から12月3日まで期末テストを実施します。', '2024-11-20', 3),
+        ('新年の挨拶', '明けましておめでとうございます。今年もよろしくお願いします。', '2025-01-01', 2);
+

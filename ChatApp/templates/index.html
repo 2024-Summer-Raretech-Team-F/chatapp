@@ -40,7 +40,7 @@
                 <h3>新着のお知らせ</h3>
                 <div class="latest-notice">
                     <p id="latest-notice-title">{{ latest_notice_title }}</p>
-                    <a href="#" id="notice-btn">お知らせへ</a><!--ボタンではなくaタグに-->
+                    <a href="{{ url_for('get_all_notices') }}" method="post" id="notice-btn">お知らせへ</a><!--ボタンではなくaタグに-->
                 </div>
             </div>
 
