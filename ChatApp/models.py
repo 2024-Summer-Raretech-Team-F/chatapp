@@ -126,14 +126,14 @@ class dbConnect:
             cur.close()       
 
 
-    def getGroupAll():
+    def getChannelAll():
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM groups;"
+            sql = "SELECT * FROM channels;"
             cur.execute(sql)
-            groups = cur.fetchall()
-            return groups
+            channels = cur.fetchall()
+            return channels
         except Exception as e:
             print(f'{e} が発生しています')
             abort(500)
@@ -141,11 +141,11 @@ class dbConnect:
             cur.close()
 
 
-    def getGroupById(group_id):
+    def getChannelById(group_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM groups WHERE group_id = %s;"
+            sql = "SELECT * FROM channels WHERE group_id = %s;"
             cur.execute(sql, (group_id,))
             group = cur.fetchone()
             return group
