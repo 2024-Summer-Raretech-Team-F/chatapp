@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
-        <link rel="icon" href="../static/img/favicon.ico" />
+        <title>{% block title %}タグに出てくるページタイトル{% endblock %}</title>
+        <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+        <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
 </head>
 <body>
-    <header class="header-regi">
-        <nav>
-            <h5>今いるページ</h5>
-           
-                <!--{% block header_links %}
-                    <h5>Chimy</h5>-->
-                <!--ホームなら「ホーム画面」記載-->
-                <!--<span class="members-school?????">保護者or教職員</span>-->
-                <!--{% endblock %}-->
+    {% block header_links %}
+    <header class="header-regi">  
+           <nav>
+             <h5>Chimy</h5>
+             <span class="members-school">保護者or教職員</span>
         </nav>
     </header>
+    {% endblock %}  
 
+    {% block content %}
     <main>
-        <!--{% block content %}
-        各ページごとのメインはここ <main> </main>
-        {% endblock %}-->
+       
+      
+       
     </main>
+    {% endblock %}
     
     <footer class="footer-regi">
         <p>&copy; 2024 summer-f</p>

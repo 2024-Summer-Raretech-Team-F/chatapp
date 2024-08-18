@@ -1,4 +1,4 @@
-.signup_body {
+.check_body {
     font-family: 'Arial', sans-serif;
     display: flex;
     flex-direction: column;
@@ -9,12 +9,14 @@
     background-color: #fff;
 }
 
-.signup_main{
+
+.check_main {
     padding-top: 63px;
     padding-bottom: 70px;
     background-color: #ffffff; /* 任意の背景色 */
     overflow-y: auto;
 }
+
 
 .header-regi {
     position: fixed;
@@ -26,7 +28,7 @@
     z-index: 10;
     }
 
-.signup_nav{
+.check_nav {
     display: flex;
     justify-content: space-between;
 
@@ -64,18 +66,35 @@
  
 }
 
-.required::after{
-    content: "必須";
-    color:#ffffff;
-    background: #ff0000;
+.required{
     font-size: 0.8em;
-    padding: 0.1em;
-    border-radius: 0.4em;
-    margin-left: 0.5em;
 }
 
-.button{
-    width: 415px;
+.receive_contents{
+    background-color: #DBF2FF;
+    width:auto;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 0.8em;
+}
+
+.button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button1 {
+    width: 125px;
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #56B7ED;
+    border-style: solid;
+    border-radius:3px
+}
+
+.button2 {
+    width: 125px;
     background-color: #56B7ED;
     color: #ffffff;
     border-color: #56B7ED;
@@ -89,31 +108,6 @@
     margin: auto;
 }
 
-::placeholder {
-     color: #bbb;
+::placeholder{
+    color: #bbb;
 }
-
-.custom-design input[type="text"], 
-.custom-design input[type="email"], 
-.custom-design input[type="password"] {
-    display: flex;
-    height: 20px;
-    border: 2px solid #333;
-    border-radius: 0;
-}
-
-.custom-design input[type="text"]:hover {
-    outline: none;
-    border: 2px solid #56B7ED;
-}
-
-.custom-design input[type="email"]:hover {
-    outline: none;
-    border: 2px solid #56B7ED;
-}
-
-.custom-design input[type="password"]:hover {
-    outline: none;
-    border: 2px solid #56B7ED;
-}
-

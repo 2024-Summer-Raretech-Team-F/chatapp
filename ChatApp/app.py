@@ -36,7 +36,7 @@ def userSignup():
     pattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 
     if name_kanji_full == '' or name_kana_full == '' or grade == '' or section == '' or parent_name == ''or phone_number == '' or email =='' or password1 == '' or password2 == '':
-        flash('空のフォームがあるようです')    
+        flash('空のフォームがあるようです')
     elif password1 != password2:
         flash('二つのパスワードの値が違っています')
     elif re.match(pattern, email) is None:
@@ -62,25 +62,26 @@ def login():
     return render_template('registration/login.html')
 
 # ログイン処理
-@app.route('/login', methods=['POST'] )
+@app.route('/login', methods=['GET'] )
 def userLogin():
     email = request.form.get('email')
     password = request.form.get('password')
-        
-    if email == '' or password == '':
-        flash('入力されていないフォームがあります')
-    else:
-        user = dbConnect.getUser(email)
-        if user is None:
-            flash('このユーザーは存在しません')
-        else:
-            hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
-            if hashPassword != user['password']:
-                flash('パスワードが間違っています')
-            else:
-                session['user_id'] = user['user_id']
-                return redirect('/home')    
-    return redirect('/login')                
+
+    # if email == '' or password == '':
+    #     flash('入力されていないフォームがあります')
+    # else:
+    #     user = dbConnect.getUser(email)
+    #     if user is None:
+    #         flash('このユーザーは存在しません')
+    #     else:
+
+    #         # hashPassword = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            # if hashPassword != user['password']:
+            #     flash('パスワードが間違っています')
+            # else:
+            #     session['user_id'] = user['user_id']
+    return redirect('/home')
+    # return redirect('/login')
 
 # 新規登録 / 学校IDの入力画面の表示
 @app.route('/auth')
@@ -90,36 +91,34 @@ def auth():
 
 @app.route('/auth', methods=['POST'])
 def getSchoolId():
-    school_code = request.form.get('school_code')  
-    
-    if not school_code:
-        flash('学校IDを入力してください')
-        return redirect(url_for('auth'))  
-    
-    school_id = dbConnect.getSchoolCode(school_code)
-    print(f"Retrieved school_id: {school_id}")
-    
-    if school_id is None:
-        flash('無効な学校IDです。正しい学校IDを入力してください。')
-        return redirect(url_for('auth'))
-    
-    
-    session['school_id'] = school_id
-    return redirect(url_for('home', school_id=school_id))
+    # if not school_code:
+    #     flash('学校IDを入力してください')
+    #     return redirect(url_for('auth'))
+
+    # school_id = dbConnect.getSchoolCode(school_code)
+
+    # if school_id is None:
+    #     flash('無効な学校IDです。正しい学校IDを入力してください。')
+    #     return redirect(url_for('auth'))
+
+
+    # session['school_id'] = school_id
+    return redirect(url_for('home', school_id=school_code))
+
 
 
 
 
 @app.route('/home',methods=['GET','POST'])
 def home():
-    
+
     school_id = session.get('school_id')
     email = session.get('email')
-    
-    if not school_id:
-        flash("学校IDが見つかりません。再度ログインしてください。")
-        return redirect(url_for('auth'))
-    
+
+    # if not school_id:
+    #     flash("学校IDが見つかりません。再度ログインしてください。")
+    #     return redirect(url_for('auth'))
+
     # 現在の年月日を取得
     now = datetime.now()
     year = now.year
@@ -173,16 +172,16 @@ def add_notice():
     description = request.form.get('description')
     post_data = request.form.get('post_data')
     user_id = request.form.get('user_id')
-    
+
     user = dbConnect.getUserById(user_id)
-    
+
     if user is None or user['role'] != 'teacher':
         abort(403)
-        
+
     dbConnect.createNotice(title, description, post_data, user_id)
-    
-    flash("お知らせが作成されました！")  
-    return redirect(url_for('get_all_notices')) 
+
+    flash("お知らせが作成されました！")
+    return redirect(url_for('get_all_notices'))
 
 
 # お知らせの更新(編集)
@@ -192,14 +191,14 @@ def edit_notice(notice_id):
     description = request.form.get('description')
     post_data = request.form.get('post_data')
     user_id = request.form.get('user_id')
-    
+
     user = dbConnect.getUserById(user_id)
-    
+
     if user is None or user['role'] != 'teacher':
         abort(403)
-    
+
     dbConnect.updateNotice(notice_id, title, description, post_data)
-    
+
     flash("お知らせが更新されました")
     return redirect(url_for('get_all_notices'))
 
@@ -208,14 +207,14 @@ def edit_notice(notice_id):
 @app.route('/notices/<int:notice_id>', methods=['DELETE'])
 def delete_notice(notice_id):
     user_id = request.form.get('user_id')
-    
+
     user = dbConnect.getUserById(user_id)
-    
+
     if user is None or user['role'] != 'teacher':
         abort(403)
-        
+
     dbConnect.deleteNotice(notice_id)
-    
+
     flash("お知らせが削除されました。")
     return redirect(url_for('get_all_notice'))
 
@@ -225,7 +224,7 @@ def delete_notice(notice_id):
 def show_group():
     groups = dbConnect.getGroups()
     render_template('chat_main.html', groups=groups)
-    
+
 
 #チャット欄の表示
 @app.route('/chat/<group_id>')
@@ -233,11 +232,11 @@ def detail(group_id):
     user_id = session.get('user_id')
     if user_id is None:
         return redirect('/loign')
-    
+
     group_id = group_id
     group = dbConnect.getGroups(group_id)
     message = dbConnect.getMessageAll(group_id)
-    
+
     return render_template('home.html', group=group, message=message)
 
 
@@ -247,14 +246,14 @@ def add_message():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect('/login')
-    
+
     message = request.form.get('message')
     group_id = request.get('group_id')
-    
+
     if message:
         dbConnect.createMessage(user_id, group_id, message)
-        
-    return redirect('/chat/{group_id}'.format(group_id = group_id))    
+
+    return redirect('/chat/{group_id}'.format(group_id = group_id))
 
 
 #チャットの削除
@@ -263,14 +262,14 @@ def delete_message():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect('/login')
-    
+
     message_id = request.form.get('message_id')
     group_id = request.form.get('group_id')
-    
+
     if message_id:
         dbConnect.deleteMessage(message_id)
-        
-    return redirect('/chat/{group_is}'.format(group_id=group_id))    
+
+    return redirect('/chat/{group_is}'.format(group_id=group_id))
 
 
 if __name__ == '__main__':

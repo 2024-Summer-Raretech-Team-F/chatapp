@@ -1,13 +1,19 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="ja">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
             <title>{% block title %}タグに出てくるページタイトル{% endblock %}Document</title>
             <link rel="icon" href="../static/img/favicon.ico" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
             <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+
+            <title>Chimy</title>
+            <link rel="icon" type="image/x-icon" href="../static/img/favicon.ico">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+            <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
+
     </head>
 <body class="login-main">
         <header class="header-regi">
@@ -28,18 +34,19 @@
             <div class="svg-container">
                 <svg viewBox="0 0 594 420">
                     <!--画像Aのurl-->
-                    <image class="left" href="hon_hyoushi.png" width="297" height="420"/>
+                    <image class="left" href="{{ url_for('static', filename='img/hon_hyoushi.png') }}" width="297" height="420"/>
                     <!--画像Bのurl-->
-                    <image class="right" href="hon_hiraki01.png" width="297" height="420"/>
-
+                    <image class="right" href="{{ url_for('static', filename='img/hon_hiraki01.png') }}" width="297" height="420"/>
+                
                     <rect id="kageL" width="297" height="420" class="left" fill="gray" fill-opacity="0.4"/>
                     <rect id="kageR" width="297" height="420" class="right" fill="gray" fill-opacity="0.4"/>
-
+                
                     <!--画像Bのurl-->
-                    <image id="honhiL" class="left" href="hon_hiraki01.png" width="297" height="420"/>
+                    <image id="honhiL" class="left" href="{{ url_for('static', filename='img/hon_hiraki01.png') }}" width="297" height="420"/>
                     <!--画像Aのurl-->
-                    <image id="honhyoR" class="right" href="hon_hyoushi.png" width="297" height="420"/>
-
+                    <image id="honhyoR" class="right" href="{{ url_for('static', filename='img/hon_hyoushi.png') }}" width="297" height="420"/>
+            
+                
                     <clipPath id="leftclip">
                         <rect x="0" y="0" width="297" height="420"/>
                     </clipPath>
@@ -50,15 +57,18 @@
                 </svg>
 
                 <!-- フォームをSVGの右側に配置 -->
-                <div class="form-overlay hidden">
-                    <form class="input-form">
+                <div class="form-overlay">
+                    <form class="input-form" action="{{ url_for('auth') }}" method="get">
                         <label for="email">メールアドレス</label>
                         <input type="email" id="email" name="email" placeholder="sample@email.com" required autocomplete="email">
                         
                         
+
                         <label for="token">認証キー</label>
                         <input type="text" id="token" name="token" placeholder="hogahoga0101" required autocomplete="one-time-code">
                         
+
+
 
                         <label for="password">パスワード</label>
                         <p class="tyuu_1">※英数字6文字以上</p>
@@ -78,6 +88,7 @@
         <p>&copy; 2024 summer-f</p>
     </footer>
 
-<script src="login.js"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
 </body>
 </html>
