@@ -91,8 +91,6 @@ def auth():
 
 @app.route('/auth', methods=['POST'])
 def getSchoolId():
-    school_code = request.form.get('school_code')
-
     # if not school_code:
     #     flash('学校IDを入力してください')
     #     return redirect(url_for('auth'))
@@ -106,6 +104,7 @@ def getSchoolId():
 
     # session['school_id'] = school_id
     return redirect(url_for('home', school_id=school_code))
+
 
 
 
