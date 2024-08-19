@@ -78,7 +78,7 @@ CREATE TABLE notices (
 
 INSERT INTO schools (school_id, school_code, school_name, parent_auth_key, teacher_auth_key) VALUES (1, 'demo01', 'Demo School', 'parent', 'teacher');
 
-INSERT INTO academic_levels (grade, section, school_id) VALUES ('1年', 'A組', 1);
+INSERT INTO academic_levels (academic_level_id, grade, section, school_id) VALUES (1,'1年', 'A組', 1);
 
 INSERT INTO users (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id)
 VALUES  ('五条　悟', 'ゴジョウ　サトル', '五条　由紀子', 'satoru@example.com', '011f55b984b0ea1e5e1d6a32df1ac1548fe24f8c20d85012b04c6fc5139abb42', 'student', '09012345678', 1, 1),
