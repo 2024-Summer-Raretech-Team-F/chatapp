@@ -11,7 +11,7 @@
 <body>
     <header class="header-main">
         <nav>
-            <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+            <a id="backButton" href="{{ url_for('home') }}"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></a>
             <h6>{% block header_links %}お知らせ一覧{% endblock %}</h6>
             <ul>
                 <li><a href="{{ url_for('getNoticeById', notice_id=1) }}">
@@ -37,14 +37,14 @@
                     <select id="grade-notice" name="category">
                         <option selected> 学年 </option>
                         <option value="all"> 全学年 </option>
-                        <option value="1"{% if grade.category = '1年生'%}{%endif%}> 1年生 </option>
-                        <option value="2"{% if grade.category = '2年生'%}{%endif%}> 2年生 </option>
-                        <option value="3"{% if grade.category = '3年生'%}{%endif%}> 3年生 </option>
-                        <option value="4"{% if grade.category = '4年生'%}{%endif%}> 4年生 </option>
-                        <option value="5"{% if grade.category = '5年生'%}{%endif%}> 5年生 </option>
-                        <option value="6"{% if grade.category = '6年生'%}{%endif%}> 6年生 </option>
+                        <option value="1"> 1年生 </option>
+                        <option value="2"> 2年生 </option>
+                        <option value="3"> 3年生 </option>
+                        <option value="4"> 4年生 </option>
+                        <option value="5"> 5年生 </option>
+                        <option value="6"> 6年生 </option>
                     </select>
-                    <form action="{{ url_for('get_notice_by_grade' )}}" method="get">
+                    <form action="{{ url_for('get_notice_by_grade', category='1年生' )}}" method="get">
                         <input type="search" name="notice-search" placeholder="キーワードを入力"> 
                         <button type="submit" class="search-button">
                             <i class="fas fa-search"></i>
@@ -54,7 +54,7 @@
             </div>
 
             <!-- Notice list -->
-            {% for notice in notices %}
+            
             <div class="notice-list">
                 <div class="top-row">
                     <p class="grade-list_a">全学年</p>
