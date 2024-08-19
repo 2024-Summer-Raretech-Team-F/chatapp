@@ -137,12 +137,18 @@ def home():
     today = now.day
 
     #カレンダー作成
-    #
+    
     # 週の始まりを日曜にする
     cal = calendar.Calendar(firstweekday=6)
     month_days = cal.monthdayscalendar(year,month)
 
     # チャットデータ
+    # user_data = dbConnect.getUser(email)
+    # grade = user_data['grade']
+    # section = user_data['section']
+    
+    # child_class = dbConnect.getAcademicLevel(grade, section)
+    # teacher_name = user_data['name_kanji_full']
     child_class = "5年3組"
     teacher = "佐藤　道哉"
     teacher_message = "本日もよろしくお願いします"
@@ -152,12 +158,8 @@ def home():
     group_message = "グループメッセージだよ〜"
     group_message_time ="7:50 "
     
-    
-    # channels = dbConnect.getChannleAll()
-    # users_data = dbConnect.getUser(email)
 
-
-    return render_template('index.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time)
+    return render_template('index.html', year=year, month=month, month_days=month_days, today=today, child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time)
 
 
 
