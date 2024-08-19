@@ -1,79 +1,56 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
-        <link rel="icon" href="../static/img/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
-</head>
-<body>
-    <header class="header-main">
-        <nav>
-            <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-            <h6><!--{% block header_links %}-->
-            今いるページ<!--ホームなら「ホーム画面」記載-->
-            <!--{% endblock %}--></h6>
-            <ul>
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
-                    <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
-                    <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
-                    <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
-                <!--<li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}"><img src="" alt="Icon">画像で行くならこっち</li>-->
-                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}">-->
-                    <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
-            </ul>
-        </nav>
-    </header>
+{%extends "/base.html" %}
 
+{% block title %}設定編集画面{% endblock}
+
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>設定編集画面</h6>
+{% endblock %}
+
+{% block content %}
     <main id="settings-mainpage_edit">
-        <!--{% block content %}<main></main>
-        各ページごとのメインはここ
-        {% endblock %}-->
         <div class="user-info">
             <i class="fa-regular fa-circle-user" id="user-icon"></i>
             <div class="info-container">
-                <div class="personal-info_settings">
-                    <div class="form-group">
-                        <label for="kidname-kanji_settings"> お子様のお名前 </label>
-                        <input type="text" id="kidname-kanji_settings" name="kidname-kanji_settings" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="kidname-kana_settings"> ふりがな </label>
-                        <input type="text" id="kidname-kana_settings" name="kidname-kana_settings" placeholder="">
-                    </div>
-                <hr>
-                    <div class="form-group">
-                        <label for="parents-name_settings"> 保護者のお名前 </label>
-                        <input type="text" id="parents-name_settings" name="parents-name_settings" placeholder="">
-                    </div>
-                <hr>
+                <form class="settingsedit-form" action="{{ url_for('auth') }}" method="post"><!-- authは仮 -->
+                    <div class="personal-info_settings">
+                        <div class="form-group group-top">
+                            <label for="kidname-kanji_settings"> お子様のお名前 </label>
+                            <input type="text" id="kidname-kanji_settings" name="kidname-kanji_settings" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="kidname-kana_settings"> ふりがな </label>
+                            <input type="text" id="kidname-kana_settings" name="kidname-kana_settings" placeholder="">
+                        </div>
+                    <hr>
+                        <div class="form-group">
+                            <label for="parents-name_settings"> 保護者のお名前 </label>
+                            <input type="text" id="parents-name_settings" name="parents-name_settings" placeholder="">
+                        </div>
+                    <hr>
                     <div class="select_settings">
                         <label for="grade_settings"> 学年 </label> 
-                            <select id="grade_settings" name="grade">
-                                <option selected> 学年 </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>
-                                <option value="4"> 4 </option>
-                                <option value="5"> 5 </option>
-                                <option value="6"> 6 </option>
-                            </select>
+                        <select id="grade_settings" name="grade">
+                            <option selected> 学年 </option>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="4"> 4 </option>
+                            <option value="5"> 5 </option>
+                            <option value="6"> 6 </option>
+                        </select>
                     </div>  
                     <div class="select_settings">  
                         <label for="class_settings">クラス</label> 
-                            <select id="class_settings" name="grade_class">
+                        <select id="class_settings" name="grade_class">
                             <option selected> クラス </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>
-                                <option value="A"> A </option>
-                                <option value="B"> B </option>
-                                <option value="C"> C </option>
-                            </select>                 
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                            <option value="A"> A </option>
+                            <option value="B"> B </option>
+                            <option value="C"> C </option>
+                        </select>                 
                     </div>
                     <div class="form-group">
                         <label for="student-nambers_settings"> 出席番号 </label>
@@ -100,19 +77,14 @@
                         <p class="school-nambers" id="schoolnamber_settings"> 学校ID </p>
                         <p class="school-nambers" id="school-nambersnon_settings"> moshimo </p>
                     </div>
-                </div>
-                </div>
-                <div class="personal-data">
-                                        
-                </div>
+                <hr id="last-border">
+                </form>
             </div>
-                    <button onclick="location.href='edit.html'" class="settings-button">編集</button>
-                </div>            
         </div>
-
-    </main>
-    
-</body>
-</html>
-
-
+        <div class="settings-input">
+            <a href="{{ url_for('settings') }}" class="cancel-btn">キャンセル</a>
+            <button type="submit" class="settings-button_edit">更 新</button>
+        </div>
+    </div>
+</main>
+{% endblock %}

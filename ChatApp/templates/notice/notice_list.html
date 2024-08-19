@@ -1,41 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}お知らせ一覧{% endblock %}</title>
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
-</head>
-<body>
-    <header class="header-main">
-        <nav>
-            <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-            <h6>{% block header_links %}お知らせ一覧{% endblock %}</h6>
-            <ul>
-                <li><a href="{{ url_for('getNoticeById', notice_id=1) }}">
-                    <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
-                <li><a href="{{ url_for('getNoticeById', notice_id=2) }}">
-                    <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
-                <li><a href="{{ url_for('getNoticeById', notice_id=3) }}">
-                    <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
-                <li><a href="{{ url_for('getNoticeById', notice_id=4) }}">
-                    <img src="{{ url_for('static', filename='img/icon.png') }}" alt="Icon"><p>Image</p></a></li>
-                <li><a href="{{ url_for('getNoticeById', notice_id=5) }}">
-                    <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
-            </ul>
-        </nav>
-    </header>
+{%extends "/base.html" %}
 
-    <main class="notice-list_main">
-        {% block content %}
-        <div class="notice-main">
-            <div class="notice-list_search">
-                <label for="grade-notice">学年を選択できます</label>
-                <div class="search-container">
-                    <select id="grade-notice" name="grade-select">
-                        <option selected> 学年 </option>
+{% block title %}お知らせ一覧{% endblock %}
+
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>お知らせ一覧</h6>
+{% endblock %}
+
+{% block content %}
+    <div class="notice-main">
+        <div class="notice-list_search">
+            <label for="grade-notice">学年を選択できます</label>
+            <div class="search-container">
+                <form action="/notices/grade" method="get">
+                    <select id="grade-notice" name="category">
                         <option value="all"> 全学年 </option>
                         <option value="1"> 1年生 </option>
                         <option value="2"> 2年生 </option>
@@ -44,43 +22,38 @@
                         <option value="5"> 5年生 </option>
                         <option value="6"> 6年生 </option>
                     </select>
-                    <form action="{{ url_for('get_notice_by_grade')}}" method="get">
-                        <input type="search" name="notice-search" placeholder="キーワードを入力"> 
-                        <button type="submit" class="search-button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </div>
+                    <input type="search" name="notice-search" placeholder="キーワードを入力"> 
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
             </div>
-
-            <!-- Notice list -->
-            <div class="notice-list">
-                <div class="top-row">
-                    <p class="grade-list_a">全学年</p>
-                    <p class="month-day-list">8月24日</p>
-                </div>
-                <div class="title-list">      
-                    <h4 class="title-list">概要50文字</h4>               
-                    <p class="summary-list">お知らせの詳細内容がここに入ります。</p>
-                </div> 
-            </div>
-            <!-- Add more notice-list divs as needed -->
-
-            <div id="notice-list_search-results">                            
-                {% if notices %}
-                    {% for notice in notices %}
-                        <p>{{ notice }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>該当するお知らせがありません。</p>
-                {% endif %}
-            </div> 
         </div>
-        {% endblock %}
-    </main>
 
-    <footer class="notice-create">
-        <a href="{{ url_for('add_notice') }}" method="post" class="notice-create_button">+</a>
-    </footer>
-</body>
-</html>
+        <!-- Notice list -->
+        <div id="notice-list_search-results">   
+            {% if notices %}
+                {% for notice in notices %}
+                    <div class="notice-list">
+                        <a href="{{ url_for('getNoticeById', notice_id=notice.id) }}">
+                            <div class="top-row">
+                                <p class="grade-list_a"> {{ notice.category }} </p>
+                                <p class="month-day-list"> {{ notice.created_at.strftime('%m月%d日') }} </p>
+                            </div>
+                            <div class="title-list">      
+                                <h4 class="title-list">{{ notice.title }}</h4>               
+                                <p class="summary-list">{{ notice.summary }}</p>
+                            </div> 
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>該当するお知らせはありません。</p>
+            {% endif %}
+        </div> 
+    </div>
+{% endblock %}
+
+<footer class="notice-create">
+    <a href="{{ url_for('add_notice') }}" method="post" class="notice-create_button">+</a>
+</footer>
