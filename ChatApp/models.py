@@ -81,6 +81,24 @@ class dbConnect:
         finally:
             cur.close()
 
+
+#学年・クラスの取得
+    def getAcademicLevel(academic_level_id):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM academic_levels WHERE academic_level_id = %s;" 
+            cur.execute(sql, (academic_level_id,))
+            academic_level = cur.fetchone() 
+
+            return academic_level
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()      
+
+
 #認証キーの処理
     def getAuthKey(school_id):
         try:

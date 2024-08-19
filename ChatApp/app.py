@@ -137,12 +137,18 @@ def home():
     today = now.day
 
     #カレンダー作成
-    #
+    
     # 週の始まりを日曜にする
     cal = calendar.Calendar(firstweekday=6)
     month_days = cal.monthdayscalendar(year,month)
 
     # チャットデータ
+    # user_data = dbConnect.getUser(email)
+    # grade = user_data['grade']
+    # section = user_data['section']
+    
+    # child_class = dbConnect.getAcademicLevel(grade, section)
+    # teacher_name = user_data['name_kanji_full']
     child_class = "5年3組"
     teacher = "佐藤　道哉"
     teacher_message = "本日もよろしくお願いします"
@@ -152,12 +158,8 @@ def home():
     group_message = "グループメッセージだよ〜"
     group_message_time ="7:50 "
     
-    
-    # channels = dbConnect.getChannleAll()
-    # users_data = dbConnect.getUser(email)
 
-
-    return render_template('index.html',year=year,month=month,month_days=month_days,today=today,child_class=child_class,teacher=teacher,teacher_message=teacher_message,teacher_message_time=teacher_message_time,student_name=student_name,group_name=group_name,group_message=group_message,group_message_time=group_message_time)
+    return render_template('index.html', year=year, month=month, month_days=month_days, today=today, child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time)
 
 
 
@@ -171,14 +173,20 @@ def get_all_notices():
 @app.route('/notice/<notice_id>', methods=['GET'])
 def getNoticeById(notice_id):
     main_notice = dbConnect.getNoticeById(notice_id)
-    return render_template('notice_main.html' ,main_notice=main_notice)
+    return render_template('notice/notice_main.html' ,main_notice=main_notice)
 
 
 #学年でお知らせを絞る
 @app.route('/notices/grade/<category>', methods=['GET'])
 def get_notice_by_grade(category):
-    notices = dbConnect.getNoticeByGrade(category)
-    return notices
+    grade = dbConnect.getNoticeByGrade(category)
+    return render_template('notice/notice_list.html', grade=grade)
+
+
+#お知らせ作成ページの表示
+@app.route('/notices/add_notice', methods=['GET'])
+def create_notice():
+    return render_template('notice/notice_create.html')
 
 
 #お知らせの作成
@@ -245,13 +253,13 @@ def show_group():
 #チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect('/login')
-
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect('/login')
+    
     channels = dbConnect.getChannelAll(group_id)
     message = dbConnect.getMessageAll(group_id)
-
+    
     return render_template('chat_main.html', channels=channels, message=message)
 
 
