@@ -4,7 +4,7 @@
 
 {% block header_content %}
         <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-        <h6>5年2組 佐藤 道哉 先生</h6>
+        <h6>{{ child_class }} {{ teacher }} 先生 {{ group_name }}</h6>
 {% endblock %}        
 
 {% block content %}
@@ -17,13 +17,13 @@
   <figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
   </figure>
 <div class="message_name_left">
-  <p >5年2組 佐藤 道哉 先生</p>
+  <p >{{ child_class }} {{ teacher }} 先生</p>
   <div class="messaging messaging_left">
-    <p class="message_text_left">今日は欠席で大丈夫でしょうか？</p>
+    <p class="message_text_left">{{ teacher_message }}/p>
   </div>
 </div>
   <!--送信時刻-->
-  <time class="message_time">AM9:00</time>
+  <time class="message_time">{{  teacher_message_time }}</time>
   <div class="clear"></div><!--回り込みを解除-->
 </div>
 
@@ -33,13 +33,13 @@
   <figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
   </figure>
 <div class="message_name_right">
-  <p class="name_text" >5年2組 田中 智樹</p>
+  <p class="name_text" >{{ student_name }}</p>
   <div class="messaging messaging_right">
-    <p class="message_text_right">今日は熱があるため欠席します。</p>
+    <p class="message_text_right">{{ group_message }}</p>
   </div>
 </div>  
   <!--送信時刻-->
-  <time class="message_time">AM9:05</time>
+  <time class="message_time">{{ group_message_time }}</time>
   <div class="clear"></div><!--回り込みを解除-->
 </div>
 </div>

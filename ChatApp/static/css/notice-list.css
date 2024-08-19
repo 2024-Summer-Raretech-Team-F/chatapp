@@ -5,6 +5,7 @@
     justify-content: center;
     margin-left: 60px;
     position: relative;
+    width: 900px;
 }
 
 .notice-list_search {
@@ -13,33 +14,46 @@
     margin-top: 20px;
     border-bottom: 2px solid #56B7ED;
     padding-bottom: 30px;
+    padding: 0 100px 30px;
 }
 
 .search-container {
-    margin-top: 10px;
     display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
     align-items: center;
 }
 
 .search-container select {
     margin-left: 28px;
     width: 90px; /* プルダウンの横幅 */
-    height: 20px;
-    margin-top: 5px;
+    height: 30px;
     text-align: center;
+    margin-right: 30px;
+}
+
+.search-button i {
+    font-size: 16px
 }
 
 .search-container form {
-    margin-left: 50px; /* プルダウンと入力バーの間 */
+    display: flex;
+    align-items: center;
     flex-grow: 1;
 }
 
 .search-container input[type="search"] {
-    width: 80%; /* バーの長さ */
+    width: 60%; /* バーの長さ */
+    margin-right: 10px; /* ボタンとの間にスペース */
+    padding: 5px; 
+    height: 30px; /* 検索バーの高さ */
+    box-sizing: border-box;
 }
 
 .search-container .search-button {
-    margin-left: 5px; /* ボタンと検索バーの間に空間 */
+    padding: 5px 10px; /* ボタンの内側のパディング */
+    height: 30px; /* ボタンの高さ */
+    cursor: pointer;
 }
 
 .notice-list {

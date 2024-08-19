@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -36,6 +37,24 @@
                 <div class="search-container">
                     <select id="grade-notice" name="category">
                         <option selected> 学年 </option>
+
+{%extends "/base.html" %}
+
+{% block title %}お知らせ一覧{% endblock %}
+
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>お知らせ一覧</h6>
+{% endblock %}
+
+{% block content %}
+    <div class="notice-main">
+        <div class="notice-list_search">
+            <label for="grade-notice">学年を選択できます</label>
+            <div class="search-container">
+                <form action="/notices/grade" method="get">
+                    <select id="grade-notice" name="category">
+
                         <option value="all"> 全学年 </option>
                         <option value="1"> 1年生 </option>
                         <option value="2"> 2年生 </option>
@@ -44,6 +63,7 @@
                         <option value="5"> 5年生 </option>
                         <option value="6"> 6年生 </option>
                     </select>
+
                     <form action="{{ url_for('get_notice_by_grade', category='1年生' )}}" method="get">
                         <input type="search" name="notice-search" placeholder="キーワードを入力"> 
                         <button type="submit" class="search-button">
@@ -76,12 +96,40 @@
                     <p>該当するお知らせがありません。</p>
                 {% endif %}
             </div> 
-        </div>
-        {% endblock %}
-    </main>
 
-    <footer class="notice-create">
-        <a href="{{ url_for('add_notice') }}" method="post" class="notice-create_button">+</a>
-    </footer>
-</body>
-</html>
+                    <input type="search" name="notice-search" placeholder="キーワードを入力"> 
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Notice list -->
+        <div id="notice-list_search-results">   
+            {% if notices %}
+                {% for notice in notices %}
+                    <div class="notice-list">
+                        <a href="{{ url_for('getNoticeById', notice_id=notice.id) }}">
+                            <div class="top-row">
+                                <p class="grade-list_a"> {{ notice.category }} </p>
+                                <p class="month-day-list"> {{ notice.created_at.strftime('%m月%d日') }} </p>
+                            </div>
+                            <div class="title-list">      
+                                <h4 class="title-list">{{ notice.title }}</h4>               
+                                <p class="summary-list">{{ notice.summary }}</p>
+                            </div> 
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>該当するお知らせはありません。</p>
+            {% endif %}
+        </div> 
+    </div>
+{% endblock %}
+
+<footer class="notice-create">
+    <a href="{{ url_for('add_notice') }}" method="post" class="notice-create_button">+</a>
+</footer>
