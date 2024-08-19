@@ -4,7 +4,9 @@
 
 {% block header_content %}
         <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-        <h6>{{ child_class }} {{ teacher }} 先生 {{ group_name }}</h6>
+        {% for channel in channels %}
+        <h6>{{ channel.group_name }} {{ channel.user_id }} 先生</h6>
+        {% endfor %}
 {% endblock %}        
 
 {% block content %}
