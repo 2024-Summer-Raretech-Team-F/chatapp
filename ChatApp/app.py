@@ -166,8 +166,8 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    # notices = dbConnect.getAllNotices()
-    return render_template('notice/notice_list.html')
+    notices = dbConnect.getAllNotices()
+    return render_template('notice/notice_list.html', notices=notices)
 
 
 @app.route('/notice/<notice_id>', methods=['GET'])
@@ -179,8 +179,8 @@ def getNoticeById(notice_id):
 #学年でお知らせを絞る
 @app.route('/notices/grade/<category>', methods=['GET'])
 def get_notice_by_grade(category):
-    notices = dbConnect.getNoticeByGrade(category)
-    return notices
+    grade = dbConnect.getNoticeByGrade(category)
+    return render_template('notice/notice_list.html', grade=grade)
 
 
 #お知らせの作成
@@ -247,13 +247,13 @@ def show_group():
 #チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect('/login')
-
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect('/login')
+    
     channels = dbConnect.getChannelAll(group_id)
     message = dbConnect.getMessageAll(group_id)
-
+    
     return render_template('chat_main.html', channels=channels, message=message)
 
 
