@@ -17,7 +17,7 @@
             <div class="auth-form">
                 <h1 id="form-title_key">新規登録</h1>
                 <p>受け取った学校IDを入力してください</p>
-                <form class="auth-form" action="" method="post">
+                <form class="auth-form" action="{{ url_for('getSchoolId') }}" method="post">
                     <label for="token-key">学校ID</label>
                     <input type="text" id="token-key" placeholder="">
                     <button type="submit" id="auth-submit_sinki">新規登録へ</button>
