@@ -1,43 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
-        <link rel="icon" href="../static/img/favicon.ico" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" type="text/css" href="/chatapp/static/css/styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
-</head>
-<body>
-    <header class="header-main">
-        <nav>
-            <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-            <h6><!--{% block header_links %}-->
-            設定画面<!--ホームなら「ホーム画面」記載-->
-            <!--{% endblock %}--></h6>
-            <ul>
-                <li><a href="#">
-                    <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
-                <li><a href="#">
-                    <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
-                <li><a href="#">
-                    <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
+{%extends "/base.html" %}
 
-                <li><a href="#">
-                    <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
-            </ul>
-        </nav>
-    </header>
+{% block title %}設定画面{% endblock}
 
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>設定画面</h6>
+{% endblock %}
+
+{% block content %}
     <main id="settings-mainpage">
-        <!--{% block content %}<main></main>
-        各ページごとのメインはここ
-        {% endblock %}-->
         <div class="user-info">
             <i class="fa-regular fa-circle-user" id="user-icon"></i>
             <div class="info-container">
                 <div class="personal-info_main">
-                    <div class="settings-main_grop">
+                    <div class="settings-main_grop group-top">
                         <p class="left-settings">お子様のお名前</p>
                         <p class="right-settings">田中  智樹</p>
                     </div>
@@ -82,13 +58,9 @@
                     </div>
                 <hr>
                 </div>
-                <div class="parsonal-data">
-                </div>
             </div>
-                    <button onclick="location.href='edit.html'" class="settings-button">編集</button>
-                </div>            
-        </div>
-    </main>
-    
-</body>
-</html>
+            <button onclick="location.href='edit.html'" class="settings-button">編集</button>
+        </div>            
+    </div>
+</main>
+{% endblock %}

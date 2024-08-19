@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}タグに出てくるページタイトル{% endblock}</title>
+    <title>{% block title %}タグに出てくるページタイトル{% endblock %}</title>
     <link rel="icon" href="../static/img/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />
@@ -20,11 +20,11 @@
         <ul>
             <li><a href="{{ url_for('home') }}">
                 <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
-            <li><a href="{{ url_for('notices') }}">
+            <li><a href="{{ url_for('get_all_notices') }}">
                 <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
-            <li><a href="{{ url_for('settings') }}">
+            <li><a href="{{ url_for('get_all_notices') }}">
                 <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
-            <li><a href="{{ url_for('settings') }}">
+            <li><a href="{{ url_for('get_all_notices') }}">
                 <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
         </ul>
     </nav>
@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block js %}
-<script></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 {% endblock %}
 
 </body>
