@@ -34,17 +34,17 @@
             <div class="notice-list_search">
                 <label for="grade-notice">学年を選択できます</label>
                 <div class="search-container">
-                    <select id="grade-notice" name="grade-select">
+                    <select id="grade-notice" name="category">
                         <option selected> 学年 </option>
                         <option value="all"> 全学年 </option>
-                        <option value="1"> 1年生 </option>
-                        <option value="2"> 2年生 </option>
-                        <option value="3"> 3年生 </option>
-                        <option value="4"> 4年生 </option>
-                        <option value="5"> 5年生 </option>
-                        <option value="6"> 6年生 </option>
+                        <option value="1"{% if grade.category = '1年生'%}{%endif%}> 1年生 </option>
+                        <option value="2"{% if grade.category = '2年生'%}{%endif%}> 2年生 </option>
+                        <option value="3"{% if grade.category = '3年生'%}{%endif%}> 3年生 </option>
+                        <option value="4"{% if grade.category = '4年生'%}{%endif%}> 4年生 </option>
+                        <option value="5"{% if grade.category = '5年生'%}{%endif%}> 5年生 </option>
+                        <option value="6"{% if grade.category = '6年生'%}{%endif%}> 6年生 </option>
                     </select>
-                    <form action="{{ url_for('get_notice_by_grade')}}" method="get">
+                    <form action="{{ url_for('get_notice_by_grade' )}}" method="get">
                         <input type="search" name="notice-search" placeholder="キーワードを入力"> 
                         <button type="submit" class="search-button">
                             <i class="fas fa-search"></i>
@@ -54,6 +54,7 @@
             </div>
 
             <!-- Notice list -->
+            {% for notice in notices %}
             <div class="notice-list">
                 <div class="top-row">
                     <p class="grade-list_a">全学年</p>
@@ -69,7 +70,7 @@
             <div id="notice-list_search-results">                            
                 {% if notices %}
                     {% for notice in notices %}
-                        <p>{{ notice }}</p>
+                        <p>{{ notice.title }}</p>
                     {% endfor %}
                 {% else %}
                     <p>該当するお知らせがありません。</p>
