@@ -1,5 +1,5 @@
-# hackathon-begginers-sample
-ハッカソンの初級者コース用のChatAppです。
+# chat.app
+FチームのChatAppです。
 
 **起動方法**
 ```
@@ -9,7 +9,7 @@ docker compose up
 ### ディレクトリ構成
 ```
 .
-├── ChatApp              # サンプルアプリ用ディレクトリ
+├── ChatApp              # ディレクトリ
 │   ├── __init__.py
 │   ├── app.py
 │   ├── models.py
