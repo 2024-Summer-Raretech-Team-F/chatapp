@@ -166,6 +166,9 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
+    # user_id = session.get("user_id")
+    # if user_id is None:
+    #     return redirect('/login')
     main_notices = dbConnect.getAllNotices()
     return render_template('notice/notice_list.html', main_notices=main_notices)
 
