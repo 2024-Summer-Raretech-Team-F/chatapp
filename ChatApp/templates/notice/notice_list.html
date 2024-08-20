@@ -38,7 +38,7 @@
             {% if notices %}
                 {% for notice in notices %}
                     <div class="notice-list">
-                        <a href="{{ url_for('get_all_notices', notice_id=notice.id) }}">
+                        <a href="{{ url_for('get_notice_by_id', notice_id=notice.notice_id) }}">
                             <div class="top-row">
                                 <p class="grade-list_a"> {{ notice.category }} </p>
                                 <p class="month-day-list"> {{ notice.post_data.strftime('%m月%d日') }} </p>
