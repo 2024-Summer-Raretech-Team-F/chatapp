@@ -295,9 +295,33 @@ def delete_message():
     return redirect('/chat/{group_id}'.format(group_id=group_id))
 
 
+#設定画面の表示
+@app.route('/setting')
+def userSetiing():
+    user_id = session.get('user_id')
+    user = dbConnect.getUser(user_id)
+    return render_template('settings.html', user=user)
 
-# @app.route('/setting')
-# def userSe
+
+@app.route('/setting/edit', methods=['POST', 'GET'])
+def editUserSetting():
+    user_id = session.get('user_id')
+    if request.method == 'POST':
+        name_kanji_full = request.form['kidname-kanji_settings']
+        name_kana_full = request.form['kidname-kana_settings']
+        parent_name = request.form['parents-name_settings']
+        phone_number = request.form['phone-number_settings']
+        email = request.form['mail-settings']
+        password = request.form['password_settings']
+        
+        dbConnect.updateUser(user_id, name_kanji_full, name_kana_full, parent_name, phone_number, email, password)
+        
+        return redirect(url_for('userSetting'))
+    
+    user = dbConnect.getUserById(user_id)
+    return render_template('settings_edit.html', user=user)
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('error/404.html'),404
