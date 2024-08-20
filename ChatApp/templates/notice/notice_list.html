@@ -38,14 +38,14 @@
             {% if notices %}
                 {% for notice in notices %}
                     <div class="notice-list">
-                        <a href="{{ url_for('getNoticeById', notice_id=notice.id) }}">
+                        <a href="{{ url_for('get_all_notices', notice_id=notice.id) }}">
                             <div class="top-row">
                                 <p class="grade-list_a"> {{ notice.category }} </p>
-                                <p class="month-day-list"> {{ notice.created_at.strftime('%m月%d日') }} </p>
+                                <p class="month-day-list"> {{ notice.post_data.strftime('%m月%d日') }} </p>
                             </div>
                             <div class="title-list">      
                                 <h4 class="title-list">{{ notice.title }}</h4>               
-                                <p class="summary-list">{{ notice.summary }}</p>
+                                <p class="summary-list">{{ notice.description }}</p>
                             </div> 
                         </a>
                     </div>
