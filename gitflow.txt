@@ -1,2 +1,0 @@
-git-flow
-https://cloudsmith.co.jp/blog/efficient/2020/08/1534208.html
