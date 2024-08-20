@@ -1,6 +1,6 @@
 {%extends "/base.html" %}
 
-{% block title %}設定編集画面{% endblock}
+{% block title %}設定編集画面{% endblock %}
 
 {% block header_content %}
     <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
@@ -12,20 +12,20 @@
         <div class="user-info">
             <i class="fa-regular fa-circle-user" id="user-icon"></i>
             <div class="info-container">
-                <form class="settingsedit-form" action="{{ url_for('auth') }}" method="post"><!-- authは仮 -->
+                <form class="settingsedit-form" action="{{ url_for('editUserSetting') }}" method="post"><!-- authは仮 -->
                     <div class="personal-info_settings">
                         <div class="form-group group-top">
                             <label for="kidname-kanji_settings"> お子様のお名前 </label>
-                            <input type="text" id="kidname-kanji_settings" name="kidname-kanji_settings" placeholder="">
+                            <input type="text" id="kidname-kanji_settings" name="kidname-kanji_settings" placeholder="" value="{{ user.name_kanji_full }}">
                         </div>
                         <div class="form-group">
-                            <label for="kidname-kana_settings"> ふりがな </label>
-                            <input type="text" id="kidname-kana_settings" name="kidname-kana_settings" placeholder="">
+                            <label for="kidname-kana_settings"> フリガナ </label>
+                            <input type="text" id="kidname-kana_settings" name="kidname-kana_settings" placeholder="" value="{{ user.name_kana_full }}">
                         </div>
                     <hr>
                         <div class="form-group">
                             <label for="parents-name_settings"> 保護者のお名前 </label>
-                            <input type="text" id="parents-name_settings" name="parents-name_settings" placeholder="">
+                            <input type="text" id="parents-name_settings" name="parents-name_settings" placeholder="" value="{{ user.parent_name }}">
                         </div>
                     <hr>
                     <div class="select_settings">
@@ -58,32 +58,32 @@
                     </div>
                     <div class="form-group">
                         <label for="phone-number_settings"> 第一緊急連絡先 </label>
-                        <input type="text" id="phone-number_settings" name="phone-number_settings" placeholder="">
+                        <input type="text" id="phone-number_settings" name="phone-number_settings" placeholder="" value="{{ user.phone_number }}">
                     </div>
                 <hr>
                     <div class="form-group">
                         <label for="mail_settings"> メールアドレス </label>
-                        <input type="text" id="mail_settings" name="mail-settings" placeholder="">
+                        <input type="text" id="mail_settings" name="mail-settings" placeholder="" value="{{ user.email }}">
                     </div>
                     <div class="form-group">
                         <label for="password_settings"> パスワード </label>
-                        <input type="password" id="password_settings" name="password_settings" placeholder="※英数字6文字以上">
+                        <input type="password" id="password_settings" name="password_settings" placeholder="※英数字6文字以上" value="{{ user.password }}">
                     </div>
                     <div class="form-group">
                         <label for="re-password_settings"> パスワード再入力 </label>
-                        <input type="password" id="re-password_settings" name="re-password_settings" placeholder="">
+                        <input type="password" id="re-password_settings" name="re-password_settings" placeholder="" value="{{ user.password }}">
                     </div>
                     <div class="form-group">
                         <p class="school-nambers" id="schoolnamber_settings"> 学校ID </p>
-                        <p class="school-nambers" id="school-nambersnon_settings"> moshimo </p>
+                        <p class="school-nambers" id="school-nambersnon_settings"> demo01 </p>
                     </div>
                 <hr id="last-border">
                 </form>
             </div>
         </div>
         <div class="settings-input">
-            <a href="{{ url_for('settings') }}" class="cancel-btn">キャンセル</a>
-            <button type="submit" class="settings-button_edit">更 新</button>
+            <a href="{{ url_for('userSetiing') }}" class="cancel-btn">キャンセル</a>
+            <button type="submit" class="settings-button_edit" >更 新</button>
         </div>
     </div>
 </main>

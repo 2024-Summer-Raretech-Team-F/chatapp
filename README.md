@@ -16,6 +16,7 @@ docker compose up
 │   ├── static          # 静的ファイル用ディレクトリ
 │   ├── templates       # Template(HTML)用ディレクトリ
 │   └── util
+|         └──DB.py
 ├── Docker
 │   ├── Flask
 │   │   └── Dockerfile # Flask(Python)用Dockerファイル

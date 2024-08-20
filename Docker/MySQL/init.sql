@@ -72,7 +72,7 @@ CREATE TABLE notices (
     title VARCHAR(100) NOT NULL,
     category VARCHAR(50) NOT NULL,
     description TEXT,
-    post_date DATE NOT NULL,
+    post_data DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -94,10 +94,10 @@ INSERT INTO user_channels (user_id, group_id) VALUES (1, 1), (2, 1), (3, 1);
 
 INSERT INTO messages (message, user_id, group_id) VALUES ('初めまして。', 1, 1);
 
-INSERT INTO notices (category, title, description, post_date, user_id)
-VALUES  ('1年生','夏休みのお知らせ', '7月20日から8月31日まで夏休みです。', '7月15日', 2),
-        ('1年生','運動会のお知らせ', '10月10日に運動会が開催されます。参加希望者は申し込みをお願いします。', '9月1日', 3),
-        ('1年生','保護者会のお知らせ', '11月20日に保護者会を行います。出席をお願いします。', '10月15日', 2),
-        ('1年生','期末テストのお知らせ', '12月1日から12月3日まで期末テストを実施します。', '11月20日', 3),
-        ('1年生','新年の挨拶', '明けましておめでとうございます。今年もよろしくお願いします。', '1月1日', 2);
+INSERT INTO notices (notice_id, category, title, description, post_data, user_id)
+VALUES  (1,'1年生','夏休みのお知らせ', '7月20日から8月31日まで夏休みです。', '7月15日', 2),
+        (2,'1年生','運動会のお知らせ', '10月10日に運動会が開催されます。参加希望者は申し込みをお願いします。', '9月1日', 3),
+        (3,'1年生','保護者会のお知らせ', '11月20日に保護者会を行います。出席をお願いします。', '10月15日', 2),
+        (4,'1年生','期末テストのお知らせ', '12月1日から12月3日まで期末テストを実施します。', '11月20日', 3),
+        (5,'1年生','新年の挨拶', '明けましておめでとうございます。今年もよろしくお願いします。', '1月1日', 2);
 
