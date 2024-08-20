@@ -18,23 +18,24 @@
     <div class="container">
         <div class="svg-container">
             <svg viewBox="0 0 594 420">
-                <!--画像Aのurl-->
+                <!--　ノート表紙のurl　A3　-->
                 <image class="left" href="{{ url_for('static', filename='img/hon_hyoushi.png') }}" width="297" height="420"/>
-                <!--画像Bのurl-->
+                <!--　ノート開いたurl　A3　-->
                 <image class="right" href="{{ url_for('static', filename='img/hon_hiraki01.png') }}" width="297" height="420"/>
             
+                <!--　影　-->
                 <rect id="kageL" width="297" height="420" class="left" fill="gray" fill-opacity="0.4"/>
-                <rect id="kageR" width="297" height="420" class="right" fill="gray" fill-opacity="0.4"/>
             
-                <!--画像Bのurl-->
+                <!--　ノート開いたurlA3　-->
                 <image id="honhiL" class="left" href="{{ url_for('static', filename='img/hon_hiraki01.png') }}" width="297" height="420"/>
-                <!--画像Aのurl-->
+                <!--　ノート表紙のurlA3　-->
                 <image id="honhyoR" class="right" href="{{ url_for('static', filename='img/hon_hyoushi.png') }}" width="297" height="420"/>
         
+                <!-- 左が見える -->
                 <clipPath id="leftclip">
                     <rect x="0" y="0" width="297" height="420"/>
                 </clipPath>
-
+                <!-- 右が見える -->
                 <clipPath id="rightclip">
                     <rect x="297" y="0" width="297" height="420"/>
                 </clipPath>

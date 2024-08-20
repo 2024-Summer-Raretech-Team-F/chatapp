@@ -14,7 +14,7 @@
     
 }
 
-/* コンテナを中央に配置 */
+
 .container {
     display: flex;
     justify-content: center;
@@ -30,7 +30,7 @@
     z-index: 1;
   }
 
-/* SVGのサイズ。 */
+/* SVGのサイズ */
 .svg-container {
     position: relative;
     width: 100%; 
@@ -48,12 +48,12 @@ svg {
     position: relative;
 }
 
-/* フォームをSVGの右側に配置 PCのみ */
+/* フォームをSVGの右側に配置 PC */
 .form-overlay {
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%; /* フォームの幅をSVGの右側半分に設定 */
+    width: 50%; /* フォームをSVGの右に設定 */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -61,20 +61,19 @@ svg {
     align-items: center;
     background-color: transparent;
     padding: 30px;
-    -webkit-box-sizing: border-box;  /*webkit系*/
-    -moz-box-sizing: border-box;  /*Firefox*/
+    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box; 
     box-sizing: border-box; 
     opacity: 0;
-    /*transform: translateY(20px);  初期位置下 */
     z-index: 1000;
-    transition: opacity 500ms ease-in-out, transform 5ms ease-in-out; /* フェードインと浮かび上がるアニメーション */
+    transition: opacity 500ms ease-in-out, transform 5ms ease-in-out; /* できてないかも */
 }
 
 
 
 .form-overlay h2 {
     margin-bottom: 20px;
-    font-size: 1vw; /* フォントサイズを相対的に設定 */
+    font-size: 1vw; 
 }
 
 
@@ -88,7 +87,7 @@ svg {
     display: block;
     margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 1vw; /* フォントサイズを相対的に設定 */
+    font-size: 1vw; 
 }
 
 .input-form input {
@@ -98,8 +97,8 @@ svg {
     border: transparent;
     border-bottom: 3px solid #DBF2FF;
     border-radius: 0px;
-    box-sizing: border-box; /* ボックスのサイズを含む */
-    font-size: 1.2vw; /* フォントサイズを相対的に設定 */
+    box-sizing: border-box; 
+    font-size: 1.2vw; 
     margin-top: 8px;
 }
 
@@ -114,7 +113,7 @@ svg {
     border-radius: 500px;
     cursor: pointer;
     margin-top: 16px;
-    font-size: 1.2vw; /* フォントサイズを相対的に設定 */
+    font-size: 1.2vw; 
 }
 
 .input-form button:hover {
@@ -124,11 +123,10 @@ svg {
 
 .tyuu_1 {
     display: block;
-    text-align: auto;
     margin-top: 8px;
     color: #000000;
     text-decoration: none;
-    font-size: 1.0vw; /* フォントサイズを相対的に設定 */
+    font-size: 1.0vw; 
 } 
 
 .pass_text {
@@ -137,11 +135,10 @@ svg {
     margin-top: 10px;
     color: #000000;
     text-decoration: none;
-    font-size: 1.0vw; /* フォントサイズを相対的に設定 */
+    font-size: 1.0vw; 
 }
 
-
-
+/* ボタン */
 .input-form a {
     display: inline-block;
     text-align: right;
@@ -166,6 +163,7 @@ svg {
     opacity: 0.7;
 }
 
+/* 入力フォーム */
 .input-form input[type="email"]:focus {
     outline: none;
 }
@@ -187,30 +185,32 @@ image {
     position: relative;
 }
 
+/* ノートの動き */
 .left {
     clip-path: url(#leftclip);
-    animation: openLeft 2s forwards; /* 本を開くアニメーション */
+    animation: openLeft 2s forwards; /* 開く */
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
 
 .right {
     clip-path: url(#rightclip);
-    animation: openLeft 2s forwards; /* 本を開くアニメーション */
+    animation: openLeft 2s forwards; /* 開く */
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
 }
 
+/* ノート演出 */
 #honhiL {
-    animation: honhiL 2s linear forwards; /* アニメーションを1回のみ実行 */
+    animation: honhiL 2s linear forwards; 
 }
 
 #honhyoR {
-    animation: honhyoR 2s linear forwards; /* アニメーションを1回のみ実行 */
+    animation: honhyoR 2s linear forwards; 
 }
 
 
-/*=======================================================*/
+/*　キーフレーム演出　*/
 
 
 @keyframes honhiL {
@@ -245,7 +245,7 @@ rect {
 }
 
 #kageR {
-  animation: kageR 2s forwards; /* アニメーションを1回のみ実行 */
+  animation: kageR 2s forwards;
 }
 
 @keyframes kageR {
@@ -264,7 +264,7 @@ rect {
 }
 
 #kageL {
-  animation: kageL 2s forwards; /* アニメーションを1回のみ実行 */
+  animation: kageL 2s forwards; 
 }
 
 @keyframes kageL {
@@ -285,10 +285,7 @@ rect {
       opacity: 1;
   }
 }
-/* 画面の幅が768px以下の場合のスタイル */
-@media (max-width: 768px) {
-  .box {
-      background-color: red;
-      color: black;
-  }
-}
+
+
+
+
