@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><!--{% block title %}タグに出てくるページタイトル{% endblock}-->Document</title>
+        <link rel="icon" href="../static/img/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+</head>
+<body>
+    <header class="header-main">
+        <nav>
+            <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+            <h6><!--{% block header_links %}-->
+            今いるページ<!--ホームなら「ホーム画面」記載-->
+            <!--{% endblock %}--></h6>
+            <ul>
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                    <i class="fa-solid fa-house" id="home-icon"></i><p>Home</p></a></li>
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                    <i class="fa-solid fa-circle-info" id="info-icon"></i><p>Info</p></a></li>
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前') }}">-->
+                    <i class="fa-solid fa-gear" id="config-icon"></i><p>Config</p></a></li>
+                <!--<li><a href="index.html"><a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}"><img src="" alt="Icon">画像で行くならこっち</li>-->
+                <li><a href="index.html"><!--<a href="{{ url_for('app.pyで定義した名前でConfigと一緒') }}">-->
+                    <i class="fa-regular fa-circle-user" id="user-icon"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="notice-mainpage">
+        
+        <div class="notice-main_container">
+            <h4 class="notice-main_title">年間スケジュール調整のお知らせ</h4>
+            <div class="notice-date_cnt">
+                <div class="top-row_date">
+                    <P class="grade-list_a">全学年</P>
+                    <p class="month-day-list">8月24日</p>
+                </div>
+                <div class="text-center_btn">
+                    <button type="button" class="btn btn-danger"> 
+                        <i class="fa-solid fa-trash"></i> 削除 </button>
+                    <!--</div>
+                <div class="text-center_createbtn">-->
+                    <button type="button" class="btn btn-edit"> 
+                        <i class="fa-solid fa-pen-to-square"></i> 編集 </button>
+                </div>
+            </div>
+
+            <div class="notice-view_main">
+                <P class="notice-dummy">保護者各位
+                    平素より、本校の教育活動にご理解とご協力を賜り、誠にありがとうございます。<br><br>
+                    ●年◆月▼日にお知らせ致しました「令和●年 年間スケジュール」の件につきまして、再度調整を行いました都合上、恐れ入りますが修正箇所が出てきました為、再度お知らせ致します。<br><br>
+                    対象枠：□月〇日(木)の「授業参観の日程」<br>
+                    修正前:■月▲日:対象3年生<br>
+                    修正後:■月▲日:対象5年生<br><br>
+                    上記の通りとなります。<br><br>                    
+                    この度は保護者の皆様へ混乱を招くお知らせとなってしまい、誠に申し訳ございません。<br>
+                    当お知らせを基に順次詳細のお知らせを掲示してまいりますので、<br>
+                    本年度も何卒よろしくお願い申し上げます。<br><br><br>                  
+                    2024年●月●日<br><br>                    
+                    史閣市立 明鏡小学校<br>
+                    副校長 長澤 明憲<br><br>                    
+                    掲載担当 有川 智弘<br><br>
+                    </P>
+            </div>
+        </div>
+
+
+
+    </main>
+
+
+    <!--<script src="{{ url_for('static', filename='js/base.js') }}"></script>-->
+
+    <!--{% block scripts %}
+    各ページのJS
+    {% endblock %}-->
+
+</body>
+</html>
