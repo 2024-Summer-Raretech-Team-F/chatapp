@@ -1,9 +1,7 @@
 .members-none {
-    display: none; /* 要素をインラインブロックに設定 */
-    float: right; /* 右に寄せる */
+    display: none;
+    float: right;
 }
-
-
 
 .main-auth {
     padding: 0;
@@ -13,7 +11,11 @@
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* 各要素の間にスペースを設定 */    
+    gap: 8px;
+}
+
+.auth-form input[type="text"]:focus {
+    border:2px solid #56B7ED;
 }
 
 #form-title, #form-title_key {
@@ -48,12 +50,7 @@
     font-weight: bold;
 }  
 
-#auth-submit:hover {
-    background-color: #56B7ED;
-    opacity: 0.7;
-} 
-
-#auth-submit_sinki:hover {
+#auth-submit:hover, #auth-submit_sinki:hover {
     background-color: #56B7ED;
     opacity: 0.7;
 }
