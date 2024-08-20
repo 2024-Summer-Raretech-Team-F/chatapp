@@ -171,13 +171,12 @@ svg {
 }
 
 .input-form input[type="password"]:focus {
-  outline: none;
-}
-
-.input-form input[type="text"]:focus {
     outline: none;
 }
 
+.form-overlay .input-form input#token:focus {
+    outline: none;
+}
 
 
 image {
