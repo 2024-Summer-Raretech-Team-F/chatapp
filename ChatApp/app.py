@@ -259,9 +259,9 @@ def detail(group_id):
     #     return redirect('/login')
     
     channels = dbConnect.getChannelAll(group_id)
-    message = dbConnect.getMessageAll(group_id)
+    messages = dbConnect.getMessageAll(group_id)
     
-    return render_template('chat_main.html', channels=channels, message=message)
+    return render_template('chat_main.html', channels=channels, messages=messages)
 
 
 #チャットの送信

@@ -13,37 +13,43 @@
 <main>
 <div class="main_message">
 <div class="sub_message">
+  {% if messages|length > 0 %}
+  {% for message in messages %}
+  {% if message.uid == uid %}
+<!--メッセージ（右側）-->
+<div class="message message_right">
+<!--ユーザー名-->
+<figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
+</figure>
+<div class="message_name_right">
+<p class="name_text" >{{ message.user_id }}</p>
+<div class="messaging messaging_right">
+  <p class="message_text_right">{{ message.message }}</p>
+</div>
+</div>
+  <!--送信時刻-->
+  <time class="message_time">{{ message.updated_at }}</time>
+  <div class="clear"></div><!--回り込みを解除-->
+</div> 
+{% else %}
 <!--メッセージ（左側）-->
 <div class="message message_left">
 <!--ユーザー名-->
   <figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
   </figure>
 <div class="message_name_left">
-  <p >{{ child_class }} {{ teacher }} 先生</p>
+  <p >{{ message.user_id }}</p><!--「先生」を付けれない、、-->
   <div class="messaging messaging_left">
-    <p class="message_text_left">{{ teacher_message }}/p>
+    <p class="message_text_left">{{ message.message }}/p>
   </div>
 </div>
   <!--送信時刻-->
-  <time class="message_time">{{  teacher_message_time }}</time>
+  <time class="message_time">{{  message.updated_at }}</time>
   <div class="clear"></div><!--回り込みを解除-->
 </div>
-
-<!--メッセージ（右側）-->
-<div class="message message_right">
-<!--ユーザー名-->
-  <figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
-  </figure>
-<div class="message_name_right">
-  <p class="name_text" >{{ student_name }}</p>
-  <div class="messaging messaging_right">
-    <p class="message_text_right">{{ group_message }}</p>
-  </div>
-</div>  
-  <!--送信時刻-->
-  <time class="message_time">{{ group_message_time }}</time>
-  <div class="clear"></div><!--回り込みを解除-->
-</div>
+{% endif %}
+{% endfor %}
+{% endif %}
 </div>
 </div>
 
