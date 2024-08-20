@@ -34,9 +34,15 @@
     <main></main>
 {% endblock %}
 
+{% block footer %}
+<!-- フッターがあれば -->
+{% endblock %}
+
 {% block js %}
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 {% endblock %}
+
+
 
 </body>
 </html>

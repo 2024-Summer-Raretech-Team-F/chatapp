@@ -170,6 +170,7 @@ def get_all_notices():
     return render_template('notice/notice_list.html', main_notices=main_notices)
 
 
+
 @app.route('/notice/<notice_id>', methods=['GET'])
 def get_notice_by_id(notice_id):
     notices = dbConnect.getNoticeById(notice_id)
