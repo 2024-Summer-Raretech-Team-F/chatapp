@@ -166,12 +166,13 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    # notices = dbConnect.getAllNotices()
-    return render_template('notice/notice_list.html')
+    notices = dbConnect.getAllNotices()
+    print(notices)
+    return render_template('notice/notice_list.html', notices=notices)
 
 
 @app.route('/notice/<notice_id>', methods=['GET'])
-def getNoticeById(notice_id):
+def get_notice_by_id(notice_id):
     main_notice = dbConnect.getNoticeById(notice_id)
     return render_template('notice/notice_main.html' ,main_notice=main_notice)
 
