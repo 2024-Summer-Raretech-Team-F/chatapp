@@ -58,7 +58,7 @@ def userSignup():
             UserId = str(user_id)
             session['user_id'] = UserId
             return redirect('/login')
-    return redirect('/home')
+    return redirect(url_for('auth'))
 
 
 # ログインページの表示
@@ -166,14 +166,15 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    #notices = dbConnect.getAllNotices()
-    return render_template('notice/notice_list.html')
+    main_notices = dbConnect.getAllNotices()
+    return render_template('notice/notice_list.html', main_notices=main_notices)
+
 
 
 @app.route('/notice/<notice_id>', methods=['GET'])
-def getNoticeById(notice_id):
-    main_notice = dbConnect.getNoticeById(notice_id)
-    return render_template('notice/notice_main.html' ,main_notice=main_notice)
+def get_notice_by_id(notice_id):
+    notices = dbConnect.getNoticeById(notice_id)
+    return render_template('notice/notice_main.html' , notices=notices)
 
 
 #学年でお知らせを絞る
@@ -242,7 +243,7 @@ def delete_notice(notice_id):
     flash("お知らせが削除されました。")
     return redirect(url_for('get_all_notice'))
 
-
+##チャットの処理
 #チャットグループの表示
 @app.route('/home')
 def show_group():
@@ -295,9 +296,33 @@ def delete_message():
     return redirect('/chat/{group_id}'.format(group_id=group_id))
 
 
+#設定画面の表示
+@app.route('/setting')
+def userSetiing():
+    user_id = session.get('user_id')
+    user = dbConnect.getUser(user_id)
+    return render_template('settings.html', user=user)
 
-# @app.route('/setting')
-# def userSe
+
+@app.route('/setting/edit', methods=['POST', 'GET'])
+def editUserSetting():
+    user_id = session.get('user_id')
+    if request.method == 'POST':
+        name_kanji_full = request.form['kidname-kanji_settings']
+        name_kana_full = request.form['kidname-kana_settings']
+        parent_name = request.form['parents-name_settings']
+        phone_number = request.form['phone-number_settings']
+        email = request.form['mail-settings']
+        password = request.form['password_settings']
+        
+        dbConnect.updateUser(user_id, name_kanji_full, name_kana_full, parent_name, phone_number, email, password)
+        
+        return redirect(url_for('userSetting'))
+    
+    user = dbConnect.getUserById(user_id)
+    return render_template('settings_edit.html', user=user)
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('error/404.html'),404

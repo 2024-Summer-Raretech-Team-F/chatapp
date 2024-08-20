@@ -54,7 +54,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM users WHERE user_id = %s;"
+            sql = "SELECT name_kanji_full, name_kana_full, parent_name, phone_number, email, password FROM users WHERE user_id = %s;"
             cur.execute(sql, (user_id,))
             user = cur.fetchone()
             
@@ -223,7 +223,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_data, created_at, user_id FROM notices;"
+            sql = "SELECT notice_id, category, title, description, post_data, user_id FROM notices;"
             cur.execute(sql)
             notices = cur.fetchall()
             return notices
@@ -234,11 +234,12 @@ class dbConnect:
             cur.close()
 
 
+
     def getNoticeById(notice_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_data, created_at, user_id FROM notices WHERE noitced_id = %s;"
+            sql = "SELECT notice_id, title, description, post_data, user_id FROM notices WHERE noitced_id = %s;"
             cur.execute(sql, (notice_id))
             notice = cur.fetchone()
             return notice
@@ -263,12 +264,12 @@ class dbConnect:
             cur.close()
 
 
-    def updateNotice(notice_id, title, description, post_date):
+    def updateNotice(notice_id, title, description, post_data):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "UPDATE notices SET title = %s, description = %s, post_date = %s WHERE notice_id = %s;"
-            cur.execute(sql, (title, description, post_date, notice_id))
+            sql = "UPDATE notices SET title = %s, description = %s, post_data = %s WHERE notice_id = %s;"
+            cur.execute(sql, (title, description, post_data, notice_id))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています')
@@ -296,7 +297,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_date, created_at, user_id, category FROM notices WHERE category = %s;"
+            sql = "SELECT notice_id, title, description, post_data, created_at, user_id, category FROM notices WHERE category = %s;"
             cur.execute(sql, (category))
             notices = cur.fetchall()
             return notices
@@ -311,7 +312,7 @@ class dbConnect:
         try:
             conn = DB.getConnection() 
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_date, created_at, user_id, category FROM notices WHERE title LIKE %s;"  
+            sql = "SELECT notice_id, title, description, post_data, created_at, user_id, category FROM notices WHERE title LIKE %s;"  
             search_title = f'%{title}%'
             cur.execute(sql, (search_title))
             notices = cur.fetchone()

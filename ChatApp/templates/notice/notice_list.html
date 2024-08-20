@@ -51,10 +51,36 @@
                         </div>
                     </a>
                 </div>
+
+            </div>
+
+        <!-- Notice list -->
+        <div id="notice-list_search-results">   
+            {% if notices %}
+                {% for notice in notices %}
+                    <div class="notice-list">
+                        <a href="{{ url_for('get_notice_by_id', notice_id=notice.notice_id) }}">
+                            <div class="top-row">
+                                <p class="grade-list_a"> {{ notice.category }} </p>
+                                <p class="month-day-list"> {{ notice.post_data.strftime('%m月%d日') }} </p>
+                            </div>
+                            <div class="title-list">      
+                                <h4 class="title-list">{{ notice.title }}</h4>               
+                                <p class="summary-list">{{ notice.description }}</p>
+                            </div> 
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>該当するお知らせはありません。</p>
+            {% endif %}
+        </div> 
+
             {% endfor %}
         {% else %}
             <p>該当するお知らせはありません。</p>
         {% endif %}
+
     </div>
 </div>
 {% endblock %}
