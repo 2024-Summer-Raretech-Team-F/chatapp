@@ -193,8 +193,8 @@ def create_notice():
 #お知らせの作成
 @app.route('/notices/add_notice', methods=['POST'])
 def add_notice():
-    title = request.form.get('title')
-    description = request.form.get('description')
+    title = request.form.get('notice-title')
+    description = request.form.get('maintext')
     post_data = request.form.get('post_data')
     user_id = request.form.get('user_id')
 
@@ -246,9 +246,13 @@ def delete_notice(notice_id):
 ##チャットの処理
 #チャットグループの表示
 @app.route('/home')
-def show_group():
-    channels = dbConnect.getChannelAll()
-    return render_template('home.html', channels=channels)
+def show_channel():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    else:
+        channels = dbConnect.getChannelAll()
+    return render_template('home.html', channels=channels, user_id=user_id)
 
 
 #チャットの表示
