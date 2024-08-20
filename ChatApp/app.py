@@ -58,7 +58,7 @@ def userSignup():
             UserId = str(user_id)
             session['user_id'] = UserId
             return redirect('/login')
-    return redirect('/home')
+    return redirect(url_for('auth'))
 
 
 # ログインページの表示
