@@ -242,7 +242,7 @@ def delete_notice(notice_id):
     flash("お知らせが削除されました。")
     return redirect(url_for('get_all_notice'))
 
-
+##チャットの処理
 #チャットグループの表示
 @app.route('/home')
 def show_group():
