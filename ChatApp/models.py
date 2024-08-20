@@ -54,7 +54,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM users WHERE user_id = %s;"
+            sql = "SELECT name_kanji_full, name_kana_full, parent_name, phone_number, email, password FROM users WHERE user_id = %s;"
             cur.execute(sql, (user_id,))
             user = cur.fetchone()
             
