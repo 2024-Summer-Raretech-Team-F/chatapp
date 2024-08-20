@@ -1,0 +1,39 @@
+{% extends "/base.html" %}
+
+{% block title %}お知らせ作成・編集{% endblock %}
+
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>お知らせ作成・編集</h6>
+{% endblock %}
+
+{% block content %}
+    <main class="notice-mainpage">
+        <div class="notice-main_container">
+            <form action="{{ url_for('add_notice') }}" method="POST">
+                <div class="notice-title_grop">
+                    <input type="text" id="notice-title" name="notice-title" placeholder="題名は何にしますか？" required>
+                    <p id="notice-title_sup">※ここで記載した情報がカレンダー上で表示されます。</p>
+                </div>
+                <hr>
+                <div class="notice-maintext">
+                    <label for="maintext">本文</label>
+                    <textarea id="maintext" name="maintext" rows="10" placeholder="本文は何を書きますか？" required></textarea>
+                </div>
+                <div class="notice-postdata_start">
+                    <label for="start_date">掲載開始日</label>
+                <input type="date" id="start_date" name="start_date" required>
+                </div>
+                <div class="notice-postdata_end">
+                    <label for="end_date">掲載終了日</label>
+                    <input type="date" id="end_date" name="end_date" required>
+                </div>
+                
+                <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+                <div >
+                    <button type="submit" class="notice-edeit_button">送信</button>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

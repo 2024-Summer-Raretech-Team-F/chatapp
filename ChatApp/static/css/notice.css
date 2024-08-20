@@ -1,0 +1,62 @@
+/*  お知らせめいん */
+
+.notice-mainpage {
+    display: flex;
+    justify-content: center;
+    min-height: 900px;
+    align-items: center;
+    margin-left: 80px;
+    min-width: 1200px;
+}
+
+
+
+.notice-view_main {
+    justify-content: center;
+    max-width: 760px;
+}
+
+.notice-main_title {
+    display: flex;
+    text-align: center;
+}
+
+.notice-date_cnt {
+    display: flex;
+    
+}
+
+.top-row_date {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 3em;
+}
+
+.text-center_btn {
+    display: inline-block;
+    align-items: center;
+}
+
+
+.btn-danger, .btn-edit {
+    margin-top: 50px;
+    padding: 1px 16px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn-danger {
+    margin-left: 300px;
+    background-color: #fff;
+    border: 2px solid #56B7ED;   
+    border-radius: 500px; 
+}
+
+.btn-edit {
+  background-color: #56B7ED;
+  border: 2px solid #56B7ED;   
+  border-radius: 500px; 
+  color: #fff;
+}
+
