@@ -69,7 +69,13 @@ def userSignup():
             
             
             flash('登録が完了しました')
-    return redirect(url_for('home'))
+    return redirect(url_for('finish'))
+
+
+#登録完了ページの表示
+@app.route('/finish')
+def finish():
+    return render_template('registration/finish.html')
 
 
 # ログインページの表示
@@ -203,8 +209,10 @@ def home():
     group_message = "グループメッセージだよ〜"
     group_message_time ="7:50 "
     
+    group_id=group_id
+    channel = dbConnect.getChannelById(group_id)
 
-    return render_template('index.html', year=year, month=month, month_days=month_days, today=today, child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time)
+    return render_template('index.html', year=year, month=month, month_days=month_days, today=today, child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time, channel=channel)
 
 
 
@@ -329,7 +337,7 @@ def detail(group_id):
     channels = dbConnect.getChannelAll(group_id)
     messages = dbConnect.getMessageAll(group_id)
     
-    return render_template('chat_main.html', channels=channels, messages=messages)
+    return render_template('chat_sample.html', channels=channels, messages=messages)
 
 
 #チャットの送信
