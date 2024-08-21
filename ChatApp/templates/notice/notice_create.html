@@ -25,12 +25,8 @@
                     </select>
                 <!-- カレンダー掲載日 -->
                 <div class="notice-postdata_start">
-                    <label for="start_date">掲載開始日</label>
-                <input type="date" id="start_date" name="start_date" required>
-                </div>
-                <div class="notice-postdata_end">
-                    <label for="end_date">掲載終了日</label>
-                    <input type="date" id="end_date" name="end_date" required>
+                    <label for="post_data">いつの内容ですか？</label>
+                    <input type="date" id="post_data" name="post_data" value="{{ notice.post_data if notice else '' }}" required>
                 </div>
     
                 <!-- 題名 -->
