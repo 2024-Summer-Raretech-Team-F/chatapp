@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         const formOverlay = document.querySelector('.form-overlay');
         if (formOverlay) {
-            formOverlay.style.opacity = 1; // フェードインを開始
+            formOverlay.style.opacity = 1; // フェードイン開始がここ
         } else {
             console.error('formOverlay not found');
         }

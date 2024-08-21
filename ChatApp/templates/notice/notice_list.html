@@ -87,6 +87,14 @@
 
 {% block footer %}
     <footer class="notice-create">
-        <a href="{{ url_for('create_notice') }}" class="notice-create_button">+</a>
+        <a href="{{ url_for('create_notice') }}" class="notice-create_button">
+            <!-- svgでボタン -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="create-btn_svg">
+                <g data-name="レイヤー_1">
+                    <rect width="200" height="200" rx="100" ry="100" style="fill:#56b7ed"/>
+                    <path d="M161.2 96.05h-57.52V37.8c0-2.21-1.79-4-4-4s-4 1.79-4 4v58.25H36.7c-2.21 0-4 1.79-4 4s1.79 4 4 4h58.98v58.25c0 2.21 1.79 4 4 4s4-1.79 4-4v-58.25h57.52c2.21 0 4-1.79 4-4s-1.79-4-4-4Z" style="fill:#fff"/>
+                </g>
+            </svg>
+        </a>
     </footer>
 {% endblock %}

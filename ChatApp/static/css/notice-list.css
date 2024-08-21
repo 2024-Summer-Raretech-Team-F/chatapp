@@ -100,36 +100,36 @@
     max-width: 100%;
 }
 
+/* 学年背景色_パステル */
 .grade-list_a {
-    background-color: #F5F5DC;
+    background-color: #F5F5DC; /* 黄緑 */
 }
 
 .grade-list_6 {
-    background-color: #F3E6FF;
+    background-color: #F3E6FF; /* 赤紫 */
 }
 
 .grade-list_5 {
-    background-color: #E6F0FF;
+    background-color: #E6F0FF; /* 青 */
 }
 
 .grade-list_4 {
-    background-color: #E6FFE6;
+    background-color: #E6FFE6; /* 緑 */
 }
 
 .grade-list_3 {
-    background-color: #FFE6E6;
+    background-color: #FFE6E6; /* 桃 */
 }
 
 .grade-list_2 {
-    background-color: #FFFDD0;
+    background-color: #FFFDD0; /* 黄 */
 }
 
 .grade-list_1 {
-    background-color: #FFE6CC;
+    background-color: #FFE6CC; /* 橙 */
 }
 
 .notice-create {
-   
     width: 800px;
     margin: 0 auto;
 }
@@ -146,16 +146,18 @@
     font-weight: 150;
     text-align: center;
     line-height: 79px;
-    text-decoration: none; /* リンクの下線を消す */
     cursor: pointer;
-    border: none;
-
     position: fixed; 
     right: calc((100% - 950px) / 2 + 20px);
     bottom: 15%;   
     transform: translateY(80%);
 }
 
+/* svgの大きさ設定 */
+.custom-svg {
+    width: 150px;
+    height: 150px; 
+}
 
 .notice-create_button:hover {
     background-color: #56B7ED;

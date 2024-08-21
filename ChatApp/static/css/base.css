@@ -68,14 +68,21 @@ button {
     cursor: pointer;
 }
 
+
+
 input[type="text"] {
-    border: 2px solid #808080;
+    border: 2px solid #bbb;
 }
 
 input[type="text"]:focus {
     outline: none;
 
 }
+
+select:focus {
+    border:2px solid #56B7ED;
+}
+
 
 .header-main {
     font-family: 'Noto Sans JP', sans-serif;
@@ -98,22 +105,24 @@ input[type="text"]:focus {
     padding: 0 30px;
 }
 
+/* 矢印ぼたん */
 #backButton {
     display: flex;
-    font-size: 16px;
+    font-size: 20px;
     background-color: transparent;
     border: none;
     margin-right: 10px;
+    margin-top: 3px;
 }
 
 #backButton i:hover {
-    color: #56B7ED; /* ホバー時のリンクの色 */
+    color: #56B7ED;
     opacity: 0.7;
 }
 
 .header-main h6 {
     display: flex;
-    margin: 0; /* 文字の大きさリセット */
+    margin: 0;
     font-size: 1em; 
     color: #333;
   }
@@ -131,7 +140,7 @@ input[type="text"]:focus {
 
 .header-main nav ul li a {
     text-decoration: none;
-    color: #333; /* テキスト色を設定（必要に応じて変更） */
+    color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,7 +149,7 @@ input[type="text"]:focus {
 }
 
 .header-main nav ul li a:hover {
-    color: #56B7ED; /* ホバー時のリンクの色 */
+    color: #56B7ED;
     opacity: 0.7;
 }
 
