@@ -144,11 +144,11 @@ class dbConnect:
             cur.close()       
 
 
-    def getChannelAll():
+    def getChannel():
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM channels;"
+            sql = "SELECT group_id, group_name, message FROM channels;"
             cur.execute(sql)
             channels = cur.fetchall()
             return channels

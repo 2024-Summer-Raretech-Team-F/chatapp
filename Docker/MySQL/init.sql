@@ -58,7 +58,7 @@ CREATE TABLE user_channels (
 
 CREATE TABLE messages (
     message_id INT AUTO_INCREMENT PRIMARY KEY,
-    message TEXT NOT NULL,
+    message TEXT ,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     user_id INT,
     group_id INT,
