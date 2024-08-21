@@ -85,7 +85,6 @@ select:focus {
 
 
 .header-main {
-    font-family: 'Noto Sans JP', sans-serif;
     display: flex;
     justify-content: center;
     width: 100%;
