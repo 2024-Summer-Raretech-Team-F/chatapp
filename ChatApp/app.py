@@ -69,7 +69,13 @@ def userSignup():
             
             
             flash('登録が完了しました')
-    return redirect(url_for('home'))
+    return redirect(url_for('finish'))
+
+
+#登録完了ページの表示
+@app.route('/finish')
+def finish():
+    return render_template('registration/finish.html')
 
 
 # ログインページの表示
@@ -143,6 +149,29 @@ def getSchoolId():
 
 
 
+@app.route('/auth_login')
+def auth_login():
+    return render_template('registration/auth-login.html')
+
+
+@app.route('/auth_login', methods=['POST'])
+def loginSchoolId():
+    school_code = request.form.get('school_code')
+    if not school_code:
+        flash('学校IDを入力してください')
+        return redirect(url_for('auth_login'))
+
+    school_id = dbConnect.getSchoolCode(school_code)
+    
+    if school_id is None:
+        flash('無効な学校IDです。正しい学校IDを入力してください。')
+        return redirect(url_for('auth_login'))
+    
+    session['school_id'] = school_id
+    
+    return redirect(url_for('home'))
+
+
 #トップページ
 @app.route('/home',methods=['GET','POST'])
 def home():
@@ -188,9 +217,12 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    user_id = session.get("user_id")
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
+    
     main_notices = dbConnect.getAllNotices()
     return render_template('notice/notice_list.html', main_notices=main_notices)
 
@@ -198,8 +230,10 @@ def get_all_notices():
 
 @app.route('/notice/<notice_id>', methods=['GET'])
 def get_notice_by_id(notice_id):
-    user_id = session.get('user_id')
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
     
     notices = dbConnect.getNoticeById(notice_id)
@@ -284,18 +318,21 @@ def show_channel():
     if user_id is None:
         return redirect('/login')
     else:
-        channels = dbConnect.getChannelAll()
+        channels = dbConnect.getChannel()
     return render_template('home.html', channels=channels, user_id=user_id)
 
 
 #チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
-    # user_id = session.get('user_id')
-    # if user_id is None:
-    #     return redirect('/login')
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
     
-    channels = dbConnect.getChannelAll(group_id)
+    if user_id is None or school_id is None:
+        return redirect('/login')
+    
+    group_id=group_id
+    channels = dbConnect.getChannelById(group_id)
     messages = dbConnect.getMessageAll(group_id)
     
     return render_template('chat_main.html', channels=channels, messages=messages)
@@ -304,8 +341,10 @@ def detail(group_id):
 #チャットの送信
 @app.route('/message', methods=['POST'])
 def add_message():
-    user_id = session.get('user_id')
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
 
     message = request.form.get('message')

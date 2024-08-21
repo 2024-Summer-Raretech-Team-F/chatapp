@@ -40,7 +40,7 @@
 <div class="message_name_left">
   <p >{{ message.user_id }}</p><!--「先生」を付けれない、、-->
   <div class="messaging messaging_left">
-    <p class="message_text_left">{{ message.message }}/p>
+    <p class="message_text_left">{{ message.message }}</p>
   </div>
 </div>
   <!--送信時刻-->
@@ -54,7 +54,7 @@
 </div>
 
 <div class="chat_footer">
-  <form method="POST" action="{{ url_for('message') }}">
+  <form method="POST" action="{{ url_for('add_message') }}">
     <input type="hidden" name="group_id" value="{{ group_id }}">
     <div class="send_box">
       <input type="text" name="message" size="60" maxlength="10000" placeholder="ここに文章を作成してください。">
