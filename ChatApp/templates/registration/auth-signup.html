@@ -19,7 +19,7 @@
                 <p>受け取った学校IDを入力してください</p>
                 <form class="auth-form" action="{{ url_for('getSchoolId') }}" method="post">
                     <label for="token-key">学校ID</label>
-                    <input type="text" id="token-key" placeholder="">
+                    <input type="text" id="token-key"  name="school_code" placeholder="">
                     <button type="submit" id="auth-submit_sinki">新規登録へ</button>
                 </form>
             </div>
