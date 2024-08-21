@@ -43,7 +43,7 @@
 
             <!-- フォームをSVGの右側に配置 -->
             <div class="form-overlay">
-                <form class="input-form" action="{{ url_for('home') }}" method="post">
+                <form class="input-form" action="{{ url_for('auth') }}" method="post">
                     <label for="email">メールアドレス</label>
                     <input type="email" id="email" name="email" placeholder="sample@email.com" required autocomplete="email">
 
@@ -58,7 +58,7 @@
                     <a href="#">こちら</a>
                     <button type="submit">ログイン</button>
                 </form>
-                <a href="{{ url_for('signup') }}" class="register-link">新規登録</a>
+                <a href="{{ url_for('auth') }}" class="register-link">新規登録</a>
             </div>
         </div>
     </div>

@@ -11,8 +11,9 @@ import re
 from models import dbConnect
 
 app = Flask(__name__)
-app.secret_key = uuid.uuid4().hex
+app.secret_key = 'chimy_app_key'
 app.permanent_session_lifetime = timedelta(days=30)
+
 
 @app.route('/')
 def jump():
@@ -40,25 +41,35 @@ def userSignup():
 
     pattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 
-    if name_kanji_full == '' or name_kana_full == '' or grade == '' or section == '' or parent_name == ''or phone_number == '' or email =='' or password1 == '' or password2 == '':
+    if not all([name_kanji_full, name_kana_full, grade, section, parent_name, phone_number, email, password1, password2]):
         flash('空のフォームがあるようです')
     elif password1 != password2:
         flash('二つのパスワードの値が違っています')
     elif re.match(pattern, email) is None:
         flash('正しいメールアドレスの形式ではありません')
     else:
-        user_id = uuid.uuid4()
+        user_id = str(uuid.uuid4())
         password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
         DBuser = dbConnect.getUser(email)
 
         if DBuser != None:
             flash('既に登録されているようです')
+            return redirect(url_for('signup')) 
         else:
             dbConnect.createUser(user_id, name_kanji_full, name_kana_full, email, password)
-            UserId = str(user_id)
-            session['user_id'] = UserId
-            return redirect('/login')
-    return redirect(url_for('auth'))
+            
+            session['user_id'] = user_id
+            session['name_kanji_full'] = name_kanji_full
+            session['name_kana_full'] = name_kana_full
+            session['grade'] = grade
+            session['section'] = section
+            session['parent_name'] = parent_name
+            session['phone_number'] = phone_number
+            session['email'] = email
+            
+            
+            flash('登録が完了しました')
+    return redirect(url_for('home'))
 
 
 # ログインページの表示
@@ -70,25 +81,33 @@ def login():
 @app.route('/login', methods=['GET', 'POST'] )
 def userLogin():
     if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-        auth_key_input = request.form.get('auth_key')
+        email = request.form['email']
+        password = request.form['password']
+        auth_key_input = request.form['auth_key']
+        
+        session['email'] = email
+        session['password'] = password
+        session['auth_key_input'] = auth_key_input
         
         user = dbConnect.getUser(email)
         
-        if user and hashlib.sha256(user[password], password):
+        if user and hashlib.sha256(password.encode('utf-8')).hexdigest() == user['password']:
             school_id = user['school_id']
             auth_key = dbConnect.getAuthKey(school_id)
-                    
+            
             if auth_key_input == auth_key['teacher_auth_key']:
                 role = 'teacher'
             elif auth_key_input == auth_key['parent_auth_key']:
                 role = 'student'
             else:
-                flash('Invalid authentication key')
+                flash('この認証キーは使用できません')
                 return redirect(url_for('login'))
             
             dbConnect.userRole(user['user_id'], role)
+            
+            session['user_id'] = user['user_id']
+            session['role'] = role
+            session['school_id'] = school_id
             
             flash("ログイン完了です！")
             return redirect(url_for('home'))
@@ -102,34 +121,37 @@ def userLogin():
 # 新規登録 / 学校IDの入力画面の表示
 @app.route('/auth_signup')
 def auth():
-    return render_template('registration/auth-login.html')
+    return render_template('registration/auth-signup.html')
 
 
 @app.route('/auth_signup', methods=['POST'])
 def getSchoolId():
     school_code = request.form.get('school_code')
-    
     if not school_code:
         flash('学校IDを入力してください')
         return redirect(url_for('auth'))
 
     school_id = dbConnect.getSchoolCode(school_code)
-
+    
     if school_id is None:
         flash('無効な学校IDです。正しい学校IDを入力してください。')
         return redirect(url_for('auth'))
-
-    return redirect(url_for('home', school_id=school_code))
+    
+    session['school_id'] = school_id
+    
+    return redirect(url_for('userSignup'))
 
 
 
 #トップページ
 @app.route('/home',methods=['GET','POST'])
 def home():
-
-    school_id = session.get('school_id')
-    email = session.get('email')
-
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
+        return redirect('/login')
+    
     # 現在の年月日を取得
     now = datetime.now()
     year = now.year
@@ -166,6 +188,9 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
+    user_id = session.get("user_id")
+    if user_id is None:
+        return redirect('/login')
     main_notices = dbConnect.getAllNotices()
     return render_template('notice/notice_list.html', main_notices=main_notices)
 
@@ -173,6 +198,10 @@ def get_all_notices():
 
 @app.route('/notice/<notice_id>', methods=['GET'])
 def get_notice_by_id(notice_id):
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    
     notices = dbConnect.getNoticeById(notice_id)
     return render_template('notice/notice_main.html' , notices=notices)
 
@@ -193,8 +222,12 @@ def create_notice():
 #お知らせの作成
 @app.route('/notices/add_notice', methods=['POST'])
 def add_notice():
-    title = request.form.get('title')
-    description = request.form.get('description')
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    
+    title = request.form.get('notice-title')
+    description = request.form.get('maintext')
     post_data = request.form.get('post_data')
     user_id = request.form.get('user_id')
 
@@ -241,14 +274,18 @@ def delete_notice(notice_id):
     dbConnect.deleteNotice(notice_id)
 
     flash("お知らせが削除されました。")
-    return redirect(url_for('get_all_notice'))
+    return redirect(url_for('get_all_notices'))
 
 ##チャットの処理
 #チャットグループの表示
 @app.route('/home')
-def show_group():
-    channels = dbConnect.getChannelAll()
-    return render_template('home.html', channels=channels)
+def show_channel():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect('/login')
+    else:
+        channels = dbConnect.getChannelAll()
+    return render_template('home.html', channels=channels, user_id=user_id)
 
 
 #チャットの表示
