@@ -17,7 +17,7 @@
             <div class="auth-form">
                 <h1 id="form-title_key">認証キー入力</h1>
                 <p>受け取った学校IDを入力してください</p>
-                <form class="auth-form" action="{{ url_for('getSchoolId') }}" method="post">
+                <form class="auth-form" action="{{ url_for('loginSchoolId') }}" method="post">
                     <label for="auth-key">学校ID</label>
                     <input type="text" id="auth-key" name="school_code" placeholder="">
                     <button type="submit" id="auth-submit">ログイン</button>
