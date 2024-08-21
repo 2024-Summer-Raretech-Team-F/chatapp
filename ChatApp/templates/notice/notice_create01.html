@@ -1,0 +1,54 @@
+{% extends "/base.html" %}
+
+{% block title %}お知らせ作成・編集{% endblock %}
+
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>お知らせ作成・編集</h6>
+{% endblock %}
+
+{% block content %}
+    <main class="notice-editpage">
+        <div class="notice-main_container">
+            <form action="{{ url_for('add_notice') }}" method="post">
+                <!-- 対象学年選択 -->
+                <label for="grade_data">対象の学年</label>
+                    <select id="grade-data" name="notice-category">
+                        <option selected disabled> 学 年 </option>
+                        <option value="all"> 全学年 </option>
+                        <option value="1年生"> 1年生 </option>
+                        <option value="2年生"> 2年生 </option>
+                        <option value="3年生"> 3年生 </option>
+                        <option value="4年生"> 4年生 </option>
+                        <option value="5年生"> 5年生 </option>
+                        <option value="6年生"> 6年生 </option>
+                    </select>
+                <!-- カレンダー掲載日 -->
+                <div class="notice-postdata_start">
+                    <label for="start_date">掲載開始日</label>
+                <input type="date" id="start_date" name="start_date" required>
+                </div>
+                <div class="notice-postdata_end">
+                    <label for="end_date">掲載終了日</label>
+                    <input type="date" id="end_date" name="end_date" required>
+                </div>
+                <hr>
+                <!-- 題名 -->
+                <div class="notice-title_grop">
+                    <input type="text" id="notice-title" name="notice-title" placeholder="題名は何にしますか？" required>
+                    <p id="notice-title_sup">※ここで記載した情報がカレンダー上で表示されます。</p>
+                </div>
+                <hr>
+                <!-- 本文 -->
+                <div class="notice-maintext">
+                    <textarea name="maintext" rows="50" placeholder="本文は何を書きますか？" required></textarea>
+                </div>
+                <hr>
+                <input type="hidden" name="user_id" value="{{ session['user_id'] }}"><!-- 教職員しかこのページ来れないからいらないかも -->
+                <div class="create-edit_btn">
+                    <button type="submit" class="notice-edeit_button">送信</button>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

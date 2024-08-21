@@ -14,7 +14,7 @@
             <div class="info-container">
                 <div class="personal-info_main">
                     <div class="settings-main_grop group-top">
-                        <p class="left-settings">お子様のお名前</p>
+                        <p class="left-settings">教職員のお名前</p>
                         <p class="right-settings">{{ user.name_kanji_full }}</p>
                     </div>
                     <div class="settings-main_grop">
@@ -36,11 +36,7 @@
                         <p class="right-settings">2組</p>
                     </div>
                     <div class="settings-main_grop">
-                        <p class="left-settings">出席番号</p>
-                        <p class="right-settings">33</p>
-                    </div>
-                    <div class="settings-main_grop">
-                        <p class="left-settings">第一緊急連絡先</p>
+                        <p class="left-settings">電話番号</p>
                         <p class="right-settings">{{ user.phone_number }}</p>
                     </div>
                 <hr>
@@ -59,7 +55,7 @@
                 <hr>
                 </div>
             </div>
-            <a href="{{ url_for('editUserSetting') }}" class="settings-button">編 集</a>
+            <a href="{{ url_for('editUserSetting') }}" class="settings-button">編集</a>
         </div>            
     </div>
 </main>

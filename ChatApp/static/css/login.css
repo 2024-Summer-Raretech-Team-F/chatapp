@@ -220,7 +220,6 @@ image {
 
 /*　演出指示　*/
 
-
 @keyframes honhiL {
   0% {
       transform: rotateY(-90deg) skewY(20deg);
