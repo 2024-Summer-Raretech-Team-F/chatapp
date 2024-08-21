@@ -209,8 +209,6 @@ def home():
     group_message = "グループメッセージだよ〜"
     group_message_time ="7:50 "
     
-    # group_id=group_id
-    # channel = dbConnect.getChannelById(group_id)
 
     return render_template('index.html', year=year, month=month, month_days=month_days, today=today, child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time)
 
@@ -320,18 +318,21 @@ def show_channel():
     if user_id is None:
         return redirect('/login')
     else:
-        channels = dbConnect.getChannelAll()
+        channels = dbConnect.getChannel()
     return render_template('home.html', channels=channels, user_id=user_id)
 
 
 #チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
-    # user_id = session.get('user_id')
-    # if user_id is None:
-    #     return redirect('/login')
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
     
-    channels = dbConnect.getChannelAll(group_id)
+    if user_id is None or school_id is None:
+        return redirect('/login')
+    
+    group_id=group_id
+    channels = dbConnect.getChannelById(group_id)
     messages = dbConnect.getMessageAll(group_id)
     
     return render_template('chat_main.html', channels=channels, messages=messages)
@@ -340,8 +341,10 @@ def detail(group_id):
 #チャットの送信
 @app.route('/message', methods=['POST'])
 def add_message():
-    user_id = session.get('user_id')
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
 
     message = request.form.get('message')

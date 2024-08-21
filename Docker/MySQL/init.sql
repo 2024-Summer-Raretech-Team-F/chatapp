@@ -92,7 +92,7 @@ INSERT INTO channels (group_id, user_id, group_name, academic_level_id) VALUES (
 
 INSERT INTO user_channels (user_id, group_id) VALUES (1, 1), (2, 1), (3, 1);
 
-INSERT INTO messages (message, user_id, group_id) VALUES ('初めまして。', 1, 1);
+INSERT INTO messages (message, user_id, group_id) VALUES ('初めまして。', 1, 1), ('やっほー', 2, 1), ('初めまして。', 3, 1);
 
 INSERT INTO notices (notice_id, category, title, description, post_data, user_id)
 VALUES  (1,'1年生','夏休みのお知らせ', '7月20日から8月31日まで夏休みです。', '2024-07-15', 2),
