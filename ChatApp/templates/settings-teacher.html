@@ -1,0 +1,62 @@
+{%extends "/base.html" %}
+
+{% block title %}設定画面{% endblock %}
+
+{% block header_content %}
+    <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+    <h6>設定画面</h6>
+{% endblock %}
+
+{% block content %}
+    <main id="settings-mainpage">
+        <div class="user-info">
+            <i class="fa-regular fa-circle-user" id="user-icon"></i>
+            <div class="info-container">
+                <div class="personal-info_main">
+                    <div class="settings-main_grop group-top">
+                        <p class="left-settings">教職員のお名前</p>
+                        <p class="right-settings">{{ user.name_kanji_full }}</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">ふりがな</p>
+                        <p class="right-settings">{{ user.name_kana_full }}</p>
+                    </div>
+                <hr>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">保護者のお名前</p>
+                        <p class="right-settings">{{ user.parent_name }}</p>
+                    </div>
+                <hr>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">学年</p>
+                        <p class="right-settings">5年</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">クラス</p>
+                        <p class="right-settings">2組</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">電話番号</p>
+                        <p class="right-settings">{{ user.phone_number }}</p>
+                    </div>
+                <hr>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">メールアドレス</p>
+                        <p class="right-settings">{{ user.email }}</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">パスワード</p>
+                        <p class="right-settings">{{ user.password }}</p>
+                    </div>
+                    <div class="settings-main_grop">
+                        <p class="left-settings">学校ID</p>
+                        <p class="right-settings">demo01</p>
+                    </div>
+                <hr>
+                </div>
+            </div>
+            <a href="{{ url_for('editUserSetting') }}" class="settings-button">編集</a>
+        </div>            
+    </div>
+</main>
+{% endblock %}
