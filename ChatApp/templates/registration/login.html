@@ -54,8 +54,10 @@
                     <p class="tyuu_1">※英数字6文字以上</p>
                     <input type="password" id="password" name="password" placeholder="" required autocomplete="current-password">
                     
-                    <p class="pass_text">パスワード・認証キーを忘れた場合は</p>
-                    <a href="#">こちら</a>
+                    <div class="forgot-grop">
+                        <p class="pass_text">パスワード・認証キーを忘れた場合は</p>
+                        <a href="#" class="forgot-page">こちら</a>
+                    </div>
                     <button type="submit">ログイン</button>
                 </form>
                 <a href="{{ url_for('auth') }}" class="register-link">新規登録</a>
