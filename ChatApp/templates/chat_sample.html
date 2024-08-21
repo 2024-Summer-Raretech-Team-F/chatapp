@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Chat Room</title>
+{% endblock %}
+
+{% block body %}
+<div class="main-container">
+    <div class="chat-box">
+        <!-- チャットルームのヘッダー -->
+        <div id="chat-header">
+            <p class="channel-title-text">{{ channel.name }}</p>
+            {% if channel.abstract %}
+                <p id="chatroom-description">{{ channel.abstract }}</p>
+            {% endif %}
+            {% if uid == channel.uid %}
+                <button id="channel-update-button">
+                    <ion-icon name="brush" style="color: #ffffff"></ion-icon>
+                </button>
+                {% include 'modal/update-channel.html' %}
+            {% endif %}
+        </div>
+        
+        <!-- メッセージエリア -->
+        <div id="message-area">
+            {% if messages|length > 0 %}
+                {% for message in messages %}
+                    {% if message.uid == uid %}
+                        <div class="my-messages">
+                            <p class="box box-right">{{ message.message }}</p>
+                            <form action="/delete_message" method="POST">
+                                <input type="hidden" value="{{ channel.id }}" name="cid" />
+                                <button class="delete-message-button" name="message_id" value="{{ message.id }}">
+                                    <ion-icon name="trash-bin-outline" style="color: #122543"></ion-icon>
+                                </button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <div class="messages">
+                            <p class="user-name">{{ message.user_name }}</p>
+                            <p class="box box-left">{{ message.message }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div id="no-message"><p>まだメッセージがありません</p></div>
+            {% endif %}
+        </div>
+        
+        <!-- メッセージ送信ボックス -->
+        <div class="typing-box-wrapper">
+            <form class="typing-box" action="/message" method="POST">
+                <textarea name="message" id="message" autofocus></textarea>
+                <input type="hidden" name="cid" value="{{ channel.id }}" />
+                <button type="submit">送信</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
