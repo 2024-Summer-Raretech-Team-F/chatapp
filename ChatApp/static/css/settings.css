@@ -52,9 +52,15 @@
     border: none;
     color: #fff;
     border-radius: 5px;
-    padding: 3px 25px;
+    padding: 3px 25px 5px;
     margin-top: 20px;
     margin-left: 50vh;
+    text-decoration: none;
+}
+
+.settings-button:hover {
+    background-color: #56B7ED;
+    opacity: 0.7;
 }
 
 #settings-mainpage_edit {
@@ -135,10 +141,35 @@
     margin: 10px 0; /* 上下の余白を調整 */
 }
 
-select:focus {
-    border:2px solid #56B7ED;
+
+.settings-input {
+    text-align: right;
+    margin: 0;
+    justify-content: center;
 }
 
+.cancel-btn {
+    display: inline-block;
+    background-color: #fff;
+    border: 2px solid #56B7ED;
+    color: #333;
+    border-radius: 3px;
+    text-decoration: none;
+    vertical-align: middle;
+    margin-right: 10px;
+    padding: 0 10px 2px;
+}
 
+.settings-button_edit {
+    display: inline-block;
+    border: none;
+    background-color: #56B7ED;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 30px 2px ;
+    vertical-align: middle;
+}
 
-
+.cancel-btn:hover, .settings-button_edit:hover {
+    opacity: 0.7;
+}
