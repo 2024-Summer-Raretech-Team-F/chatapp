@@ -211,8 +211,10 @@ def home():
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    user_id = session.get("user_id")
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
     main_notices = dbConnect.getAllNotices()
     return render_template('notice/notice_list.html', main_notices=main_notices)
@@ -221,8 +223,10 @@ def get_all_notices():
 
 @app.route('/notice/<notice_id>', methods=['GET'])
 def get_notice_by_id(notice_id):
-    user_id = session.get('user_id')
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
     
     notices = dbConnect.getNoticeById(notice_id)
@@ -245,8 +249,10 @@ def create_notice():
 #お知らせの作成
 @app.route('/notices/add_notice', methods=['POST'])
 def add_notice():
-    user_id = session.get('user_id')
-    if user_id is None:
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
     
     title = request.form.get('notice-title')
@@ -314,9 +320,11 @@ def show_channel():
 #チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
-    # user_id = session.get('user_id')
-    # if user_id is None:
-    #     return redirect('/login')
+    school_id = session.get('school_id','なし')
+    user_id = session.get('user_id','なし')
+    
+    if user_id is None or school_id is None:
+        return redirect('/login')
     
     channels = dbConnect.getChannelAll(group_id)
     messages = dbConnect.getMessageAll(group_id)
@@ -366,7 +374,7 @@ def userSetiing():
 
 @app.route('/setting/edit', methods=['POST', 'GET'])
 def editUserSetting():
-    user_id = session.get('user_id')
+    user_id = session.get('user_id','なし')
     if request.method == 'POST':
         name_kanji_full = request.form['kidname-kanji_settings']
         name_kana_full = request.form['kidname-kana_settings']
