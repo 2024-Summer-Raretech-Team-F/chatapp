@@ -1,60 +1,83 @@
-{% extends 'base.html' %}
+{% extends "/base.html" %}
 
-{% block title %}
-    <title>Chat Room</title>
+{% block title %}ホーム画面{% endblock %}
+
+{% block header_content %}
+<button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
+<h6>ホーム画面</h6>
 {% endblock %}
 
-{% block body %}
-<div class="main-container">
-    <div class="chat-box">
-        <!-- チャットルームのヘッダー -->
-        <div id="chat-header">
-            <p class="channel-title-text">{{ channel.name }}</p>
-            {% if channel.abstract %}
-                <p id="chatroom-description">{{ channel.abstract }}</p>
-            {% endif %}
-            {% if uid == channel.uid %}
-                <button id="channel-update-button">
-                    <ion-icon name="brush" style="color: #ffffff"></ion-icon>
-                </button>
-                {% include 'modal/update-channel.html' %}
-            {% endif %}
+{% block content %}
+<main class="main-home">
+    <section class="left-section">
+        <div class="notifications">
+            <h3>新着のお知らせ</h3>
+            <div class="latest-notice">
+                <p id="latest-notice-title">年間スケジュール調整のお知らせ<!-- {{ latest_notice_title }} --></p>
+                <a href="{{ url_for('get_all_notices') }}" id="notice-btn">お知らせへ</a>
+            </div>
         </div>
-        
-        <!-- メッセージエリア -->
-        <div id="message-area">
-            {% if messages|length > 0 %}
-                {% for message in messages %}
-                    {% if message.uid == uid %}
-                        <div class="my-messages">
-                            <p class="box box-right">{{ message.message }}</p>
-                            <form action="/delete_message" method="POST">
-                                <input type="hidden" value="{{ channel.id }}" name="cid" />
-                                <button class="delete-message-button" name="message_id" value="{{ message.id }}">
-                                    <ion-icon name="trash-bin-outline" style="color: #122543"></ion-icon>
-                                </button>
-                            </form>
-                        </div>
-                    {% else %}
-                        <div class="messages">
-                            <p class="user-name">{{ message.user_name }}</p>
-                            <p class="box box-left">{{ message.message }}</p>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                <div id="no-message"><p>まだメッセージがありません</p></div>
-            {% endif %}
+
+        <div class="calendar">
+            <div id="calendar-nav">
+                <a href="#" id="prev-month"><i class="fa-solid fa-angle-up fa-rotate-270"></i></a>
+                <p id="calendar-month">{{ year }}年 {{ month }} 月</p>
+                <a href="#" id="next-month"><i class="fa-solid fa-angle-up fa-rotate-90"></i></a>
+            </div>
+
+            <div id="calendar">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sunday-detail">日</th>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th class="saturday-detail">土</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in month_days %}
+                        <tr>
+                            {% for day in week %}
+                            {% if day == 0 %}
+                            <td></td>
+                            {% else %}
+                            {% if today == day %}
+                            <td><span class="day-box today">{{ day }}</span></td>
+                            {% else %}
+                            <td>{{ day }}</td>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="selected-date-notice">発表会に関して<!-- {{ selected_date_notice }} --></div>
         </div>
-        
-        <!-- メッセージ送信ボックス -->
-        <div class="typing-box-wrapper">
-            <form class="typing-box" action="/message" method="POST">
-                <textarea name="message" id="message" autofocus></textarea>
-                <input type="hidden" name="cid" value="{{ channel.id }}" />
-                <button type="submit">送信</button>
-            </form>
-        </div>
-    </div>
-</div>
+    </section>
+
+    <!-- チャット一覧表示よてい -->
+    <section class="chat_list">
+        {% if channels %}
+            {% for channel in channels %}
+                <div class="chat_item">
+                    <a class="chat-button" href="{{ url_for('detail', group_id=channel['group_id']) }}">
+                        <h3>{{ channel['group_name'] }}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>チャットグループがありません。</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
 {% endblock %}
