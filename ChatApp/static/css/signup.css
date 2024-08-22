@@ -24,7 +24,8 @@
     color: #ffffff;
     border-color: #56B7ED;
     border-style: solid;
-    border-radius:3px
+    border-radius:3px;
+    margin-left: 10px;
 }
 
 .sentence{
