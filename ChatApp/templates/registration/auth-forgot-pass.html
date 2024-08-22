@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><!--{% block title %}再設定{% endblock}-->Document</title>
+        <link rel="icon" href="../static/img/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="styles.css"><!--<link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}" />-->
+</head>
+<body>
+    <header class="header-regi">
+        <nav>
+            <h5>今いるページ</h5>
+           
+                <!--{% block header_links %}
+                    <h5>Chimy</h5>-->
+                <!--ホームなら「ホーム画面」記載-->
+                <!--<span class="members-school?????">保護者or教職員</span>-->
+               <!--{% endblock %}-->
+        </nav>
+    </header>
+
+    <main>
+        <div class="pass-forgot_container">
+            <h2>パスワード再取得・認証キー</h2>
+            <p class="mailtext">登録したメールアドレスを教えてください</p>
+            <form action="#" method="POST"><!-- パスワードリセットリンク -->
+                <label for="email-pass_forgot">メールアドレス:</label>
+                <input type="email" id="email-pass_forgot" name="email-pass_forgot" required>
+                <p class="mailtext_sup">「送信」を押すとパスワード再取得・認証キーの確認の為のURLがお送り致します</p>
+                <button type="submit">送信</button>
+            </form>
+        </div>
+    </main>
+    
+    <footer class="footer-regi">
+        <p>&copy; 2024 summer-f</p>
+    </footer>
+
+    <script src="base0.js"></script>
+    <!--<script src="{{ url_for('static', filename='js/●●.js') }}"></script>-->
+
+    <!--{% block scripts %}
+    各ページのJS
+    {% endblock %}-->
+
+</body>
+</html>
