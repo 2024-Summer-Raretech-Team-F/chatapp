@@ -15,14 +15,14 @@
 <div class="sub_message">
   {% if messages|length > 0 %}
   {% for message in messages %}
-  {% if message.uid == uid %}
+  {% if message.user_id == user_id %}
 <!--メッセージ（右側）-->
 <div class="message message_right">
 <!--ユーザー名-->
 <figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
 </figure>
 <div class="message_name_right">
-<p class="name_text" >{{ message.user_id }}</p>
+<p class="name_text" >{{ message.name_kanji_full }}</p>
 <div class="messaging messaging_right">
   <p class="message_text_right">{{ message.message }}</p>
 </div>
@@ -38,7 +38,7 @@
   <figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
   </figure>
 <div class="message_name_left">
-  <p >{{ message.user_id }}</p><!--「先生」を付けれない、、-->
+  <p >{{ message.name_kanji_full }}</p><!--「先生」を付けれない、、-->
   <div class="messaging messaging_left">
     <p class="message_text_left">{{ message.message }}</p>
   </div>
@@ -54,10 +54,11 @@
 </div>
 
 <div class="chat_footer">
-  <form method="POST" action="{{ url_for('add_message') }}">
-    <input type="hidden" name="group_id" value="{{ group_id }}">
+  <form method="POST" action="{{ url_for('add_message') }}" >
     <div class="send_box">
       <input type="text" name="message" size="60" maxlength="10000" placeholder="ここに文章を作成してください。">
+      <input type="hidden" name="group_id" value="{{ group_id }}">
+      <input type="hidden" name="user_id" value="{{ user_id }}"> 
       <button type="submit"><i class="far fa-paper-plane" style="font-size:20px"></i></button>
     </div>
   </form>

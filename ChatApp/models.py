@@ -144,11 +144,11 @@ class dbConnect:
             cur.close()       
 
 
-    def getChannel():
+    def getChannelAll():
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT group_id, group_name, message FROM channels;"
+            sql = "SELECT * FROM channels;"
             cur.execute(sql)
             channels = cur.fetchall()
             return channels
@@ -180,7 +180,7 @@ class dbConnect:
             conn = DB.getConnection()
             cur = conn.cursor()
             sql = "SELECT message_id, u.user_id, name_kanji_full, message FROM messages AS m INNER JOIN users AS u ON m.user_id = u.user_id WHERE group_id = %s;"
-            cur.execute(sql,(group_id))
+            cur.execute(sql,(group_id,))
             messages = cur.fetchall()
             return messages
         except Exception as e:
@@ -190,12 +190,12 @@ class dbConnect:
             cur.close()
 
 
-    def createMessage(uid, cid, message):
+    def createMessage(message, user_id, group_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO messages(uid, cid, message) VALUES(%s, %s, %s)"
-            cur.execute(sql, (uid, cid, message))
+            sql = "INSERT INTO messages(message, user_id, group_id) VALUES(%s, %s, %s)"
+            cur.execute(sql, (message, int(user_id), int(group_id)))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています')

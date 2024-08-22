@@ -175,8 +175,8 @@ def loginSchoolId():
 #トップページ
 @app.route('/home',methods=['GET','POST'])
 def home():
-    school_id = session.get('school_id','なし')
-    user_id = session.get('user_id','なし')
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
     
     if user_id is None or school_id is None:
         return redirect('/login')
@@ -188,37 +188,33 @@ def home():
     today = now.day
 
     #カレンダー作成
-    
-    # 週の始まりを日曜にする
     cal = calendar.Calendar(firstweekday=6)
     month_days = cal.monthdayscalendar(year,month)
-
-    # チャットデータ
-    # user_data = dbConnect.getUser(email)
-    # grade = user_data['grade']
-    # section = user_data['section']
     
-    # child_class = dbConnect.getAcademicLevel(grade, section)
-    # teacher_name = user_data['name_kanji_full']
+    
+    channels = dbConnect.getChannelAll()
+    teacher = dbConnect.getUserById(user_id)
+    
+    #####################
     child_class = "5年3組"
     teacher = "佐藤　道哉"
     teacher_message = "本日もよろしくお願いします"
     teacher_message_time = "7:46"
     student_name = "田中　智樹"
     group_name = "グループ"
-    group_message = "グループメッセージだよ〜"
+    group_message = "本日欠席します〜"
     group_message_time ="7:50 "
     
 
-    return render_template('index.html', year=year, month=month, month_days=month_days, today=today, child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time)
+    return render_template('index.html', year=year, month=month, month_days=month_days, today=today, channels=channels,child_class=child_class, teacher=teacher, teacher_message=teacher_message, teacher_message_time=teacher_message_time, student_name=student_name, group_name=group_name, group_message=group_message, group_message_time=group_message_time)
 
 
 
 #お知らせ一覧(全て)を表示させる
 @app.route('/notices', methods=['GET'])
 def get_all_notices():
-    school_id = session.get('school_id','なし')
-    user_id = session.get('user_id','なし')
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
     
     if user_id is None or school_id is None:
         return redirect('/login')
@@ -230,8 +226,8 @@ def get_all_notices():
 
 @app.route('/notice/<notice_id>', methods=['GET'])
 def get_notice_by_id(notice_id):
-    school_id = session.get('school_id','なし')
-    user_id = session.get('user_id','なし')
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
     
     if user_id is None or school_id is None:
         return redirect('/login')
@@ -318,15 +314,15 @@ def show_channel():
     if user_id is None:
         return redirect('/login')
     else:
-        channels = dbConnect.getChannel()
+        channels = dbConnect.getChannelAll()
     return render_template('home.html', channels=channels, user_id=user_id)
 
 
 #チャットの表示
 @app.route('/chat/<group_id>')
 def detail(group_id):
-    school_id = session.get('school_id','なし')
-    user_id = session.get('user_id','なし')
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
     
     if user_id is None or school_id is None:
         return redirect('/login')
@@ -335,14 +331,14 @@ def detail(group_id):
     channels = dbConnect.getChannelById(group_id)
     messages = dbConnect.getMessageAll(group_id)
     
-    return render_template('chat_main.html', channels=channels, messages=messages)
+    return render_template('chat_main.html', channels=channels, messages=messages, user_id=user_id, group_id=group_id)
 
 
 #チャットの送信
 @app.route('/message', methods=['POST'])
 def add_message():
-    school_id = session.get('school_id','なし')
-    user_id = session.get('user_id','なし')
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
     
     if user_id is None or school_id is None:
         return redirect('/login')
@@ -359,8 +355,10 @@ def add_message():
 #チャットの削除
 @app.route('/delete_message', methods=['POST'])
 def delete_message():
-    user_id = session.get('user_id')
-    if user_id is None:
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
+    
+    if user_id is None or school_id is None:
         return redirect('/login')
 
     message_id = request.form.get('message_id')
@@ -382,7 +380,12 @@ def userSetiing():
 
 @app.route('/setting/edit', methods=['POST', 'GET'])
 def editUserSetting():
-    user_id = session.get('user_id')
+    school_id = session.get('school_id','None')
+    user_id = session.get('user_id','None')
+    
+    if user_id is None or school_id is None:
+        return redirect('/login')
+    
     if request.method == 'POST':
         name_kanji_full = request.form['kidname-kanji_settings']
         name_kana_full = request.form['kidname-kana_settings']
