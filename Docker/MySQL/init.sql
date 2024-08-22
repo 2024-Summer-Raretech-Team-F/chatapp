@@ -86,13 +86,35 @@ INSERT INTO academic_levels (academic_level_id, grade, section, school_id) VALUE
 INSERT INTO users (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id)
 VALUES  ('五条　悟', 'ゴジョウ　サトル', '五条　由紀子', 'satoru@example.com', '011f55b984b0ea1e5e1d6a32df1ac1548fe24f8c20d85012b04c6fc5139abb42', 'student', '09012345678', 1, 1),
         ('夏油　傑', 'ゲトウ　スグル', NULL, 'suguru@example.com', '54aaa3aced18c8f91fa47b375ea186680236a0359f80dcf483ad7b90b72f8d0d', 'teacher', '08087654321', 1, 1),
-        ('家入　硝子', 'イエイリ　ショウコ', NULL, 'syouko@example.com', 'ade7c829d3edab5cdb685fa383149fa867d0880136341ecfe1e1128dc9e2dfdd', 'teacher', '08043218765', 1, 1);
+        ('家入　硝子', 'イエイリ　ショウコ', NULL, 'syouko@example.com', 'ade7c829d3edab5cdb685fa383149fa867d0880136341ecfe1e1128dc9e2dfdd', 'teacher', '08043218765', 1, 1),
+        ('高田　真希', 'タカダ　マキ', NULL, 'maki@example.com', 'cdda29d8bf916a0f97e4ea583bb1dcf6769c1c66773b9a15435a7f4d9fa1d7db', 'student', '09065432109', 1, 1),
+        ('伊地知　洋介', 'イジチ　ヨウスケ', NULL, 'yousuke@example.com', 'd5c3ec5f6d4121298e1a6b9095fb8493a4f35dbb3e6fc01f3c885eb9db9fb8d4', 'teacher', '08054321098', 1, 1);
 
-INSERT INTO channels (group_id, user_id, group_name, academic_level_id) VALUES (1, 1, '佐藤 道哉', 1), (2, 1,'田中 智樹', 1), (3, 1,'佐藤 道哉', 1);
+INSERT INTO channels (group_id, user_id, group_name, academic_level_id) 
+VALUES  (1, 1, '田中 田中', 1), 
+        (2, 2, 'プロスイマー 佐藤', 1),
+        (3, 3, '佐藤 道哉', 1), 
+        (4, 1, '五条 悟', 1), 
+        (5, 2, '夏油 傑', 1),
+        (6, 2, '夏油 傑', 1),
+        (7, 3, '家入 硝子', 1),
+        (8, 4, '高田 真希', 1),
+        (9, 5, '伊地知 洋介', 1);
 
-INSERT INTO user_channels (user_id, group_id) VALUES (1, 1), (2, 1), (3, 1);
 
-INSERT INTO messages (message, user_id, group_id) VALUES ('初めまして。', 1, 1), ('やっほー', 2, 1), ('初めまして。', 3, 1);
+INSERT INTO user_channels (user_id, group_id) 
+VALUES  (1, 1), (2, 2), (3, 3), (1, 4), (2, 5), (2, 6), (3, 7), (4, 8), (5, 9);
+
+INSERT INTO messages (message, user_id, group_id) 
+VALUES  ('本日欠席します〜', 1, 1), 
+        ('本日欠席します〜', 2, 2), 
+        ('本日欠席します〜', 3, 3), 
+        ('本日欠席します〜', 1, 4), 
+        ('本日欠席します〜', 2, 5), 
+        ('本日欠席します〜', 2, 6),
+        ('本日欠席します〜', 3, 7),
+        ('本日欠席します〜', 4, 8),
+        ('本日欠席します〜', 5, 9);
 
 INSERT INTO notices (notice_id, category, title, description, post_data, user_id)
 VALUES  (1,'1年生','夏休みのお知らせ', '7月20日から8月31日まで夏休みです。', '2024-07-15', 2),
