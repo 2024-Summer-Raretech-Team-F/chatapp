@@ -103,6 +103,10 @@ textarea ::placeholder {
     height: 500px;
 }
 
+textarea:focus {
+    outline: none;
+}
+
 .create-edit_btn {
     display: flex;
     justify-content: flex-end;
