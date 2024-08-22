@@ -69,124 +69,25 @@
                 <div class="class-affi">
                     <h6 class="student-title">{{child_class}}</h6>
                     <h6 class="student-title">{{student_name}}</h6> 
-                </div>  
-                <a class="chat-button" href="{{ url_for('detail', group_id=group_id) }}"><!-- グループのURLなのでおいおい変更 -->
-                  <div class="chat-container">
-                      <div class="icon-time">
-                          <i class="fa-regular fa-circle-user chat-exc"></i>
-                          <p class="time-new">{{teacher_message_time}}</p>
-                      </div>
-                      <div class="teacher-message-wrapper">
-                          <div class="class-teacher">
-                              <h6 class="teacher-title">{{child_class}}</h6>
-                              <h6 class="teacher-title">{{teacher}}先生</h6>
-                          </div>
-                          <div class="message-group">
-                              <p class="message-new">{{teacher_message}}</p>       
-                          </div>
-                      </div>
-                  </div>
-                </a>
-
-                <a class="chat-button" href="{{ url_for('detail', group_id=group_id) }}">
+                </div> 
+                {% for group in channels %}
+                <a class="chat-button" href="{{ url_for('detail', group_id=group.group_id) }}">
                     <div class="chat-container">
                         <div class="icon-time">
                             <i class="fa-regular fa-circle-user chat-exc"></i>
-                            <p class="time-new">{{group_message_time}}</p>
                         </div>
                         <div class="teacher-message-wrapper">
                             <div class="class-teacher">
-                                <h6 class="teacher-title">{{child_class}}</h6>
-                                <h6 class="teacher-title">{{group_name}}</h6>
+                                <h6 class="teacher-title">{{ child_class }}</h6>
+                                <h6 class="teacher-title">{{ group.group_name }}</h6>
                             </div>
                             <div class="message-group">
-                                    <p class="message-new">{{group_message}}</p>       
+                                <p class="message-new">{{ group_message }}</p>       
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </a>
-                
-                <div class="class-affi">
-                    <h6 class="student-title">{{child_class}}</h6>
-                    <h6 class="student-title">{{student_name}}</h6> 
-                </div>  
-
-                <a class="chat-button" href="{{ url_for('detail', group_id=group_id) }}"><!-- グループのURLなのでおいおい変更 -->
-                  <div class="chat-container">
-                      <div class="icon-time">
-                          <i class="fa-regular fa-circle-user chat-exc"></i>
-                          <p class="time-new">{{teacher_message_time}}</p>
-                      </div>
-                      <div class="teacher-message-wrapper">
-                          <div class="class-teacher">
-                              <h6 class="teacher-title">{{child_class}}</h6>
-                              <h6 class="teacher-title">{{teacher}}先生</h6>
-                          </div>
-                          <div class="message-group">
-                              <p class="message-new">{{teacher_message}}</p>       
-                          </div>
-                      </div>
-                  </div>
-                </a>
-
-                <a class="chat-button" href="{{ url_for('detail', group_id=group_id) }}">
-                    <div class="chat-container">
-                        <div class="icon-time">
-                            <i class="fa-regular fa-circle-user chat-exc"></i>
-                            <p class="time-new">{{group_message_time}}</p>
-                        </div>
-                        <div class="teacher-message-wrapper">
-                            <div class="class-teacher">
-                                <h6 class="teacher-title">{{child_class}}</h6>
-                                <h6 class="teacher-title">{{group_name}}</h6>
-                            </div>
-                            <div class="message-group">
-                                    <p class="message-new">{{group_message}}</p>       
-                            </div>
-                        </div>
-                    </div>  
-                </a>
-
-                <div class="class-affi">
-                    <h6 class="student-title">{{child_class}}</h6>
-                    <h6 class="student-title">{{student_name}}</h6> 
-                </div>  
-                
-                <a class="chat-button" href="{{ url_for('detail', group_id=group_id) }}"><!-- グループのURLなのでおいおい変更 -->
-                  <div class="chat-container">
-                      <div class="icon-time">
-                          <i class="fa-regular fa-circle-user chat-exc"></i>
-                          <p class="time-new">{{teacher_message_time}}</p>
-                      </div>
-                      <div class="teacher-message-wrapper">
-                          <div class="class-teacher">
-                              <h6 class="teacher-title">{{child_class}}</h6>
-                              <h6 class="teacher-title">{{teacher}}先生</h6>
-                          </div>
-                          <div class="message-group">
-                              <p class="message-new">{{teacher_message}}</p>       
-                          </div>
-                      </div>
-                  </div>
-                </a>
-
-                <a class="chat-button" href="{{ url_for('detail', group_id=group_id) }}">
-                    <div class="chat-container">
-                        <div class="icon-time">
-                            <i class="fa-regular fa-circle-user chat-exc"></i>
-                            <p class="time-new">{{group_message_time}}</p>
-                        </div>
-                        <div class="teacher-message-wrapper">
-                            <div class="class-teacher">
-                                <h6 class="teacher-title">{{child_class}}</h6>
-                                <h6 class="teacher-title">{{group_name}}</h6>
-                            </div>
-                            <div class="message-group">
-                                    <p class="message-new">{{group_message}}</p>       
-                            </div>
-                        </div>
-                    </div>  
-                </a>
+                {% endfor %}                
             <!-- 他のチャット要素も同様に修正 -->
         </div>
     </section>
