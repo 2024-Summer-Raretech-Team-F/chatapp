@@ -62,7 +62,7 @@
 /* 作成・編集 */
 
 .notice-editpage {
-    max-height: 530px;
+    max-height: 700px;
 }
 
 .notice-main_container hr {
@@ -92,15 +92,13 @@
 textarea {
     resize: none;
     width: 600px;
-    height: 500px;
+    height: 550px;
     border: none;
     font-family: 'Noto Sans JP', sans-serif;
 }
 
 textarea ::placeholder {
     resize: none;
-    width: 600px;
-    height: 500px;
 }
 
 textarea:focus {
@@ -121,8 +119,4 @@ textarea:focus {
     color: #fff; 
 }
 
-input [type="date"]:focus {
-    background-color: #56B7ED;
-    border: 1px solid #56B7ED;
-    
-}
+

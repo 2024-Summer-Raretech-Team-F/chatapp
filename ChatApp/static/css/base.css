@@ -79,6 +79,10 @@ input[type="text"]:focus {
 
 }
 
+select {
+    padding-top: 3px;
+}
+
 select:focus {
     border:2px solid #56B7ED;
 }
