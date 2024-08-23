@@ -194,8 +194,8 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO messages(message, user_id, group_id) VALUES(%s, %s, %s)"
-            cur.execute(sql, (message, int(user_id), int(group_id)))
+            sql = "INSERT INTO messages(message, user_id, group_id) VALUES(%s, %s, %s);"
+            cur.execute(sql, (message, user_id, group_id))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています')
