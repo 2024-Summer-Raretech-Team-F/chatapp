@@ -11,7 +11,7 @@ import re
 from models import dbConnect
 
 app = Flask(__name__)
-app.secret_key = 'chimy_app_key'
+app.secret_key = uuid.uuid4().hex
 app.permanent_session_lifetime = timedelta(days=30)
 
 
@@ -48,7 +48,7 @@ def userSignup():
     elif re.match(pattern, email) is None:
         flash('正しいメールアドレスの形式ではありません')
     else:
-        user_id = str(uuid.uuid4())
+        user_id = uuid.uuid4()
         password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
         DBuser = dbConnect.getUser(email)
 
@@ -56,7 +56,7 @@ def userSignup():
             flash('既に登録されているようです')
             return redirect(url_for('signup')) 
         else:
-            dbConnect.createUser(user_id, name_kanji_full, name_kana_full, email, password)
+            dbConnect.creatUser1(name_kanji_full, name_kana_full, email, password, phone_number)
             
             session['user_id'] = user_id
             session['name_kanji_full'] = name_kanji_full

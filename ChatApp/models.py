@@ -36,12 +36,12 @@ class dbConnect:
             cur.close()                         
 
 
-    def createUser(name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id):
+    def createUser(user_id, name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "INSERT INTO users (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
-            cur.execute(sql, (name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id))
+            sql = "INSERT INTO users (user_id, name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            cur.execute(sql, (user_id, name_kanji_full, name_kana_full, parent_name, email, password, role, phone_number, academic_level_id, school_id))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生してます')
@@ -50,11 +50,25 @@ class dbConnect:
             cur.close()
 
 
+    def creatUser1(user_id, name_kanji_full, name_kana_full, email, password, phone_number):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "INSERT INTO users (user_id, name_kanji_full, name_kana_full, parent_name, email, password, phone_number) VALUES (%s, %s, %s, %s, %s, %s);"
+            cur.execute(sql, (user_id, name_kanji_full, name_kana_full, email, password, phone_number))
+            conn.commit()
+        except Exception as e:
+            print(f'{e} が発生しています')
+            abort(500)
+        finally:
+            cur.close()        
+
+
     def getUserById(user_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT name_kanji_full, name_kana_full, parent_name, phone_number, email, password FROM users WHERE user_id = %s;"
+            sql = "SELECT * FROM users WHERE user_id = %s;"
             cur.execute(sql, (user_id,))
             user = cur.fetchone()
             
@@ -116,12 +130,12 @@ class dbConnect:
             cur.close()
 
 
-    def userRole(role):
+    def userRole(role, user_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
             sql = "UPDATE users SET role = %s WHERE user_id = %s;"
-            cur.execute(sql, (role))
+            cur.execute(sql, (role, user_id))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています')
@@ -130,12 +144,12 @@ class dbConnect:
             cur.close()        
 
 
-    def updateUser(user_id, name_kanji_full, name_kana_full, parent_name, phone_number,email, password):
+    def updateUser(name_kanji_full, name_kana_full, parent_name, phone_number,email, password, user_id):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
             sql = "UPDATE users SET name_kanji_full = %s, name_kana_full = %s, parent_name = %s, phone_number = %s, email = %s, password = %s WHERE user_id = %s;"
-            cur.execute(sql, (user_id, name_kanji_full, name_kana_full, parent_name, phone_number,email, password))
+            cur.execute(sql, (name_kanji_full, name_kana_full, parent_name, phone_number,email, password, user_id))
             conn.commit()
         except Exception as e:
             print(f'{e} が発生しています') 
@@ -239,7 +253,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT notice_id, title, description, post_data, user_id FROM notices WHERE noitced_id = %s;"
+            sql = "SELECT notice_id, title, description, post_data, user_id FROM notices WHERE noticed_id = %s;"
             cur.execute(sql, (notice_id))
             notice = cur.fetchone()
             return notice
