@@ -103,5 +103,16 @@ input[type="text"]{
     clear:both;
 }
 
+#no-message {
+    padding-top: 54px;
+    width: 100%;
+    height: calc(100vh - (54px + 15vh));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#no-message p {
+    display: inline;
+}
 

@@ -219,8 +219,8 @@ def get_all_notices():
     if user_id is None or school_id is None:
         return redirect('/login')
     
-    main_notices = dbConnect.getAllNotices()
-    return render_template('notice/notice_list.html', main_notices=main_notices)
+    allnotices = dbConnect.getAllNotices()
+    return render_template('notice/notice_list.html', allnotices=allnotices)
 
 
 
@@ -241,6 +241,14 @@ def get_notice_by_id(notice_id):
 def get_notice_by_grade(category):
     grade = dbConnect.getNoticeByGrade(category)
     return render_template('notice/notice_list.html', grade=grade)
+
+
+#タイトルで検索
+@app.route('/notice/search ', methods=['GET'])
+def get_notice_by_search(title):
+    title = request.args.get('title')
+    noticeTitle = dbConnect.getNoticeByTitle(title)
+    return render_template('notice/notice_list.html', noticeTilte=noticeTitle)
 
 
 #お知らせ作成ページの表示
@@ -331,7 +339,7 @@ def detail(group_id):
     channels = dbConnect.getChannelById(group_id)
     messages = dbConnect.getMessageAll(group_id)
     
-    return render_template('chat_main.html', channels=channels, messages=messages, user_id=user_id, group_id=group_id)
+    return render_template('sample_chat.html', channels=channels, messages=messages, user_id=user_id, group_id=group_id)
 
 
 #チャットの送信
@@ -347,7 +355,7 @@ def add_message():
     group_id = request.form.get('group_id')
 
     if message:
-        dbConnect.createMessage(user_id, group_id, message)
+        dbConnect.createMessage(message, user_id, group_id)
 
     return redirect('/chat/{group_id}'.format(group_id = group_id))
 
