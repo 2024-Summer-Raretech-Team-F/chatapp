@@ -315,7 +315,7 @@ class dbConnect:
             sql = "SELECT notice_id, title, description, post_data, created_at, user_id, category FROM notices WHERE title LIKE %s;"  
             search_title = f'%{title}%'
             cur.execute(sql, (search_title))
-            notices = cur.fetchone()
+            notices = cur.fetchall()
             return notices
         except Exception as e:
             print(f'{e} が発生しています')
