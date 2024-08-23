@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block content %}
-    <main class="notice-mainpage">
+    <main class="notice-editpage">
         <div class="notice-main_container">
-            <form action="{{ url_for('add_notice') }}" method="">
+            <form action="{{ url_for('add_notice') }}" method="post">
                 <!-- 対象学年選択 -->
                 <label for="grade_data">対象の学年</label>
-                    <select id="grade-data" name="category">
+                    <select id="grade-data" name="notice-category">
                         <option selected disabled> 学 年 </option>
                         <option value="all"> 全学年 </option>
                         <option value="1年生"> 1年生 </option>
@@ -25,14 +25,14 @@
                     </select>
                 <!-- カレンダー掲載日 -->
                 <div class="notice-postdata_start">
-                    <label for="post_data">掲載開始日</label>
-                    <input type="date" id="post_data" name="post_data" value="{{ notice.post_data if notice else '' }}" required>
+                    <label for="start_date">掲載開始日</label>
+                <input type="date" id="start_date" name="start_date" required>
                 </div>
                 <div class="notice-postdata_end">
                     <label for="end_date">掲載終了日</label>
-                    <input type="date" id="end_date" name="end_date" value="{{ notice.post_data if notice else '' }}" required>
+                    <input type="date" id="end_date" name="end_date" required>
                 </div>
-    
+                <hr>
                 <!-- 題名 -->
                 <div class="notice-title_grop">
                     <input type="text" id="notice-title" name="notice-title" class="custom-input" placeholder="題名は何にしますか？" required>
@@ -40,12 +40,11 @@
                 </div>
                 <hr>
                 <!-- 本文 -->
-                <div class="notice-maintext">    
-                    <textarea id="maintext" name="maintext" rows="10" placeholder="本文は何を書きますか？" required></textarea>
+                <div class="notice-maintext">
+                    <textarea name="maintext" rows="50" placeholder="本文は何を書きますか？" required></textarea>
                 </div>
-                
+                <hr>
                 <input type="hidden" name="user_id" value="{{ session['user_id'] }}"><!-- 教職員しかこのページ来れないからいらないかも -->
-                
                 <div class="create-edit_btn">
                     <button type="submit" class="notice-edeit_button">送信</button>
                 </div>

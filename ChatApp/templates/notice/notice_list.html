@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="notice-main">
+<main class="notice-list_main">
     <div class="notice-list_search">
         <div class="search-container">
             <!-- 学年選択フォーム -->
@@ -40,11 +40,13 @@
         {% if allnotices %}
             {% for notice in allnotices %}
                 <div class="notice-list">
-                    <a href="{{ url_for('get_all_notices') }}">
+                    <a href="{{ url_for('get_all_notices') }}" class="notice-content">
+                       <!-- 学年と月日 -->
                         <div class="top-row">
                             <p class="grade-list_a">{{ notice.category }}</p>
                             <p class="month-day-list">{{ notice.post_data.strftime('%y年%m月%d日') }}</p>
                         </div>
+                        <!-- タイトルと書き出し50文字 -->
                         <div class="title-list">
                             <h4 class="title-list">{{ notice.title }}</h4>
                             <p class="summary-list">{{ notice.description[:50] }}...</p>
