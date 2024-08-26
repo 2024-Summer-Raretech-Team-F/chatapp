@@ -1,50 +1,54 @@
-{%extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}チャットルーム{% endblock %}
 
 {% block header_content %}
-        <button id="backButton"><i class="fa-solid fa-arrow-right fa-flip-horizontal"></i></button>
-        {% for channel in channels %}
+    <button id="backButton">
+        <i class="fa-solid fa-arrow-right fa-flip-horizontal"></i>
+    </button>
+    {% for channel in channels %}
         <h6>{{ channel.group_name }} {{ channel.user_id }}</h6>
-        {% endfor %}
-{% endblock %}        
+    {% endfor %}
+{% endblock %}
 
 {% block content %}
 <main>
-<div class="main_message">
-<div class="sub_message">
-{% if messages|length > 0 %}
-    {% for message in messages %}
-    {% if message.user_id == user_id %}
-<div class="message">
-<!--ユーザー名-->
-<figure class="icon_img"><i class="fa-regular fa-circle-user" style="font-size:40px"></i>
-</figure>
-<div class="message_name_right">
-<p class="name_text">{{ message.name_kanji_full }}</p>
-<div class="messaging messaging_right">
-  <p class="message_text_right">{{ message.message }}</p>
-</div>
-</div>
-  <!--送信時刻-->
-  <time class="message_time">{{ message.updated_at }}</time>
-  <div class="clear"></div><!--回り込みを解除-->
-</div> 
-    {% else %}
-<div id="no-message"><p>まだメッセージがありません</p></div>
-    {% endif %}
-    {% endfor %}
-{% endif %}
-</div>
-
-<div class="chat_footer">
-  <form method="POST" action="{{ url_for('add_message') }}" >
-    <div class="send_box">
-      <input type="text" name="message" size="60" maxlength="10000" placeholder="ここに文章を作成してください。">
-      <input type="hidden" name="group_id" value="{{ group_id }}">
-      <button type="submit"><i class="far fa-paper-plane" style="font-size:20px"></i></button>
+    <div class="main_message">
+        <div class="sub_message">
+            {% if messages|length == 0 %}
+                <div id="no-message"><p>まだメッセージがありません</p></div>
+            {% else %}
+                {% for message in messages %}
+                    <div class="message {% if message.user_id == user_id %}right{% else %}left{% endif %}">
+                        <!-- ユーザー名 -->
+                        <figure class="icon_img">
+                            <i class="fa-regular fa-circle-user" style="font-size:40px"></i>
+                        </figure>
+                        <div class="message_content">
+                            <p class="name_text">{{ message.name_kanji_full }}</p>
+                            <div class="messaging">
+                                <p class="message_text">{{ message.message }}</p>
+                            </div>
+                        </div>
+                        <!-- 送信時刻 -->
+                        <time class="message_time">{{ message.updated_at }}</time>
+                        <div class="clear"></div><!-- 回り込みを解除 -->
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
-  </form>
-</div>
+
+    <div class="chat_footer">
+        <form method="POST" action="{{ url_for('add_message') }}">
+            <div class="send_box">
+                <input type="text" name="message" size="60" maxlength="10000" placeholder="ここに文章を作成してください。">
+                <input type="hidden" name="group_id" value="{{ group_id }}">
+                <button type="submit">
+                    <i class="far fa-paper-plane" style="font-size:20px"></i>
+                </button>
+            </div>
+        </form>
+    </div>
 </main>
 {% endblock %}
