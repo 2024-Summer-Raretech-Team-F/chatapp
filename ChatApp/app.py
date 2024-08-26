@@ -356,8 +356,8 @@ def add_message():
     message = request.form.get('message')
     group_id = request.form.get('group_id')
 
-    if message:
-        dbConnect.createMessage(message, user_id, group_id)
+    if message and user_id and group_id:
+        dbConnect.createMessage(user_id, group_id, message)
 
     return redirect('/chat/{group_id}'.format(group_id = group_id))
 
