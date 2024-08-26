@@ -11,7 +11,7 @@ import re
 from models import dbConnect
 
 app = Flask(__name__)
-app.secret_key = uuid.uuid4().hex
+app.secret_key = "chimy-app-secret-key"
 app.permanent_session_lifetime = timedelta(days=30)
 
 
@@ -67,7 +67,7 @@ def userSignup():
             session['phone_number'] = phone_number
             session['email'] = email
             
-            
+            session.parmanent = True
             flash('登録が完了しました')
     return redirect(url_for('finish'))
 
@@ -114,6 +114,8 @@ def userLogin():
             session['user_id'] = user['user_id']
             session['role'] = role
             session['school_id'] = school_id
+            
+            session.parmanent = True
             
             flash("ログイン完了です！")
             return redirect(url_for('home'))
